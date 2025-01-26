@@ -10,7 +10,7 @@
 2. **Clone the Repository**
    - Open your terminal and run:
      ```bash
-     git clone https://github.com/your-username/repository-name.git
+     git clone https://github.com/SRV30/NJ.git
      ```
 
 3. **Install Client Dependencies**
