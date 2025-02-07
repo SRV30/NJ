@@ -1,13 +1,14 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import cors from "cors";
-import cookieParser from "cookie-parser";
 import cloudinary from "cloudinary";
-import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 import morgan from "morgan";
+import connectDB from "./config/connectDB.js";
 import errorMiddleware from "./middleware/error.js";
+import contactUs from "./route/contactUs.js";
 dotenv.config();
 
 process.on("uncaughtException", (err) => {
@@ -15,16 +16,6 @@ process.on("uncaughtException", (err) => {
   console.error(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
-
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then((data) =>
-    console.log(`Mongodb connected with server: ${data.connection.host}`)
-  )
-  .catch((error) => {
-    console.error("MongoDB connection failed:", error);
-    process.exit(1);
-  });
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -73,8 +64,30 @@ app.get("/", (req, res) => {
 });
 
 //routes
+import addressRouter from "./route/addressRoute.js";
+import cartRouter from "./route/cartRoute.js";
+import categoryRouter from "./route/categoryRoute.js";
+import discountRouter from "./route/discountRoutes.js";
+import orderRouter from "./route/orderRoute.js";
+import paymentRouter from "./route/paymentRoute.js";
+import productRouter from "./route/productRoute.js";
+import userRouter from "./route/userRoute.js";
+import webhookRouter from "./route/webhookRoutes.js";
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.use("/api/address", addressRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/category", categoryRouter);
+app.use("/api/discount", discountRouter);
+app.use("/api/order", orderRouter);
+app.use("/api/payment", paymentRouter);
+app.use("/api/product", productRouter);
+app.use("/api/user", userRouter);
+app.use("/api/webhook", webhookRouter);
+app.use("/api",contactUs);
+
+connectDB().then(() => {
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+});
 
 process.on("unhandledRejection", (err) => {
   console.error(`Error: ${err.message}`);
