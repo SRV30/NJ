@@ -2,3 +2,24 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
   
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+
+/* Light Mode */
+:root {
+  --primary: #d4af37; /* Gold - yellow-500 */
+  --secondary: #f7e7ce; /* Deep Champagne - orange-100*/
+  --background: #faf9f6; /* Off-White - stone-100 */
+  --text-primary: #333333; /* Charcoal Black - neutral-800 */
+  --text-secondary: #5a4a42; /* Deep Brown - stone-600*/
+}
+
+/* Dark Mode */
+.dark {
+  --primary: #ffd700; /* Gold - yellow-400*/
+  --secondary: #c0c0c0; /* Silver - neutral-300*/
+  --background: #121212; /* Deep Charcoal - neutral-900*/
+  --text-primary: #eaeaea; /* Soft White - neutral-200*/
+  --text-secondary: #b0a999; /* Warm Gray - stone-400*/
+}

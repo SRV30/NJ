@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -8,6 +7,8 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import errorMiddleware from "./middleware/error.js";
+import connectDB from "./config/connectDB.js";
+import userRouter from "./route/userRoute.js";
 dotenv.config();
 
 process.on("uncaughtException", (err) => {
@@ -15,16 +16,6 @@ process.on("uncaughtException", (err) => {
   console.error(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
-
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then((data) =>
-    console.log(`Mongodb connected with server: ${data.connection.host}`)
-  )
-  .catch((error) => {
-    console.error("MongoDB connection failed:", error);
-    process.exit(1);
-  });
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -34,24 +25,27 @@ cloudinary.config({
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 2000,
   message: "Too many requests, please try again later.",
 });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_WWW_URL,
+  "http://localhost:5173"
+];
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Cache-Control",
-      "Expires",
-      "Pragma",
-    ],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
@@ -73,8 +67,12 @@ app.get("/", (req, res) => {
 });
 
 //routes
+app.use("/api/user", userRouter);
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+connectDB().then(() => {
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+});
+
 
 process.on("unhandledRejection", (err) => {
   console.error(`Error: ${err.message}`);
