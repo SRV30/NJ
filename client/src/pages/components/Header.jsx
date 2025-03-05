@@ -85,7 +85,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-gray-700 dark:to-gray-600 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500"
+      className="fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-gray-700 dark:to-gray-600 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500 w-full"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
@@ -244,9 +244,9 @@ export default function Header() {
           whileTap={{ scale: 0.9 }}
         >
           {menuOpen ? (
-            <X className="w-6 h-6 text-amber-100" />
+            <X className="w-6 h-6 text-amber-800" />
           ) : (
-            <Menu className="w-6 h-6 text-amber-100" />
+            <Menu className="w-6 h-6 text-amber-800" />
           )}
         </motion.button>
       </div>
@@ -255,7 +255,7 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
-            className="absolute top-full left-0 w-full bg-gradient-to-b from-amber-500/95 to-amber-600/95 dark:from-gray-900 dark:to-gray-800 md:hidden flex flex-col items-center space-y-4 py-6 shadow-xl border-t border-amber-200/20 dark:border-gray-700/20"
+            className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-2xl rounded-xl border border-amber-200/50 dark:border-gray-700/50  md:hidden flex flex-col items-center space-y-4 py-6  border-t "
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -275,7 +275,7 @@ export default function Header() {
                 <motion.a
                   key={index}
                   href={path}
-                  className={`text-base font-sans font-medium text-amber-100 ${
+                  className={`text-base font-sans font-medium dark:text-amber-300  ${
                     isActiveRoute(path)
                       ? "bg-amber-700/40 dark:bg-gray-700/50 rounded-full px-4 py-2 shadow-sm"
                       : "hover:bg-amber-700/20 dark:hover:bg-gray-700/30 rounded-full px-4 py-2"
