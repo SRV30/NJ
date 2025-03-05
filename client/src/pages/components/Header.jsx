@@ -85,7 +85,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="bg-gradient-to-r from-amber-500/90 to-amber-600/90 dark:from-gray-900 dark:to-gray-800 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 sticky top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500"
+      className="fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-gray-700 dark:to-gray-600 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
@@ -107,7 +107,7 @@ export default function Header() {
 
       {/* Desktop Navigation */}
       <motion.nav
-        className="hidden md:flex space-x-6 lg:space-x-10 font-sans font-medium text-amber-100 tracking-wide"
+        className="hidden md:flex space-x-6 lg:space-x-10 font-sans font-medium text-amber-900 dark:text-amber-100 tracking-wide"
         variants={navVariants}
         initial="hidden"
         animate="visible"
@@ -128,7 +128,7 @@ export default function Header() {
               href={path}
               className={`relative px-3 py-1 rounded-full transition-all duration-300 ${
                 isActiveRoute(path)
-                  ? "text-white bg-amber-700/40 dark:bg-gray-700/50 shadow-sm"
+                  ? "text-amber-700 bg-amber-700/40 dark:bg-gray-700/50 shadow-sm"
                   : "hover:text-white hover:bg-amber-700/20 dark:hover:bg-gray-700/30"
               }`}
               variants={itemVariants}
@@ -137,7 +137,7 @@ export default function Header() {
             >
               {label}
               <motion.span
-                className="absolute left-1/2 bottom-0 w-0 h-[2px] bg-amber-300 dark:bg-amber-200 rounded-full transform -translate-x-1/2"
+                className="absolute left-1/2 bottom-0 w-0 h-[2px] bg-amber-800 dark:bg-amber-200 rounded-full transform -translate-x-1/2"
                 initial={{ width: 0 }}
                 animate={{ width: isActiveRoute(path) ? "80%" : 0 }}
                 whileHover={{ width: "80%" }}
@@ -149,13 +149,13 @@ export default function Header() {
       </motion.nav>
 
       {/* Right Icons */}
-      <div className="flex items-center space-x-4 lg:space-x-6 text-amber-100">
+      <div className="flex items-center space-x-4 lg:space-x-6 text-amber-900 dark:text-amber-100">
         <motion.a
           href="/products"
           whileHover={{ scale: 1.15, rotate: 10 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Search className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-white transition-colors" />
+          <Search className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-amber-600 transition-colors" />
         </motion.a>
 
         <motion.a
@@ -164,7 +164,7 @@ export default function Header() {
           whileHover={{ scale: 1.15, rotate: 10 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Heart className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-white transition-colors" />
+          <Heart className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-amber-600 transition-colors" />
         </motion.a>
 
         <motion.a
@@ -173,7 +173,7 @@ export default function Header() {
           whileHover={{ scale: 1.15, rotate: 10 }}
           whileTap={{ scale: 0.9 }}
         >
-          <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-white transition-colors" />
+          <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-amber-600 transition-colors" />
         </motion.a>
 
         <motion.div

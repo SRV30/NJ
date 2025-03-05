@@ -34,7 +34,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-amber-500/90 to-amber-600/90 dark:from-gray-900 dark:to-gray-800  text-amber-100 px-6 py-12 lg:px-12 lg:py-16 absolte overflow-hidden">
+    <footer className="bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-gray-900 dark:to-gray-800  text-amber-100 px-6 py-12 lg:px-12 lg:py-16 absolte overflow-hidden">
       {/* Subtle Sparkle Background */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -72,7 +72,7 @@ const Footer = () => {
             alt="Nandani Jewellers Logo"
             className="h-14 lg:h-16 w-auto hidden dark:block"
           />
-          <p className="text-amber-200 text-sm lg:text-base font-sans tracking-wider max-w-sm">
+          <p className="text-amber-800 text-sm lg:text-base font-sans tracking-wider max-w-sm">
             Crafting elegance since 2002. Discover the art of luxury with{" "}
             <span className="font-medium">Nandani Jewellers</span>.
           </p>
@@ -107,7 +107,7 @@ const Footer = () => {
               variants={itemVariants}
               transition={{ delay: index * 0.1 }}
             >
-              <h3 className="font-sans text-base lg:text-lg font-semibold text-amber-100 mb-4 uppercase tracking-widest">
+              <h3 className="font-sans text-base lg:text-lg font-semibold text-amber-900 mb-4 uppercase tracking-widest">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -119,7 +119,7 @@ const Footer = () => {
                   >
                     <a
                       href={section.hrefs[i]}
-                      className="text-amber-200 text-sm lg:text-base hover:text-white transition-colors duration-300"
+                      className="text-amber-800 text-sm lg:text-base hover:text-amber-600 transition-colors duration-300"
                     >
                       {link}
                     </a>
@@ -138,26 +138,26 @@ const Footer = () => {
         animate="visible"
         className="max-w-7xl mx-auto mt-10 pt-8 border-t border-amber-400/40 dark:border-gray-600/40 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-sm lg:text-base relative z-10"
       >
-        <motion.p variants={itemVariants} className="text-amber-200">
+        <motion.p variants={itemVariants} className="text-amber-900">
           © {currentYear} Nandani Jewellers. All Rights Reserved.
           <span className="mx-2 md:mx-3">•</span>
           <a
             href="/privacy-policy"
-            className="hover:text-white transition-colors duration-300"
+            className="hover:text-amber-600 transition-colors duration-300"
           >
             Privacy
           </a>
           <span className="mx-2 md:mx-3">•</span>
           <a
             href="/terms"
-            className="hover:text-white transition-colors duration-300"
+            className="hover:text-amber-600 transition-colors duration-300"
           >
             Terms
           </a>
           <span className="mx-2 md:mx-3">•</span>
           <a
             href="/sitemap"
-            className="hover:text-white transition-colors duration-300"
+            className="hover:text-amber-600 transition-colors duration-300"
           >
             Sitemap
           </a>

@@ -30,20 +30,19 @@ const AdminDashboard = () => {
       case "Dashboard":
         return (
           <motion.div
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-xl shadow-lg text-center"
-            initial={{ opacity: 0, y: -10 }}
+            className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white p-6 rounded-2xl shadow-lg text-center"
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="text-2xl md:text-3xl font-bold tracking-wide">
+            <h1 className="text-3xl font-bold tracking-wide">
               👋 Welcome,{" "}
-              <span className="bg-white text-blue-600 px-2 py-1 rounded-md shadow-sm">
+              <span className="bg-white text-amber-600 px-3 py-1 rounded-md shadow-sm">
                 {user.name}
               </span>
             </h1>
           </motion.div>
         );
-
       case "Customers":
         return <AdminUsers />;
       case "Jewellery Type":
@@ -54,66 +53,82 @@ const AdminDashboard = () => {
         return <AdminProducts />;
       case "Orders":
         return <AdminOrdersPage />;
-
       default:
         return null;
     }
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-100 dark:bg-gray-900">
-      <aside
-        className={`fixed md:static z-30 h-full w-64 transition-transform duration-300 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 md:translate-x-0 flex flex-col`}
+    <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
+      {/* Sidebar */}
+      <motion.aside
+        initial={{ x: -250 }}
+        animate={{ x: isSidebarOpen ? 0 : -250 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed md:static z-40 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transition-all duration-300
+          border-r border-gray-300 dark:border-gray-700 md:translate-x-0 flex flex-col
+          backdrop-blur-xl bg-opacity-80 dark:bg-opacity-80`}
       >
-        <div className="h-14 flex items-center justify-between px-4 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-200 items-center justify-center flex m-auto">
+        {/* Sidebar Header */}
+        <div className="h-16 flex items-center justify-between px-5 border-b border-gray-300 dark:border-gray-700">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">
             Admin Dashboard
           </h2>
           <button onClick={() => setIsSidebarOpen(false)} className="md:hidden">
-            <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+            <X className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
         </div>
-        <nav className="flex-1 overflow-y-auto p-3 space-y-1">
+
+        {/* Sidebar Navigation */}
+        <nav className="flex-1 overflow-y-auto p-4 space-y-2">
           {[
             { icon: LayoutDashboard, text: "Dashboard" },
-            { icon: Users, text: "Customers", path: "/admin/users" },
-            { icon: Gem, text: "Jewellery Type", },
-            { icon: Category, text: "Category", },
+            { icon: Users, text: "Customers" },
+            { icon: Gem, text: "Jewellery Type" },
+            { icon: Category, text: "Category" },
             { icon: ShoppingBag, text: "Products" },
             { icon: Package, text: "Orders" },
           ].map((item) => (
-            <button
+            <motion.button
               key={item.text}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveSection(item.text)}
-              className={`flex items-center w-full px-3 py-2 rounded-lg text-left space-x-3 text-gray-800 dark:text-gray-200
+              className={`flex items-center w-full px-4 py-3 rounded-lg text-left space-x-3 font-medium
                 ${
                   activeSection === item.text
-                    ? "bg-yellow-400 dark:bg-red-600"
-                    : "hover:bg-gray-50 dark:hover:bg-gray-700"
-                }`}
+                    ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-md"
+                    : "text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                } transition-all duration-300`}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon className="w-6 h-6" />
               <span onClick={() => navigate(item.path)}>{item.text}</span>
-            </button>
+            </motion.button>
           ))}
         </nav>
-      </aside>
+      </motion.aside>
 
+      {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-14 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
+        {/* Header */}
+        <header className="h-16 bg-white dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between px-5 shadow-md">
           <button
             onClick={() => setIsSidebarOpen(true)}
             className="p-2 md:hidden"
           >
-            <Menu className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+            <Menu className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
         </header>
 
-        <main className="flex-1 overflow-auto p-4 text-gray-900 dark:text-gray-200">
+        {/* Page Content */}
+        <motion.main
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex-1 overflow-auto p-6 text-gray-900 dark:text-gray-200"
+        >
           {renderContent()}
-        </main>
+        </motion.main>
       </div>
     </div>
   );
