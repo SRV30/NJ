@@ -6,7 +6,7 @@ const uploadImage = async (image) => {
       throw new Error("No image buffer provided for upload.");
     }
 
-    const buffer = image.buffer;
+    const buffer = Buffer.isBuffer(image.buffer) ? image.buffer : Buffer.from(image.buffer);
 
     const uploadResult = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(

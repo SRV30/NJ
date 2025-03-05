@@ -8,7 +8,6 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import errorMiddleware from "./middleware/error.js";
 import connectDB from "./config/connectDB.js";
-import userRouter from "./route/userRoute.js";
 dotenv.config();
 
 process.on("uncaughtException", (err) => {
@@ -67,7 +66,14 @@ app.get("/", (req, res) => {
 });
 
 //routes
+import userRouter from "./route/userRoute.js";
+import jewelleryRouter from "./route/jewelleryRoute.js";
+import categoryRouter from "./route/categoryRoute.js";
+
+app.use("/api/category", categoryRouter)
+app.use("/api/jewellery", jewelleryRouter)
 app.use("/api/user", userRouter);
+
 
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
