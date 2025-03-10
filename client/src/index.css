@@ -6,6 +6,16 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 
+  .react-slider {
+    height: 8px;
+  }
+  .react-slider__thumb {
+    top: -6px;
+  }
+  .react-slider__track-1 {
+    background-color: #e5e7eb !important;
+  }
+
 /* Light Mode */
 :root {
   --primary: #d4af37; /* Gold - yellow-500 */

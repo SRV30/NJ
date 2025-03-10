@@ -74,22 +74,26 @@ const Testimonials = () => {
           }}
         >
           {testimonials.map((t, i) => (
-            <SwiperSlide key={i}>
-              <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md text-center transition-transform hover:-translate-y-2 duration-300">
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  className="w-20 h-20 mx-auto rounded-full border-2 border-gray-200 dark:border-gray-600 shadow-lg"
-                />
-                <h3 className="text-xl font-semibold mt-4 text-gray-800 dark:text-white">
-                  {t.name}
-                </h3>
-                <p className="text-sm text-amber-600 dark:text-amber-400">
-                  {t.location}
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 italic mt-3 leading-relaxed">
-                  &ldquo;{t.review}&rdquo;
-                </p>
+            <SwiperSlide key={i} className="flex justify-center">
+              <div className="w-full md:w-[300px] h-[380px] p-6 bg-white dark:bg-slate-900 rounded-lg shadow-md text-center transition-transform hover:-translate-y-2 duration-300 flex flex-col justify-between">
+                <div>
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-20 h-20 mx-auto rounded-full border-2 border-gray-200 dark:border-gray-600 shadow-lg"
+                  />
+                  <h3 className="text-xl font-semibold mt-4 text-gray-800 dark:text-white">
+                    {t.name}
+                  </h3>
+                  <p className="text-sm text-amber-600 dark:text-amber-400">
+                    {t.location}
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 italic mt-3 leading-relaxed line-clamp-3">
+                    &ldquo;{t.review}&rdquo;
+                  </p>
+                </div>
+
+                {/* ⭐ Star Ratings */}
                 <div className="mt-3 flex justify-center">
                   {[...Array(5)].map((_, idx) => (
                     <svg

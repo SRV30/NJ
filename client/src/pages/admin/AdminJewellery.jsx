@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { showJewelryToast } from "../extras/showJewelryToast";
 import MetaData from "../extras/MetaData";
-
 import {
   addJewelleryCategory,
   fetchJewelleryCategories,
@@ -62,7 +61,7 @@ const ManageJewelleryType = () => {
     setName(category.name);
     setImagePreview(category.images[0]?.url || null);
     setImage(null);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
+    window.scrollTo({ top: 0, behavior: "smooth" }); 
   };
 
   const handleDelete = (id) => {

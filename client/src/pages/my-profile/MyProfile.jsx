@@ -279,7 +279,7 @@ const MyProfile = () => {
         </div>
 
         {/* Bottom Navigation - Mobile Only */}
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg py-3 flex justify-around border-t border-amber-200 dark:border-gray-700">
+        <div className="sm:hidden bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg py-10 flex justify-around border-t border-amber-200 dark:border-gray-700 ">
           {[
             { to: "/my-profile", icon: User, label: "Profile" },
             { to: "/my-orders", icon: ShoppingBag, label: "Orders" },

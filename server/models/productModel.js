@@ -49,7 +49,7 @@ const productSchema = new mongoose.Schema(
     gender: {
       type: String,
       required: [true, "Please specify the target color for the product"],
-      enum: ["Men", "Women", "Kids", "Unisex"],
+      enum: ["Male", "Female", "Kids", "Unisex"],
     },
     karatage: {
       type: String,

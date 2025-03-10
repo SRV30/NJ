@@ -34,7 +34,7 @@ const About = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+    <div className=" text-gray-800 dark:text-white">
       <MetaData
         title="About Us | Nandani Jewellers - Timeless Craftsmanship"
         description="Learn about Nandani Jewellers' legacy, crafting gold, diamond, and silver jewelry since 2002. Explore our luxurious collections today."
@@ -118,7 +118,7 @@ const About = () => {
         >
           Founded in 2002 by Mr. Nandani, Nandani Jewellers began as a small
           workshop with a passion for crafting exquisite jewellery. Over the
-          decades, we’ve grown into a renowned name, celebrated for our
+          decades, we&apos;ve grown into a renowned name, celebrated for our
           dedication to quality, craftsmanship, and customer satisfaction. Our
           journey is a testament to our commitment to blending tradition with
           innovation, creating pieces that become cherished heirlooms.
@@ -127,7 +127,7 @@ const About = () => {
 
       {/* Values Section */}
       <motion.section
-        className="bg-amber-50 dark:bg-gray-800 py-12 lg:py-20"
+        className=" py-12 lg:py-20"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -163,7 +163,7 @@ const About = () => {
                 key={index}
                 variants={itemVariants}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md border border-amber-200 dark:border-gray-600"
+                className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md border border-amber-200 dark:border-gray-600"
               >
                 <h3 className="text-xl font-serif font-medium text-amber-700 dark:text-amber-300 mb-2">
                   {value.title}
@@ -177,7 +177,7 @@ const About = () => {
 
       {/* CSR Section */}
       <motion.section
-        className="bg-amber-50 dark:bg-gray-800 py-12 lg:py-20"
+        className="py-12 lg:py-20"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

@@ -17,12 +17,14 @@ import ScrollToTop from "./pages/extras/ScrollToTop";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import { useSelector } from "react-redux";
 import AdminJewellery from "./pages/admin/AdminJewellery";
+import ProductsPage from "./pages/products/Products";
+import SingleProductPage from "./pages/products/SingleProduct";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   return (
-    <div className="flex flex-col overflow-hidden bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+    <div className="flex flex-col overflow-hidden bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 mt-15 sm:mt-20 text-amber-800 dark:text-amber-300">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -46,6 +48,8 @@ const App = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/About" element={<About />} />
         <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products/:productId" element={<SingleProductPage />} />
         <Route
           path="/my-profile"
           element={

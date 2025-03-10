@@ -56,7 +56,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+    <div className="text-gray-800 dark:text-white">
      <MetaData
             title="Contact Us | Nandani Jewellers - Timeless Elegance & Craftsmanship"
             description="Discover the legacy of Nandani Jewellers, where tradition meets innovation. Explore our exquisite collection of gold, diamond, and silver jewelry, crafted with precision and passion."

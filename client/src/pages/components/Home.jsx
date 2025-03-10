@@ -1,5 +1,6 @@
 import MetaData from "../extras/MetaData";
 import BannerProduct from "./BannerProduct";
+import BestSeller from "./Bestseller";
 import JewelleryType from "./JewelleryType";
 import LuxuryExperience from "./LuxuryExperience";
 import ProductCategory from "./ProductCategory";
@@ -16,9 +17,7 @@ const Home = () => {
       <BannerProduct />
       <JewelleryType />
       <ProductCategory />
-      {/* best seller */}
-      {/* new arrival */}
-      {/* Shop by price */}
+      <BestSeller />
       <LuxuryExperience />
       <Testimonials />
     </div>

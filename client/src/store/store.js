@@ -4,6 +4,7 @@ import authReducer from "./auth-slice/user";
 import otpSlice from "./auth-slice/otpSlice";
 import jewelleryReducer from "./product-slice/jewelleryType";
 import categoryReducer from "./product-slice/category";
+import productReducer from "./product-slice/product";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     otp: otpSlice,
     jewellery: jewelleryReducer,
     category: categoryReducer,
+    product: productReducer,
   },
 });
 

@@ -85,7 +85,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-gray-700 dark:to-gray-600 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500 w-full"
+      className="fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-amber-900 dark:via-amber-900 dark:to-amber-900 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500 w-full"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
