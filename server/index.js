@@ -71,9 +71,13 @@ import jewelleryRouter from "./route/jewelleryRoute.js";
 import categoryRouter from "./route/categoryRoute.js";
 import productRouter from "./route/productRoute.js";
 import dashboardRoutes from "./route/dashboardRoutes.js";
+import addressRouter from "./route/addressRoute.js";
+import getintouchRouter from "./route/getintouchRoute.js";
 
+app.use("/api/address", addressRouter);
 app.use("/api/category", categoryRouter)
 app.use("/api/dashboard", dashboardRoutes)
+app.use("/api/contact", getintouchRouter)
 app.use("/api/jewellery", jewelleryRouter)
 app.use("/api/product", productRouter)
 app.use("/api/user", userRouter);

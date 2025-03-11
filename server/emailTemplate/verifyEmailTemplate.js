@@ -37,7 +37,7 @@ const verifyEmailTemplate = ({ name, otp }) => {
       <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
       <p style="font-size: 12px; text-align: center; color: #777;">
         Need help? Contact us at 
-        <a href="mailto:support@faithandfast.com" style="color: #ff8c00; text-decoration: none;">support@faithandfast.com</a>
+        <a href="mailto:support@nandanijewellers.com" style="color: #ff8c00; text-decoration: none;">support@nandanijewellers.com</a>
       </p>
     </div>
   `;

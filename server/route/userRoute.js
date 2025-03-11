@@ -9,6 +9,7 @@ import {
   logoutUser,
   registerUser,
   resetPassword,
+  updatePassword,
   updateUserDetails,
   updateUserRole,
   updateUserStatus,
@@ -33,6 +34,8 @@ userRouter.post("/login", loginUser);
 userRouter.get("/logout", logoutUser);
 
 userRouter.put("/upload-avatar", upload.single("avatar"), auth, uploadAvatar);
+
+userRouter.put("/update/password", auth, updatePassword);
 
 userRouter.put("/forgot-password", forgotPassword);
 

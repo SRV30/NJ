@@ -11,6 +11,7 @@ import { showJewelryToast } from "../extras/showJewelryToast";
 import { fetchCategories, clearError } from "@/store/product-slice/category";
 import { ArrowRight } from "lucide-react";
 import Loader from "../extras/Loader";
+import { Link } from "react-router-dom";
 
 const ProductCategory = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -143,9 +144,7 @@ const ProductCategory = () => {
   }, [gradientColors.length]);
 
   if (loading) {
-    return (
-     <Loader />
-    );
+    return <Loader />;
   }
   return (
     <div className="min-h-screen py-4 px-4 sm:px-6 lg:px-8 ">
@@ -254,74 +253,79 @@ const ProductCategory = () => {
             >
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-10">
                 {getVisibleCategories().map((category, idx) => (
-                  <motion.div
+                  <Link
                     key={category._id}
-                    className="relative group h-80 rounded-3xl overflow-hidden shadow-lg border border-amber-100/30 dark:border-gray-700/50 perspective-1000"
-                    variants={cardVariants}
-                    whileHover="hover"
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: idx * 0.1 }}
-                    style={{
-                      transformStyle: "preserve-3d",
-                      WebkitTransformStyle: "preserve-3d",
-                      boxShadow:
-                        "0 15px 35px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.07)",
-                    }}
+                    to={`/products?productCategory=${category._id}`}
                   >
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10 opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                      key={category._id}
+                      className="relative group h-80 rounded-3xl overflow-hidden shadow-lg border border-amber-100/30 dark:border-gray-700/50 perspective-1000"
+                      variants={cardVariants}
+                      whileHover="hover"
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ delay: idx * 0.1 }}
                       style={{
-                        background:
-                          "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(217,119,6,0.1) 100%)",
+                        transformStyle: "preserve-3d",
+                        WebkitTransformStyle: "preserve-3d",
+                        boxShadow:
+                          "0 15px 35px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.07)",
                       }}
-                    />
-                    {category.images[0]?.url && (
-                      <motion.div
-                        className="w-full h-full"
-                        style={{
-                          rotateX: isHovering ? cardRotateX : 0,
-                          rotateY: isHovering ? cardRotateY : 0,
-                          transformStyle: "preserve-3d",
-                        }}
-                      >
-                        <motion.img
-                          src={category.images[0].url}
-                          alt={category.name}
-                          className="w-full h-full object-cover"
-                          initial={{ scale: 1.2, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          transition={{ duration: 0.8 }}
-                          style={{
-                            transformStyle: "preserve-3d",
-                            transition:
-                              "transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                          }}
-                          whileHover={{ scale: 1.1 }}
-                        />
-                      </motion.div>
-                    )}
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 z-20"
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
                     >
-                      <div className="p-4 backdrop-blur-md bg-amber-800/90 relative overflow-hidden">
-                        <motion.div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-amber-600 opacity-30" />
-                        <h3 className="text-xl font-serif font-semibold text-white drop-shadow-md capitalize relative">
-                          {category.name}
-                        </h3>
-                      </div>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10 opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                        style={{
+                          background:
+                            "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(217,119,6,0.1) 100%)",
+                        }}
+                      />
+                      {category.images[0]?.url && (
+                        <motion.div
+                          className="w-full h-full"
+                          style={{
+                            rotateX: isHovering ? cardRotateX : 0,
+                            rotateY: isHovering ? cardRotateY : 0,
+                            transformStyle: "preserve-3d",
+                          }}
+                        >
+                          <motion.img
+                            src={category.images[0].url}
+                            alt={category.name}
+                            className="w-full h-full object-cover"
+                            initial={{ scale: 1.2, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.8 }}
+                            style={{
+                              transformStyle: "preserve-3d",
+                              transition:
+                                "transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                            }}
+                            whileHover={{ scale: 1.1 }}
+                          />
+                        </motion.div>
+                      )}
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 z-20"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
+                      >
+                        <div className="p-4 backdrop-blur-md bg-amber-800/90 relative overflow-hidden">
+                          <motion.div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-amber-600 opacity-30" />
+                          <h3 className="text-xl font-serif font-semibold text-white drop-shadow-md capitalize relative">
+                            {category.name}
+                          </h3>
+                        </div>
+                      </motion.div>
+                      <motion.div
+                        className="absolute inset-0 bg-amber-500 mix-blend-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                        whileHover={{
+                          opacity: 0.2,
+                          transition: { duration: 0.3 },
+                        }}
+                      />
                     </motion.div>
-                    <motion.div
-                      className="absolute inset-0 bg-amber-500 mix-blend-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                      whileHover={{
-                        opacity: 0.2,
-                        transition: { duration: 0.3 },
-                      }}
-                    />
-                  </motion.div>
+                  </Link>
                 ))}
               </div>
             </motion.div>

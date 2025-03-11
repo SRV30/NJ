@@ -93,8 +93,8 @@ const generateReceiptHTML = (order) => {
           <div class="receipt-footer">
             <p>We will notify you once your order has been shipped.</p>
             <p>Thank you for choosing Nandani Jewellers!</p>
-            <p><strong>Contact Us:</strong> support@faithandfast.com</p>
-            <p><strong><a href="https://www.faithandfast.com">Nandani Jewellers</a></strong></p>
+            <p><strong>Contact Us:</strong> support@nandanijewellers.com</p>
+            <p><strong><a href="https://www.nandanijewellers.com">Nandani Jewellers</a></strong></p>
           </div>
         </div>
 

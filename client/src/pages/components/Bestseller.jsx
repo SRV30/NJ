@@ -430,29 +430,31 @@ const BestsellerPage = () => {
             className="flex justify-center mt-10"
           >
             <motion.button
-            onClick={() => (window.location.href = "/products")}
-            className="relative bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-10 py-4 rounded-2xl font-serif font-semibold text-xl tracking-wide shadow-xl overflow-hidden group"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 10px 40px rgba(217, 119, 6, 0.4)",
-            }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <span className="relative z-10 flex items-center">
-              Explore All Collections
-              <motion.span
-                className="ml-2"
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 1.5,
-                  ease: "easeInOut",
-                }}
-              >
-                <ArrowRight />
-              </motion.span>
-            </span>
-          </motion.button>
+              onClick={() =>
+                (window.location.href = "/products?type=bestseller")
+              }
+              className="relative bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-10 py-4 rounded-2xl font-serif font-semibold text-xl tracking-wide shadow-xl overflow-hidden group"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 40px rgba(217, 119, 6, 0.4)",
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10 flex items-center">
+                Explore All Collections
+                <motion.span
+                  className="ml-2"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1.5,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <ArrowRight />
+                </motion.span>
+              </span>
+            </motion.button>
           </motion.div>
         )}
       </div>

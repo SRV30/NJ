@@ -77,13 +77,13 @@ const Footer = () => {
           </p>
         </motion.div>
 
-        {/* Navigation Links */}
+     
         <div className="grid grid-cols-2 gap-8 md:col-span-2 md:grid-cols-4 text-center md:text-left ">
           {[
             {
               title: "Collections",
               links: ["New Arrivals", "Best Sellers", "All Jewels"],
-              hrefs: ["/products", "/products", "/products"],
+              hrefs: ["/products", "/products?type=bestseller", "/products"],
             },
             {
               title: "Our Story",
@@ -130,7 +130,7 @@ const Footer = () => {
         </div>
       </motion.div>
 
-      {/* Bottom Section */}
+    
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -165,7 +165,7 @@ const Footer = () => {
           </a>
         </motion.p>
 
-        {/* Social Icons */}
+
         <motion.div
           variants={itemVariants}
           className="flex space-x-5 mt-6 md:mt-0"

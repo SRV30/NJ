@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { getSingleDetail } from "@/store/auth-slice/user";
 import MediData from "../extras/MetaData";
+import Loader from "../extras/Loader";
 
 const MyProfile = () => {
   const fileInputRef = useRef(null);
@@ -59,7 +60,6 @@ const MyProfile = () => {
     >
       <MediData title="My Profile | Nandani Jewellers" />
       <div className="max-w-5xl mx-auto">
-        {/* Header Section */}
         <div className="text-center mb-8">
           <motion.h1
             className="text-3xl sm:text-4xl font-serif font-medium text-amber-800 dark:text-amber-200"
@@ -75,34 +75,20 @@ const MyProfile = () => {
           </motion.p>
         </div>
 
-        {/* Mobile Layout (below sm) */}
         <div className="sm:hidden flex flex-col items-center text-center space-y-8">
-          {/* Profile Image & Name */}
           <motion.div
             className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-amber-300 dark:border-amber-600 cursor-pointer shadow-lg"
             variants={itemVariants}
           >
             {loading ? (
-              <p className="flex items-center justify-center h-full text-amber-600 dark:text-amber-300 text-sm">
-                Loading...
-              </p>
+              <Loader />
             ) : (
               <img
                 src={profileImage}
                 alt="Profile"
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                onClick={() => fileInputRef.current?.click()}
+                className="w-full h-full object-fit transition-transform duration-300 hover:scale-105 cursor-default"
               />
             )}
-            <input
-              type="file"
-              ref={fileInputRef}
-              className="hidden"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                if (file) setProfileImage(URL.createObjectURL(file));
-              }}
-            />
           </motion.div>
           <motion.h2
             className="text-xl font-serif font-semibold text-amber-800 dark:text-amber-200 capitalize"
@@ -147,9 +133,7 @@ const MyProfile = () => {
           </motion.div>
         </div>
 
-        {/* Tablet/Laptop Layout (sm and above) */}
         <div className="hidden sm:grid sm:grid-cols-1 lg:grid-cols-3 sm:gap-8">
-          {/* Profile Card */}
           <motion.div
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-amber-100 dark:border-gray-700 p-6 lg:col-span-1"
             variants={containerVariants}
@@ -171,19 +155,10 @@ const MyProfile = () => {
                     <img
                       src={profileImage}
                       alt="Profile"
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-fit transition-transform duration-300 group-hover:scale-105 cursor-default"
                     />
                   )}
                 </div>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    if (file) setProfileImage(URL.createObjectURL(file));
-                  }}
-                />
               </motion.div>
 
               <motion.h2
@@ -200,7 +175,6 @@ const MyProfile = () => {
               </motion.p>
             </div>
 
-            {/* Navigation - Vertical on Tablet/Laptop */}
             <nav className="mt-6 flex flex-col space-y-3">
               {[
                 {

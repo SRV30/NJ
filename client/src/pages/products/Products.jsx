@@ -7,7 +7,7 @@ import { fetchCategories } from "@/store/product-slice/category";
 // import { showJewelryToast } from "../extras/showJewelryToast";
 import MetaData from "../extras/MetaData";
 import Typewriter from "typewriter-effect/dist/core";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loader from "../extras/Loader";
 
 const ProductsPage = () => {
@@ -19,6 +19,14 @@ const ProductsPage = () => {
     (state) => state.jewellery
   );
   const { categories } = useSelector((state) => state.category);
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const type = params.get("type");
+  const jewelleryType = params.get("jewelleryType");
+  const productCategory = params.get("productCategory");
+
+  const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
     keyword: "",
@@ -43,6 +51,26 @@ const ProductsPage = () => {
     dispatch(fetchCategories());
     return () => clearTimeout(delayDebounceFn);
   }, [dispatch, filters]);
+
+  useEffect(() => {
+    if (type === "bestseller") {
+      setFilters((prev) => ({ ...prev, bestseller: "Yes" }));
+    } else {
+      dispatch(getProducts());
+    }
+  }, [dispatch, type]);
+
+  useEffect(() => {
+    if (jewelleryType) {
+      setFilters((prev) => ({ ...prev, jewelleryType }));
+    }
+  }, [jewelleryType]);
+
+  useEffect(() => {
+    if (productCategory) {
+      setFilters((prev) => ({ ...prev, productCategory }));
+    }
+  }, [productCategory]);
 
   useEffect(() => {
     const input = document.querySelector(".typewriter-input");
@@ -93,6 +121,7 @@ const ProductsPage = () => {
       page: 1,
       limit: 20,
     });
+    navigate("/products");
   };
 
   const containerVariants = {
@@ -568,9 +597,7 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      {loading && (
-        <Loader />
-      )}
+      {loading && <Loader />}
     </div>
   );
 };

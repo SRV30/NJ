@@ -226,6 +226,77 @@ export const getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
+export const getProductsByJewelleryType = catchAsyncErrors(
+  async (req, res, next) => {
+    try {
+      const { jewelleryType } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(jewelleryType)) {
+        return next(new ErrorHandler("Invalid jewellery type ID", 400));
+      }
+
+      const products = await ProductModel.find({ jewelleryType })
+        .populate("jewelleryType", "name")
+        .populate("productCategory", "name");
+
+      res.status(200).json({
+        message: "Products fetched successfully",
+        data: products,
+        totalProducts: products.length,
+        success: true,
+      });
+    } catch (error) {
+      console.error("Error in getProductsByJewelleryType:", error);
+      next(new ErrorHandler("Error fetching products by jewellery type", 500));
+    }
+  }
+);
+
+export const getProductsByProductCategory = catchAsyncErrors(
+  async (req, res, next) => {
+    try {
+      const { productCategory } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(productCategory)) {
+        return next(new ErrorHandler("Invalid product category ID", 400));
+      }
+
+      const products = await ProductModel.find({ productCategory })
+        .populate("productCategory", "name")
+        .populate("jewelleryType", "name");
+
+      res.status(200).json({
+        message: "Products fetched successfully",
+        data: products,
+        totalProducts: products.length,
+        success: true,
+      });
+    } catch (error) {
+      console.error("Error in getProductsByProductCategory:", error);
+      next(new ErrorHandler("Error fetching products by category", 500));
+    }
+  }
+);
+
+export const getBestsellerProducts = catchAsyncErrors(
+  async (req, res, next) => {
+    try {
+      const products = await ProductModel.find({ bestseller: "Yes" })
+        .populate("productCategory", "name")
+        .populate("jewelleryType", "name");
+
+      res.status(200).json({
+        message: "Bestseller products fetched successfully",
+        data: products,
+        totalProducts: products.length,
+        success: true,
+      });
+    } catch (error) {
+      next(new ErrorHandler("Error fetching bestseller products", 500));
+    }
+  }
+);
+
 export const updateProduct = catchAsyncErrors(async (req, res, next) => {
   try {
     const { id } = req.params;

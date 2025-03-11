@@ -16,15 +16,20 @@ import ContactUs from "./pages/components/ContactUs";
 import ScrollToTop from "./pages/extras/ScrollToTop";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import { useSelector } from "react-redux";
-import AdminJewellery from "./pages/admin/AdminJewellery";
 import ProductsPage from "./pages/products/Products";
 import SingleProductPage from "./pages/products/SingleProduct";
+import UpdatePassword from "./pages/my-profile/UpdatePassword";
+import UpdateProfile from "./pages/my-profile/UpdateProfile";
+import SavedAddress from "./pages/my-profile/SavedAddress";
+import MyOrders from "./pages/my-profile/MyOrders";
+import VerifyOtp from "./pages/auth-page/ResetVerifyOtp";
+import AdminSingleUser from "./pages/admin/AdminSingleUser";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   return (
-    <div className="flex flex-col overflow-hidden bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 mt-15 sm:mt-20 text-amber-800 dark:text-amber-300">
+    <div className="flex flex-col mt-15 sm:mt-20 overflow-hidden bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -45,6 +50,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/About" element={<About />} />
         <Route path="/ContactUs" element={<ContactUs />} />
@@ -58,11 +64,44 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/my-orders"
+          element={
+            <ProtectedRoute>
+              <MyOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/update-password"
+          element={
+            <ProtectedRoute>
+              <UpdatePassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/update-profile"
+          element={
+            <ProtectedRoute>
+              <UpdateProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/saved-address"
+          element={
+            <ProtectedRoute>
+              <SavedAddress />
+            </ProtectedRoute>
+          }
+        />
 
         {isAuthenticated && user?.role === "ADMIN" && (
           <>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/jewellery" element={<AdminJewellery />} />
+            <Route path="/admin/users/:id" element={<AdminSingleUser />} />
+
           </>
         )}
       </Routes>

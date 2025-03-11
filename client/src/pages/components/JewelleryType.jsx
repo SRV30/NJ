@@ -10,6 +10,7 @@ import {
 } from "@/store/product-slice/jewelleryType";
 import { ArrowRight } from "lucide-react";
 import Loader from "../extras/Loader";
+import { Link } from "react-router-dom";
 
 const JewelleryType = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -190,9 +191,7 @@ const JewelleryType = () => {
   };
 
   if (loading) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   return (
@@ -316,6 +315,7 @@ const JewelleryType = () => {
         )}
 
         {/* Carousel Items */}
+
         <AnimatePresence mode="wait" custom={slideDirection}>
           <motion.div
             key={currentIndex}
@@ -328,107 +328,112 @@ const JewelleryType = () => {
           >
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-8">
               {getVisibleCategories().map((category, idx) => (
-                <motion.div
+                <Link
                   key={category._id}
-                  className="relative group h-72 rounded-3xl overflow-hidden shadow-lg border border-amber-100/30 dark:border-gray-700/50 transform perspective-1000"
-                  variants={cardVariants}
-                  style={{
-                    transformStyle: "preserve-3d",
-                  }}
-                  whileHover="hover"
-                  onHoverStart={() => setHoverIndex(idx)}
-                  onHoverEnd={() => setHoverIndex(null)}
+                  to={`/products?jewelleryType=${category._id}`}
                 >
-                  {/* Parallax Image Effect */}
                   <motion.div
-                    className="absolute inset-0 w-full h-full"
-                    animate={{
-                      x: hoverIndex === idx ? -5 : 0,
-                      y: hoverIndex === idx ? -5 : 0,
-                      scale: hoverIndex === idx ? 1.1 : 1,
+                    key={category._id}
+                    className="relative group h-72 rounded-3xl overflow-hidden shadow-lg border border-amber-100/30 dark:border-gray-700/50 transform perspective-1000"
+                    variants={cardVariants}
+                    style={{
+                      transformStyle: "preserve-3d",
                     }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 30,
-                    }}
+                    whileHover="hover"
+                    onHoverStart={() => setHoverIndex(idx)}
+                    onHoverEnd={() => setHoverIndex(null)}
                   >
-                    {/* Image with Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 via-transparent to-transparent z-10" />
-                    {category.images[0]?.url && (
-                      <motion.img
-                        src={category.images[0].url}
-                        alt={category.name}
-                        className="w-full h-full object-cover"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                      />
-                    )}
-                  </motion.div>
-
-                  {/* Hover Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-amber-400/20 opacity-0 z-10 rounded-3xl"
-                    animate={{
-                      opacity: hoverIndex === idx ? 0.3 : 0,
-                      boxShadow:
-                        hoverIndex === idx
-                          ? "inset 0 0 30px rgba(251, 191, 36, 0.6)"
-                          : "inset 0 0 0px rgba(251, 191, 36, 0)",
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
-
-                  {/* Title Card */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 p-4 text-center z-20 bg-gradient-to-t from-amber-800 to-amber-700"
-                    animate={{
-                      y: hoverIndex === idx ? 0 : 10,
-                      opacity: hoverIndex === idx ? 1 : 0.9,
-                      height: hoverIndex === idx ? "40%" : "25%",
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 30,
-                    }}
-                  >
-                    <h3 className="text-xl font-serif font-semibold text-white drop-shadow-md capitalize">
-                      {category.name}
-                    </h3>
-
+                    {/* Parallax Image Effect */}
                     <motion.div
+                      className="absolute inset-0 w-full h-full"
                       animate={{
-                        opacity: hoverIndex === idx ? 1 : 0,
-                        y: hoverIndex === idx ? 0 : 10,
+                        x: hoverIndex === idx ? -5 : 0,
+                        y: hoverIndex === idx ? -5 : 0,
+                        scale: hoverIndex === idx ? 1.1 : 1,
                       }}
-                      transition={{ delay: 0.1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
                     >
-                      <p className="text-amber-100 mt-2 text-sm">
-                        Explore our collection
-                      </p>
+                      {/* Image with Gradient Overlay */}
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 via-transparent to-transparent z-10" />
+                      {category.images[0]?.url && (
+                        <motion.img
+                          src={category.images[0].url}
+                          alt={category.name}
+                          className="w-full h-full object-cover"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      )}
+                    </motion.div>
+
+                    {/* Hover Glow Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-amber-400/20 opacity-0 z-10 rounded-3xl"
+                      animate={{
+                        opacity: hoverIndex === idx ? 0.3 : 0,
+                        boxShadow:
+                          hoverIndex === idx
+                            ? "inset 0 0 30px rgba(251, 191, 36, 0.6)"
+                            : "inset 0 0 0px rgba(251, 191, 36, 0)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+
+                    {/* Title Card */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 p-4 text-center z-20 bg-gradient-to-t from-amber-800 to-amber-700"
+                      animate={{
+                        y: hoverIndex === idx ? 0 : 10,
+                        opacity: hoverIndex === idx ? 1 : 0.9,
+                        height: hoverIndex === idx ? "40%" : "25%",
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 30,
+                      }}
+                    >
+                      <h3 className="text-xl font-serif font-semibold text-white drop-shadow-md capitalize">
+                        {category.name}
+                      </h3>
+
                       <motion.div
-                        className="w-8 h-0.5 bg-amber-300 mx-auto mt-2"
                         animate={{
-                          width: hoverIndex === idx ? 32 : 0,
+                          opacity: hoverIndex === idx ? 1 : 0,
+                          y: hoverIndex === idx ? 0 : 10,
                         }}
-                        transition={{
-                          delay: 0.2,
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 30,
-                        }}
-                      />
+                        transition={{ delay: 0.1 }}
+                      >
+                        <p className="text-amber-100 mt-2 text-sm">
+                          Explore our collection
+                        </p>
+                        <motion.div
+                          className="w-8 h-0.5 bg-amber-300 mx-auto mt-2"
+                          animate={{
+                            width: hoverIndex === idx ? 32 : 0,
+                          }}
+                          transition={{
+                            delay: 0.2,
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 30,
+                          }}
+                        />
+                      </motion.div>
                     </motion.div>
                   </motion.div>
-                </motion.div>
+                </Link>
               ))}
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Enhanced Pagination Dots */}
         {shuffledCategories.length > itemsPerPage && (
           <div className="absolute bottom-10 left-0 right-0 flex justify-center space-x-2 z-20">
             {Array.from({ length: totalSlides }).map((_, index) => (

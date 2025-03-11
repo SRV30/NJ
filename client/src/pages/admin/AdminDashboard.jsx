@@ -11,6 +11,7 @@ import {
   LogOut,
   Check,
   Trash2,
+  Contact,
 } from "lucide-react";
 import AdminUsers from "./AdminUsers";
 import AdminProducts from "./AdminProducts";
@@ -23,7 +24,7 @@ import { Category } from "@mui/icons-material";
 import { getProducts } from "@/store/product-slice/product";
 import { fetchJewelleryCategories } from "@/store/product-slice/jewelleryType";
 import { fetchCategories } from "@/store/product-slice/category";
-import { logoutUser } from "@/store/auth-slice/user";
+import { getAllUsers, logoutUser } from "@/store/auth-slice/user";
 import { showJewelryToast } from "../extras/showJewelryToast";
 import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "../extras/DarkModeToggle";
@@ -33,12 +34,17 @@ import {
   markNotificationAsRead,
   deleteNotification,
 } from "@/store/extra/dashboardSlice";
+import AdminContact from "./AdminGetInTouch";
 
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("Dashboard");
   const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
+  const [search, setSearch] = useState("");
 
   const { user } = useSelector((state) => state.auth);
   const { products = [] } = useSelector((state) => state.product || {});
@@ -56,14 +62,14 @@ const AdminDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Fetch data
   useEffect(() => {
+    dispatch(getAllUsers({ page, search }));
     dispatch(getProducts());
     dispatch(fetchJewelleryCategories());
     dispatch(fetchCategories());
     dispatch(fetchNotifications());
     dispatch(fetchLowStockProducts());
-  }, [dispatch]);
+  }, [dispatch, page, search]);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -76,34 +82,47 @@ const AdminDashboard = () => {
       title: "Users",
       count: users.length,
       icon: Users,
-      newCount: 12,
       color: "indigo",
     },
     {
       title: "Products",
       count: products.length,
       icon: ShoppingBag,
-      newCount: 8,
-      color: "emerald",
+      color: "yellow",
     },
     {
       title: "Jewellery Types",
       count: jewelleryType.length,
       icon: Gem,
-      newCount: 3,
-      color: "purple",
+      color: "amber",
     },
     {
       title: "Categories",
       count: productCategory.length,
       icon: Category,
-      newCount: 5,
-      color: "amber",
+      color: "blue",
     },
-    { title: "Orders", count: 245, icon: Package, newCount: 18, color: "rose" },
+    {
+      title: "Orders",
+      count: 245,
+      icon: Package,
+      newCount: 18,
+      color: "green",
+    },
+    {
+      title: "Unread Notifications",
+      count: notifications.filter((n) => !n.read).length,
+      icon: Bell,
+      color: "red",
+    },
   ];
 
-  const toggleNotifications = () => setIsOpen(!isOpen);
+  const toggleNotifications = () => {
+    setIsOpen(!isOpen);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 5000);
+  };
 
   const handleMarkAsRead = (id) => {
     dispatch(markNotificationAsRead(id));
@@ -126,7 +145,6 @@ const AdminDashboard = () => {
       case "Dashboard":
         return (
           <div className="space-y-8">
-            {/* Welcome Banner */}
             <motion.div
               className="bg-gradient-to-r from-amber-100 to-amber-300 dark:from-amber-900 dark:to-amber-700 p-8 rounded-2xl shadow-lg text-center relative overflow-hidden"
               initial={{ opacity: 0, y: -20 }}
@@ -245,7 +263,7 @@ const AdminDashboard = () => {
             </motion.div>
           </div>
         );
-      case "Customers":
+      case "Users":
         return <AdminUsers />;
       case "Jewellery Type":
         return <AdminJewellery />;
@@ -255,6 +273,8 @@ const AdminDashboard = () => {
         return <AdminProducts />;
       case "Orders":
         return <AdminOrdersPage />;
+      case "Contact Form":
+        return <AdminContact />;
       default:
         return null;
     }
@@ -276,7 +296,7 @@ const AdminDashboard = () => {
           <div className="flex items-center space-x-2">
             <Gem className="h-6 w-6 text-amber-500" />
             <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">
-              Nandani Jewellers Admin
+              Nandani Jewellers Admin Panel
             </h2>
           </div>
           <button onClick={() => setIsSidebarOpen(false)} className="md:hidden">
@@ -304,11 +324,12 @@ const AdminDashboard = () => {
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
           {[
             { icon: LayoutDashboard, text: "Dashboard" },
-            { icon: Users, text: "Customers" },
+            { icon: Users, text: "Users" },
             { icon: Gem, text: "Jewellery Type" },
             { icon: Category, text: "Category" },
             { icon: ShoppingBag, text: "Products" },
             { icon: Package, text: "Orders" },
+            { icon: Contact, text: "Contact Form" },
           ].map((item) => (
             <motion.button
               key={item.text}

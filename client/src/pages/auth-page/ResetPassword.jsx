@@ -1,120 +1,138 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { clearAuthState, resetPassword } from "@/store/auth-slice/user";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Lock } from "@mui/icons-material";
-import { toast } from "react-toastify";
+import MetaData from "../extras/MetaData";
+import { showJewelryToast } from "../extras/showJewelryToast";
+import { Eye, EyeOff } from "lucide-react";
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const navigate = useNavigate(); 
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleReset = () => {
-    if (!password || !confirmPassword) {
-      toast.error("Please fill in both password fields");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error, success } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("resetEmail");
+    if (storedEmail) {
+      setEmail(storedEmail);
+    } else {
+      showJewelryToast("Invalid request! Please verify OTP first.", "error");
+      navigate("/verify-otp");
+    }
+  }, [navigate]);
+
+  const handleResetPassword = () => {
+    if (!email || !newPassword || !confirmPassword) {
+      showJewelryToast("All fields are required!", "error");
       return;
     }
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match!");
+    if (newPassword.length < 8) {
+      showJewelryToast("Password must be at least 8 characters!", "error");
       return;
     }
-
-    toast.success("Password reset successful!");
-    navigate("/login"); 
+    if (newPassword !== confirmPassword) {
+      showJewelryToast("Passwords do not match!", "error");
+      return;
+    }
+    dispatch(resetPassword({ email, newPassword, confirmPassword }));
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  useEffect(() => {
+    if (success) {
+      showJewelryToast(
+        "Password updated successfully! Redirecting to login...",
+        "success"
+      );
+      localStorage.removeItem("resetEmail");
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    }
+    if (error) {
+      showJewelryToast(error, "error");
+    }
+  }, [success, error, navigate]);
 
-  const buttonVariants = {
-    hover: { scale: 1.02, transition: { duration: 0.3 } },
-    tap: { scale: 0.98 },
-  };
+  useEffect(() => {
+    return () => {
+      dispatch(clearAuthState());
+    };
+  }, [dispatch]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-amber-100 dark:border-gray-700"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6 text-center"
-        >
-          Reset Your Password
-        </motion.h2>
+    <>
+      <MetaData title="Reset Password - Nandani Jewellers" />
 
-        <motion.p
-          variants={itemVariants}
-          className="text-amber-700 dark:text-amber-300 mb-6 text-center"
-        >
-          Enter your new password below.
-        </motion.p>
+      {/* Reset Password Card */}
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 px-4">
+        <div className="bg-white dark:bg-slate-900 shadow-lg rounded-xl p-6 w-full max-w-md">
+          <h2 className="text-2xl font-semibold text-amber-800 dark:text-amber-300 text-center">
+            Reset Password
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">
+            Enter a new password for your account.
+          </p>
 
-        <motion.div variants={itemVariants} className="mb-6 relative">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600"
+          <div className="mt-6 space-y-4">
+            <input
+              type="email"
+              value={email}
+              readOnly
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed"
+            />
+
+            <div className="relative">
+              <input
+                type={showNewPassword ? "text" : "password"}
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring focus:ring-amber-500 bg-transparent text-amber-800 dark:text-amber-300 pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+                className="absolute right-3 top-3 text-gray-500 dark:text-gray-400"
+              >
+                {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring focus:ring-amber-500 bg-transparent text-amber-800 dark:text-amber-300 pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-3 text-gray-500 dark:text-gray-400"
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+          </div>
+
+          <button
+            onClick={handleResetPassword}
+            disabled={loading}
+            className="w-full mt-4 py-3 bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white font-semibold rounded-lg transition"
           >
-            <Lock />
-          </motion.div>
-          <input
-            type="password"
-            placeholder="New Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 rounded-lg border border-amber-400 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 dark:text-white placeholder-amber-600/50 transition-all duration-300"
-          />
-        </motion.div>
-
-        <motion.div variants={itemVariants} className="mb-6 relative">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-600"
-          >
-            <Lock />
-          </motion.div>
-          <input
-            type="password"
-            placeholder="Confirm New Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 rounded-lg border border-amber-400 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 dark:text-white placeholder-amber-600/50 transition-all duration-300"
-          />
-        </motion.div>
-
-        <motion.button
-          variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
-          onClick={handleReset}
-          className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white py-3 rounded-lg font-medium tracking-wide shadow-md hover:from-amber-700 hover:to-amber-800 transition-all duration-300"
-        >
-          Reset Password
-        </motion.button>
-      </motion.div>
-    </div>
+            {loading ? "Updating..." : "Update Password"}
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

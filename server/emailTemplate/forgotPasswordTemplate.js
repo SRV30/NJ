@@ -11,104 +11,104 @@ const forgotPasswordTemplate = ({ name, otp }) => {
               font-family: 'Arial', sans-serif;
               margin: 0;
               padding: 0;
-              background-color: #f4f7fc;
-              color: #333;
+              background: linear-gradient(to bottom right, #fef3c7, #fff7ed, #fef3c7);
+              color: #78350f;
             }
-  
+
             .container {
               width: 100%;
               max-width: 600px;
-              margin: 0 auto;
+              margin: 40px auto;
               padding: 40px;
               background-color: #ffffff;
-              border-radius: 10px;
-              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            }
-  
-            .header {
+              border-radius: 12px;
+              box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
               text-align: center;
-              padding-bottom: 30px;
+              position: relative;
+              overflow: hidden;
             }
-  
+
+            .container::before {
+              content: '';
+              position: absolute;
+              top: -80px;
+              left: -80px;
+              width: 160px;
+              height: 160px;
+              background: rgba(255, 204, 0, 0.2);
+              border-radius: 50%;
+              filter: blur(80px);
+            }
+
             .header h1 {
-              color: #4a90e2;
-              font-size: 32px;
-              margin-bottom: 0;
+              font-size: 28px;
+              color: #b45309;
               font-weight: bold;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
             }
-  
+
             .body {
               font-size: 16px;
               line-height: 1.6;
-              color: #555555;
-              margin-top: 20px;
+              color: #854d0e;
+              text-align: center;
             }
-  
+
             .body p {
               margin: 15px 0;
             }
-  
+
             .otp-container {
-              background-color: #fdd835;
-              color: #333;
-              font-size: 24px;
-              padding: 25px;
+              background: linear-gradient(to right, #facc15, #f59e0b);
+              color: #fff;
+              font-size: 28px;
+              padding: 20px;
               text-align: center;
               font-weight: bold;
-              border-radius: 8px;
-              margin-top: 30px;
-              border: 2px solid #fbc02d;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+              border-radius: 10px;
+              margin: 30px auto;
+              display: inline-block;
+              width: 80%;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
             }
-  
-            .otp-container p {
-              margin: 0;
-            }
-  
+
             .footer {
-              text-align: center;
-              margin-top: 40px;
-              font-size: 14px;
-              color: #888888;
-            }
-  
-            .footer p {
-              margin: 5px 0;
-            }
-  
-            .footer a {
-              color: #4a90e2;
-              text-decoration: none;
-            }
-  
-            .button-container {
-              text-align: center;
               margin-top: 30px;
+              font-size: 14px;
+              color: #b45309;
             }
-  
+
+            .footer a {
+              color: #c2410c;
+              text-decoration: none;
+              font-weight: bold;
+            }
+
+            .button-container {
+              margin-top: 25px;
+            }
+
             .button {
-              background-color: #4a90e2;
+              background: linear-gradient(to right, #facc15, #f59e0b);
               color: white;
-              padding: 15px 35px;
+              padding: 12px 30px;
               border-radius: 8px;
               text-decoration: none;
               font-weight: bold;
+              font-size: 16px;
               text-transform: uppercase;
-              font-size: 18px;
-              transition: background-color 0.3s, transform 0.3s;
-              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+              transition: all 0.3s ease-in-out;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+              display: inline-block;
             }
-  
+
             .button:hover {
-              background-color: #357ab7;
-              transform: translateY(-2px);
+              background: linear-gradient(to right, #f59e0b, #facc15);
+              transform: scale(1.05);
             }
-  
-            .button:active {
-              background-color: #2c6c9e;
-              transform: translateY(0);
-            }
-  
+
           </style>
         </head>
         <body>
@@ -116,25 +116,27 @@ const forgotPasswordTemplate = ({ name, otp }) => {
             <div class="header">
               <h1>Password Reset Request</h1>
             </div>
-  
+
             <div class="body">
-              <p>Hello ${name},</p>
-              <p>We received a request to reset the password for your Nandani Jewellers account.</p>
-              <p>If you didn't request a password reset, you can ignore this email.</p>
-              <p>To reset your password, please use the following OTP:</p>
+              <p>Hello <strong>${name}</strong>,</p>
+              <p>We received a request to reset the password for your <strong>Nandani Jewellers</strong> account.</p>
+              <p>If you didn't request a password reset, please ignore this email.</p>
+              <p>To reset your password, use the following OTP:</p>
+
               <div class="otp-container">
-                <p>${otp}</p>
+                ${otp}
               </div>
-              <p>This OTP is valid for only 10 minutes. Enter it on the Nandani Jewellers website to proceed with resetting your password.</p>
+
+              <p>This OTP is valid for only <strong>10 minutes</strong>. Enter it on the Nandani Jewellers website to proceed.</p>
             </div>
-  
-            <div class="footer">
-              <p>Nandani Jewellers | <a href="https://www.faithandfast.com" target="_blank">www.faithandfast.com</a></p>
-              <p>For assistance, please contact <a href="mailto:support@faithandfast.com">support@faithandfast.com</a></p>
-            </div>
-  
+
             <div class="button-container">
-              <a href="https://www.faithandfast.com/reset-password" class="button">Reset Password</a>
+              <a href="https://nandanijewellers.com/verify-otp" class="button">Reset Password</a>
+            </div>
+
+            <div class="footer">
+              <p>Nandani Jewellers | <a href="https://www.nandanijewellers.com" target="_blank">www.nandanijewellers.com</a></p>
+              <p>For assistance, contact <a href="mailto:support@nandanijewellers.com">support@nandanijewellers.com</a></p>
             </div>
           </div>
         </body>

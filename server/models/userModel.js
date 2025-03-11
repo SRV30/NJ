@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     addressDetails: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: "Address",
+        ref: "address",
       },
     ],
     shoppingCart: [

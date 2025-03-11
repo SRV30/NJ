@@ -6,8 +6,11 @@ import {
   createProduct,
   deleteProduct,
   deleteProductReview,
+  getBestsellerProducts,
   getProductReviews,
   getProducts,
+  getProductsByJewelleryType,
+  getProductsByProductCategory,
   getSimilarProducts,
   getSingleProduct,
   postProductReview,
@@ -27,6 +30,12 @@ productRouter.post(
 productRouter.get("/get", getProducts);
 
 productRouter.get("/get/:productId", getSingleProduct);
+
+productRouter.get("/get/:jewelleryType", getProductsByJewelleryType);
+
+productRouter.get("/get/:productCategory", getProductsByProductCategory);
+
+productRouter.get("/get/bestseller", getBestsellerProducts);
 
 productRouter.put(
   "/update/:id",
