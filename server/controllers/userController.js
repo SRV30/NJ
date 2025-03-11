@@ -7,6 +7,7 @@ import { deleteImage, uploadImage } from "../utils/cloudinary.js";
 import generatedOtp from "../utils/generatedOtp.js";
 import sendToken from "../utils/jwtToken.js";
 import forgotPasswordTemplate from "../emailTemplate/forgotPasswordTemplate.js";
+import { createNotification } from "../controllers/dashboardController.js";
 
 export const registerUser = catchAsyncErrors(async (req, res) => {
     try {
@@ -67,6 +68,8 @@ export const registerUser = catchAsyncErrors(async (req, res) => {
           success: false,
         });
       }
+  
+      await createNotification(`New user registered: ${savedUser.name}`);
   
       return res.status(201).json({
         message:

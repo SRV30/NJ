@@ -70,8 +70,10 @@ import userRouter from "./route/userRoute.js";
 import jewelleryRouter from "./route/jewelleryRoute.js";
 import categoryRouter from "./route/categoryRoute.js";
 import productRouter from "./route/productRoute.js";
+import dashboardRoutes from "./route/dashboardRoutes.js";
 
 app.use("/api/category", categoryRouter)
+app.use("/api/dashboard", dashboardRoutes)
 app.use("/api/jewellery", jewelleryRouter)
 app.use("/api/product", productRouter)
 app.use("/api/user", userRouter);

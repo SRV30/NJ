@@ -3,6 +3,7 @@ import ProductModel from "../models/productModel.js";
 import { deleteImage, uploadImage } from "../utils/cloudinary.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import mongoose from "mongoose";
+import { createNotification } from "../controllers/dashboardController.js";
 
 export const createProduct = catchAsyncErrors(async (req, res, next) => {
   try {
@@ -75,6 +76,8 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
 
     const savedProduct = await product.save();
 
+    await createNotification(`New product created : ${savedProduct.name}`);
+
     res.status(201).json({
       message: "Product Created Successfully",
       data: savedProduct,
@@ -82,7 +85,6 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
       success: true,
     });
   } catch (error) {
-    console.error("Error creating product:", error);
     next(new ErrorHandler("Error creating product", 500));
   }
 });
@@ -288,6 +290,8 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
 
     const updatedProduct = await product.save();
 
+    await createNotification(`Product updated: ${updatedProduct.name}`);
+
     res.status(200).json({
       message: "Product updated successfully",
       data: updatedProduct,
@@ -328,6 +332,7 @@ export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
       );
     }
 
+    await createNotification(`Product deleted: ${product.name || product._id}`);
     return res.json({
       message: "Product deleted successfully.",
       error: false,
@@ -418,6 +423,9 @@ export const postProductReview = catchAsyncErrors(async (req, res, next) => {
     product.reviews.length;
 
   await product.save();
+  await createNotification(
+    `New review for ${product.name} by ${req.user.name}`
+  );
   res.status(201).json({
     message: "Review posted successfully",
     error: false,
