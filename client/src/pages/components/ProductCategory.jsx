@@ -12,7 +12,6 @@ import { fetchCategories, clearError } from "@/store/product-slice/category";
 import { ArrowRight } from "lucide-react";
 import Loader from "../extras/Loader";
 import { Link } from "react-router-dom";
-
 const ProductCategory = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dispatch = useDispatch();
@@ -47,10 +46,10 @@ const ProductCategory = () => {
     }
   }, [categories]);
   const getItemsPerPage = () => {
-    if (window.innerWidth >= 1280) return 10;
-    if (window.innerWidth >= 1024) return 8;
+    if (window.innerWidth >= 1280) return 5;
+    if (window.innerWidth >= 1024) return 5;
     if (window.innerWidth >= 768) return 6;
-    return 4;
+    return 2;
   };
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
   useEffect(() => {
@@ -291,7 +290,7 @@ const ProductCategory = () => {
                           <motion.img
                             src={category.images[0].url}
                             alt={category.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-fit"
                             initial={{ scale: 1.2, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.8 }}

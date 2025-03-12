@@ -675,7 +675,7 @@ const AdminAddProduct = () => {
                         <img
                           src={imagesPreview[index]}
                           alt={`Preview ${index}`}
-                          className="w-28 h-28 object-cover rounded-lg shadow-lg border border-gray-300 dark:border-gray-600"
+                          className="w-28 h-28 object-fit rounded-lg shadow-lg border border-gray-300 dark:border-gray-600"
                         />
                         <button
                           onClick={() => handleImageDelete(index)}
@@ -709,7 +709,7 @@ const AdminAddProduct = () => {
                         <img
                           src={image}
                           alt={`Preview ${index}`}
-                          className="w-28 h-28 object-cover rounded-lg shadow-lg border border-gray-300 dark:border-gray-600"
+                          className="w-28 h-28 object-fit rounded-lg shadow-lg border border-gray-300 dark:border-gray-600"
                         />
                         <button
                           onClick={() => handleImageDelete(index)}

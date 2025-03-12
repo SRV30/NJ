@@ -475,7 +475,7 @@ const AdminProducts = () => {
                     key={index}
                     src={preview}
                     alt={`Preview ${index}`}
-                    className="w-full h-32 object-cover rounded-xl shadow-lg border border-amber-200/50"
+                    className="w-full h-32 object-fit rounded-xl shadow-lg border border-amber-200/50"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
@@ -604,7 +604,7 @@ const AdminProducts = () => {
                         <motion.img
                           src={product.images[0].url}
                           alt={product.name}
-                          className="w-24 h-24 object-cover rounded-lg shadow-md border border-amber-200/50"
+                          className="w-24 h-24 object-fit rounded-lg shadow-md border border-amber-200/50"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ duration: 0.5 }}

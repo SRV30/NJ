@@ -48,10 +48,10 @@ const JewelleryType = () => {
   }, [categories]);
 
   const getItemsPerPage = () => {
-    if (window.innerWidth >= 1280) return 10;
-    if (window.innerWidth >= 1024) return 8;
+    if (window.innerWidth >= 1280) return 5;
+    if (window.innerWidth >= 1024) return 5;
     if (window.innerWidth >= 768) return 6;
-    return 4;
+    return 2;
   };
 
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
@@ -229,7 +229,6 @@ const JewelleryType = () => {
             "0 20px 60px -15px rgba(0, 0, 0, 0.1), 0 15px 30px -5px rgba(0, 0, 0, 0.05)",
         }}
       >
-        {/* Decorative Elements */}
         <motion.div
           className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-amber-300/20 dark:bg-amber-700/10 blur-3xl"
           animate={{
@@ -256,7 +255,7 @@ const JewelleryType = () => {
           }}
         />
 
-        {/* Navigation Arrows */}
+
         {shuffledCategories.length > itemsPerPage && (
           <>
             <motion.button
@@ -314,7 +313,7 @@ const JewelleryType = () => {
           </>
         )}
 
-        {/* Carousel Items */}
+
 
         <AnimatePresence mode="wait" custom={slideDirection}>
           <motion.div
@@ -364,7 +363,7 @@ const JewelleryType = () => {
                         <motion.img
                           src={category.images[0].url}
                           alt={category.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-fit"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ duration: 0.5 }}

@@ -476,7 +476,7 @@ const About = () => {
                 <img
                   src="/images/csr-image.jpg"
                   alt="Nandani Jewellers CSR Initiative"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit"
                 />
               </motion.div>
 

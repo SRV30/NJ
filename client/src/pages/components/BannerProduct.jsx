@@ -175,7 +175,7 @@ const BannerProduct = () => {
             >
               <img
                 src={desktopImages[currentImage]}
-                className="w-full h-full object-cover rounded-xl transform transition-transform duration-1000 hover:scale-105"
+                className="w-full h-full object-fit rounded-xl transform transition-transform duration-1000 hover:scale-105"
                 alt={`Nandani Jewellers Banner ${
                   currentImage + 1
                 } - Luxury Jewelry`}
@@ -198,7 +198,7 @@ const BannerProduct = () => {
             >
               <img
                 src={mobileImages[currentImage]}
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-fit rounded-xl"
                 alt={`Nandani Jewellers Mobile Banner ${
                   currentImage + 1
                 } - Luxury Jewelry`}

@@ -282,7 +282,7 @@ const SingleProductPage = () => {
                         <img
                           src={image.url}
                           alt={`${product.name} view ${index + 1}`}
-                          className="w-full h-full object-cover object-center"
+                          className="w-full h-full object-fit object-center"
                         />
                       </motion.div>
                     ))}
@@ -851,7 +851,7 @@ const SingleProductPage = () => {
                             <img
                               src={prod.images[0]?.url}
                               alt={prod.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-fit"
                             />
                           </div>
                           <div className="p-3">

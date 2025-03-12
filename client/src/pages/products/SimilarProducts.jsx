@@ -27,7 +27,7 @@ const SimilarProducts = ({ similarProducts }) => {
                 <img
                   src={prod.images[0]?.url}
                   alt={prod.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit"
                 />
               </div>
               <div className="p-3">

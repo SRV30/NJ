@@ -126,7 +126,7 @@ const UpdateProfile = () => {
             <motion.img
               src={profileImage}
               alt="Profile"
-              className="w-28 h-28 object-cover rounded-full border-4 border-amber-500 shadow-md"
+              className="w-28 h-28 object-fit rounded-full border-4 border-amber-500 shadow-md"
               whileHover={{ scale: 1.05 }}
             />
             <button

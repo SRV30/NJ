@@ -187,7 +187,7 @@ const ManageJewelleryType = () => {
               <motion.img
                 src={imagePreview}
                 alt="Category Preview"
-                className="mt-6 w-full h-48 object-cover rounded-xl shadow-lg border border-amber-200/50"
+                className="mt-6 w-full h-48 object-fit rounded-xl shadow-lg border border-amber-200/50"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}

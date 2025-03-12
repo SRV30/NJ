@@ -62,7 +62,7 @@ const BestSeller = ({ product, index }) => {
           <img
             src={product?.images?.[0]?.url || "/api/placeholder/400/320"}
             alt={product?.name || "Luxury Jewelry Item"}
-            className="w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:saturate-125"
+            className="w-full h-full object-fit transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:saturate-125"
             style={{ filter: "contrast(1.05) brightness(1.02)" }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-all duration-500 ease-out"></div>
