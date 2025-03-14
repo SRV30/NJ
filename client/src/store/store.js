@@ -9,6 +9,9 @@ import dashboardReducer from "./extra/dashboardSlice";
 import addressReducer from "./address-slice/addressSlice";
 import contactReducer from "@/store/extra/getintouchSlice";
 import productSlice from "./product-slice/getbySlice";
+import cartReducer from "./order-slice/addToCart";
+import wishListReducer from "./order-slice/addToWishList";
+import orderReducer from "./order-slice/order";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +25,9 @@ const store = configureStore({
     address: addressReducer,
     contact: contactReducer,
     getproducts: productSlice,
+    cart: cartReducer,
+    wishList: wishListReducer,
+    order: orderReducer,
   },
 });
 

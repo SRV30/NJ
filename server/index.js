@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 4000;
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   process.env.FRONTEND_WWW_URL,
-  "http://localhost:5173"
+  "http://localhost:5173",
 ];
 app.use(
   cors({
@@ -73,20 +73,24 @@ import productRouter from "./route/productRoute.js";
 import dashboardRoutes from "./route/dashboardRoutes.js";
 import addressRouter from "./route/addressRoute.js";
 import getintouchRouter from "./route/getintouchRoute.js";
+import cartRouter from "./route/cartRoute.js";
+import orderRouter from "./route/orderRoute.js";
+import wishListRouter from "./route/wishListRoute.js";
 
 app.use("/api/address", addressRouter);
-app.use("/api/category", categoryRouter)
-app.use("/api/dashboard", dashboardRoutes)
-app.use("/api/contact", getintouchRouter)
-app.use("/api/jewellery", jewelleryRouter)
-app.use("/api/product", productRouter)
+app.use("/api/cart", cartRouter);
+app.use("/api/category", categoryRouter);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/contact", getintouchRouter);
+app.use("/api/jewellery", jewelleryRouter);
+app.use("/api/order", orderRouter);
+app.use("/api/product", productRouter);
 app.use("/api/user", userRouter);
-
+app.use("/api/wishlist", wishListRouter);
 
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 });
-
 
 process.on("unhandledRejection", (err) => {
   console.error(`Error: ${err.message}`);

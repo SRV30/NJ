@@ -67,52 +67,12 @@ const BestSeller = ({ product, index }) => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-all duration-500 ease-out"></div>
           <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
-          {product?.discount > 0 && (
-            <motion.div
-              initial={{ scale: 0, rotate: -15 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                delay: 0.2 + index * 0.1,
-              }}
-              className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg"
-            >
-              <span className="inline-block animate-pulse">
-                {product.discount}% OFF
-              </span>
-            </motion.div>
-          )}
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-6 transform group-hover:translate-y-0 text-white transition-all duration-500 ease-out">
-          <h3 className="text-xl font-semibold mb-2 group-hover:text-amber-300 transition-colors duration-300 group-hover:-translate-y-1 transform">
-            {product?.name}
-          </h3>
           <div className="flex items-center justify-between opacity-90 group-hover:opacity-100 transition-opacity">
-            <div className="relative">
-              <p className="text-lg font-medium group-hover:translate-y-0 transform transition-all duration-300">
-                <span className="text-amber-400 group-hover:text-amber-300">
-                  ₹
-                </span>
-                <span className="ml-1 relative">
-                  <span className="group-hover:blur-sm transition-all duration-300 absolute">
-                    {Math.round(
-                      product.price - (product.price * product.discount) / 100
-                    ).toLocaleString()}
-                  </span>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                    {Math.round(
-                      product.price - (product.price * product.discount) / 100
-                    ).toLocaleString()}
-                  </span>
-                </span>
-                {product.discount > 0 && (
-                  <span className="text-sm text-gray-400 line-through ml-2 opacity-70 group-hover:opacity-100">
-                    ₹{product.price.toLocaleString()}
-                  </span>
-                )}
-              </p>
-            </div>
+            <h3 className="font-semibold mb-2 text-3xl text-amber-300 group-hover:text-amber-300 transition-colors duration-300 group-hover:-translate-y-1 transform">
+              {product?.name}
+            </h3>
             <div className="overflow-hidden">
               <span className="inline-block opacity-0 transform translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-amber-300 text-sm font-medium">
                 View Details

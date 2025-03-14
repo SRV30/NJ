@@ -66,7 +66,7 @@ const faqs = [
     answer: (
       <>
         Please report security vulnerabilities by emailing us at{" "}
-        <strong>support@faithandfast.com</strong> with the following details:
+        <strong>support@nandanijewellers.com</strong> with the following details:
         <ol className="list-decimal ml-5 mt-2">
           <li>Steps to reproduce the bug/issue.</li>
           <li>Your web browser/mobile browser’s name and version.</li>
@@ -113,7 +113,7 @@ const faqs = [
     question: "How do I contact customer support?",
     answer: (
       <>
-        You can reach us via email at <strong>support@faithandfast.com</strong>.
+        You can reach us via email at <strong>support@nandanijewellers.com</strong>.
       </>
     ),
   },

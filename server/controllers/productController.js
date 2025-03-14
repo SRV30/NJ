@@ -4,29 +4,26 @@ import { deleteImage, uploadImage } from "../utils/cloudinary.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import mongoose from "mongoose";
 import { createNotification } from "../controllers/dashboardController.js";
+import User from "../models/userModel.js";
+import CartProductModel from "../models/cartModel.js";
+import wishListProductModel from "../models/wishlistModel.js";
 
 export const createProduct = catchAsyncErrors(async (req, res, next) => {
   try {
     const {
       name,
       description,
-      price,
       jewelleryType,
       productCategory,
-      gender,
-      karatage,
       metal,
-      diamondClarity,
       metalColour,
-      stock,
-      discount,
       bestseller,
     } = req.body;
 
-    if (!name || !description || !price || !metal || !gender) {
+    if (!name || !description || !metal) {
       return next(
         new ErrorHandler(
-          "Please enter all required fields (name, description, price, metal, gender)",
+          "Please enter all required fields (name, description , metal)",
           400
         )
       );
@@ -60,16 +57,10 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
     const product = new ProductModel({
       name,
       description,
-      price: parseFloat(price),
       jewelleryType: jewelleryType ? JSON.parse(jewelleryType) : [],
       productCategory: productCategory ? JSON.parse(productCategory) : [],
-      gender,
-      karatage: karatage || "",
-      metal,
-      diamondClarity: diamondClarity || "",
+      metal: metal || "",
       metalColour: metalColour || "",
-      stock: parseInt(stock, 10) || 0,
-      discount: parseFloat(discount) || 0,
       bestseller: bestseller || "No",
       images: uploadedImages,
     });
@@ -93,8 +84,6 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
   try {
     const {
       keyword,
-      priceRange,
-      sort,
       jewelleryType,
       productCategory,
       metalColour,
@@ -109,7 +98,6 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
       const searchRegex = new RegExp(keyword, "i");
       query.$or = [
         { name: { $regex: searchRegex } },
-        { gender: { $regex: searchRegex } },
         { metalColour: { $regex: searchRegex } },
       ];
 
@@ -135,12 +123,6 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
       }
     }
 
-    if (priceRange && Array.isArray(priceRange) && priceRange.length === 2) {
-      query.price = {
-        $gte: parseInt(priceRange[0]),
-        $lte: parseInt(priceRange[1]),
-      };
-    }
     if (jewelleryType && !query.jewelleryType)
       query.jewelleryType = jewelleryType;
     if (productCategory && !query.productCategory)
@@ -155,28 +137,10 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
     const parsedPage = parseInt(page, 10);
     const parsedLimit = parseInt(limit, 10);
 
-    let sortOption = {};
-    switch (sort) {
-      case "price-low":
-        sortOption = { price: 1 };
-        break;
-      case "price-high":
-        sortOption = { price: -1 };
-        break;
-      case "rating":
-        sortOption = { ratings: -1 };
-        break;
-      case "newest":
-      default:
-        sortOption = { createdAt: -1 };
-        break;
-    }
-
     const totalProducts = await ProductModel.countDocuments(query);
     const products = await ProductModel.find(query)
       .populate("productCategory", "name")
       .populate("jewelleryType", "name")
-      .sort(sortOption)
       .skip((parsedPage - 1) * parsedLimit)
       .limit(parsedLimit);
 
@@ -313,16 +277,10 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
     const {
       name,
       description,
-      price,
       jewelleryType,
       productCategory,
-      gender,
-      karatage,
       metal,
-      diamondClarity,
       metalColour,
-      stock,
-      discount,
       bestseller,
     } = req.body;
 
@@ -343,20 +301,14 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
 
     product.name = name || product.name;
     product.description = description || product.description;
-    product.price = price ? parseFloat(price) : product.price;
     if (jewelleryType) {
       product.jewelleryType = JSON.parse(jewelleryType);
     }
     if (productCategory) {
       product.productCategory = JSON.parse(productCategory);
     }
-    product.gender = gender || product.gender;
-    product.karatage = karatage || product.karatage;
     product.metal = metal || product.metal;
-    product.diamondClarity = diamondClarity || product.diamondClarity;
     product.metalColour = metalColour || product.metalColour;
-    product.stock = stock ? parseInt(stock, 10) : product.stock;
-    product.discount = discount ? parseFloat(discount) : product.discount;
     product.bestseller = bestseller || product.bestseller;
 
     const updatedProduct = await product.save();
@@ -389,6 +341,7 @@ export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
     const product = await ProductModel.findByIdAndDelete(deleteId, {
       returnDocument: "before",
     });
+
     if (!product) {
       return res.status(404).json({
         message: "Product not found.",
@@ -402,6 +355,19 @@ export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
         product.images.map((img) => deleteImage(img.public_id))
       );
     }
+
+    await User.updateMany(
+      {}, 
+      {
+        $pull: { 
+          shoppingCart: deleteId, 
+          shoppingWishlist: deleteId 
+        },
+      }
+    );
+
+    await CartProductModel.deleteMany({ productId: deleteId });
+    await wishListProductModel.deleteMany({ productId: deleteId });
 
     await createNotification(`Product deleted: ${product.name || product._id}`);
     return res.json({

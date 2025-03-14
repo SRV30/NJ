@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   deleteNotification,
-  getLowStockProducts,
   getNotifications,
   markNotificationAsRead,
 } from "../controllers/dashboardController.js";
@@ -18,6 +17,5 @@ dashboardRoutes.delete(
   admin,
   deleteNotification
 );
-dashboardRoutes.get("/low-stock", auth, admin, getLowStockProducts);
 
 export default dashboardRoutes;

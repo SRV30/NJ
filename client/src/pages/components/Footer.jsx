@@ -6,6 +6,7 @@ import {
   FaYoutube,
   FaInstagram,
 } from "react-icons/fa";
+import Logo from "../../assets/Logo.png"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -49,7 +50,6 @@ const Footer = () => {
         }}
       />
 
-      {/* Footer Content */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -62,15 +62,11 @@ const Footer = () => {
           className="flex flex-col space-y-5 items-center md:items-start text-center md:text-left"
         >
           <img
-            src={""} // Replace with your light mode logo
+            src={Logo}
             alt="Nandani Jewellers Logo"
-            className="h-14 lg:h-16 w-auto dark:hidden"
+            className="h-14 lg:h-16 w-auto"
           />
-          <img
-            src={""} // Replace with your dark mode logo
-            alt="Nandani Jewellers Logo"
-            className="h-14 lg:h-16 w-auto hidden dark:block"
-          />
+          
           <p className="text-amber-800 dark:text-amber-300 text-sm lg:text-base font-sans tracking-wider max-w-sm">
             Crafting elegance since 2002. Discover the art of luxury with{" "}
             <span className="font-medium">Nandani Jewellers</span>.
@@ -87,8 +83,8 @@ const Footer = () => {
             },
             {
               title: "Our Story",
-              links: ["About Us", "Craftsmanship", "Blog"],
-              hrefs: ["/about", "", ""],
+              links: ["About Us", "Photo Gallery"],
+              hrefs: ["/about", "/photo"],
             },
             {
               title: "Help",
@@ -156,13 +152,7 @@ const Footer = () => {
           >
             Terms
           </a>
-          <span className="mx-2 md:mx-3">•</span>
-          <a
-            href="/sitemap"
-            className="hover:text-amber-600 transition-colors duration-300"
-          >
-            Sitemap
-          </a>
+          
         </motion.p>
 
 

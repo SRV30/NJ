@@ -14,24 +14,20 @@ import {
 } from "@/store/product-slice/product";
 import { fetchJewelleryCategories } from "@/store/product-slice/jewelleryType";
 import { fetchCategories } from "@/store/product-slice/category";
+import { useNavigate } from "react-router-dom";
 
 const AdminProducts = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    price: "",
-    jewelleryType: "",
-    productCategory: "",
-    gender: "",
-    karatage: "",
+    jewelleryType: [],
+    productCategory: [],
     metal: "",
-    diamondClarity: "",
     metalColour: "",
-    stock: "",
-    discount: "",
     bestseller: "No",
     images: [],
   });
+
   const [imagePreviews, setImagePreviews] = useState([]);
   const [editId, setEditId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -39,12 +35,13 @@ const AdminProducts = () => {
   const [filters, setFilters] = useState({
     keyword: "",
     metal: "",
-    gender: "",
   });
   const [page, setPage] = useState(1);
   const limit = 10;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     loading: productLoading,
     error: productError,
@@ -99,20 +96,19 @@ const AdminProducts = () => {
     e.preventDefault();
     const productData = new FormData();
     Object.keys(formData).forEach((key) => {
-      if (key !== "images") productData.append(key, formData[key]);
+      if (!["images", "jewelleryType", "productCategory"].includes(key)) {
+        productData.append(key, formData[key]);
+      }
     });
     formData.images.forEach((image) => productData.append("images", image));
 
-    if (formData.jewelleryType) {
-      productData.set(
-        "jewelleryType",
-        JSON.stringify([formData.jewelleryType])
-      );
+    if (formData.jewelleryType.length > 0) {
+      productData.set("jewelleryType", JSON.stringify(formData.jewelleryType));
     }
-    if (formData.productCategory) {
+    if (formData.productCategory.length > 0) {
       productData.set(
         "productCategory",
-        JSON.stringify([formData.productCategory])
+        JSON.stringify(formData.productCategory)
       );
     }
 
@@ -128,16 +124,16 @@ const AdminProducts = () => {
     setFormData({
       name: product.name,
       description: product.description,
-      price: product.price,
-      jewelleryType: product.jewelleryType[0] || "",
-      productCategory: product.productCategory[0] || "",
-      gender: product.gender,
-      karatage: product.karatage || "",
+      jewelleryType:
+        product.jewelleryType && product.jewelleryType.length
+          ? product.jewelleryType.map((item) => item._id)
+          : [],
+      productCategory:
+        product.productCategory && product.productCategory.length
+          ? product.productCategory.map((item) => item._id)
+          : [],
       metal: product.metal,
-      diamondClarity: product.diamondClarity || "",
       metalColour: product.metalColour || "",
-      stock: product.stock || "",
-      discount: product.discount || "",
       bestseller: product.bestseller || "No",
       images: [],
     });
@@ -164,16 +160,10 @@ const AdminProducts = () => {
     setFormData({
       name: "",
       description: "",
-      price: "",
-      jewelleryType: "",
-      productCategory: "",
-      gender: "",
-      karatage: "",
+      jewelleryType: [],
+      productCategory: [],
       metal: "",
-      diamondClarity: "",
       metalColour: "",
-      stock: "",
-      discount: "",
       bestseller: "No",
       images: [],
     });
@@ -273,29 +263,25 @@ const AdminProducts = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
-                Price
-              </label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                placeholder="e.g., 1500"
-                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Jewellery Type
               </label>
               <select
                 name="jewelleryType"
                 value={formData.jewelleryType}
-                onChange={handleInputChange}
+                multiple
+                onChange={(e) => {
+                  const selected = Array.from(
+                    e.target.selectedOptions,
+                    (option) => option.value
+                  );
+                  setFormData((prev) => ({
+                    ...prev,
+                    jewelleryType: selected,
+                  }));
+                }}
                 className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
                 disabled={jewelleryLoading}
               >
-                <option value="">Select Type</option>
                 {jewelleryCategories.map((category) => (
                   <option key={category._id} value={category._id}>
                     {category.name}
@@ -303,6 +289,7 @@ const AdminProducts = () => {
                 ))}
               </select>
             </div>
+
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Product Category
@@ -310,11 +297,20 @@ const AdminProducts = () => {
               <select
                 name="productCategory"
                 value={formData.productCategory}
-                onChange={handleInputChange}
+                multiple
+                onChange={(e) => {
+                  const selected = Array.from(
+                    e.target.selectedOptions,
+                    (option) => option.value
+                  );
+                  setFormData((prev) => ({
+                    ...prev,
+                    productCategory: selected,
+                  }));
+                }}
                 className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
                 disabled={categoryLoading}
               >
-                <option value="">Select Category</option>
                 {productCategories.map((category) => (
                   <option key={category._id} value={category._id}>
                     {category.name}
@@ -335,57 +331,10 @@ const AdminProducts = () => {
                 <option value="">Select Metal</option>
                 <option value="Gold">Gold</option>
                 <option value="Silver">Silver</option>
-                <option value="Platinum">Platinum</option>
+                <option value="Diamond">Diamond</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
-                Gender
-              </label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleInputChange}
-                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Unisex">Unisex</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
-                Karatage
-              </label>
-              <input
-                type="text"
-                name="karatage"
-                value={formData.karatage}
-                onChange={handleInputChange}
-                placeholder="e.g., 18K"
-                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300"
-              />
-            </div>
-            {formData.jewelleryType === "Diamond" && (
-              <div>
-                <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
-                  Diamond Clarity
-                </label>
-                <select
-                  name="diamondClarity"
-                  value={formData.diamondClarity}
-                  onChange={handleInputChange}
-                  className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
-                >
-                  <option value="">Select Clarity</option>
-                  <option value="FL">FL</option>
-                  <option value="IF">IF</option>
-                  <option value="VVS1">VVS1</option>
-                  <option value="VS1">VS1</option>
-                </select>
-              </div>
-            )}
+
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Metal Colour
@@ -397,37 +346,16 @@ const AdminProducts = () => {
                 className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
               >
                 <option value="">Select Colour</option>
+                <option value="Silver">Silver</option>
                 <option value="Yellow">Yellow</option>
                 <option value="White">White</option>
                 <option value="Rose">Rose</option>
+                <option value="White and Rose">White and Rose</option>
+                <option value="Yellow and Rose">Yellow and Rose</option>
+                <option value="Yellow and White">Yellow and White</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
-                Stock
-              </label>
-              <input
-                type="number"
-                name="stock"
-                value={formData.stock}
-                onChange={handleInputChange}
-                placeholder="e.g., 10"
-                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
-                Discount (%)
-              </label>
-              <input
-                type="number"
-                name="discount"
-                value={formData.discount}
-                onChange={handleInputChange}
-                placeholder="e.g., 10"
-                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300"
-              />
-            </div>
+
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Bestseller
@@ -443,7 +371,6 @@ const AdminProducts = () => {
               </select>
             </div>
           </motion.div>
-
           <motion.div variants={itemVariants}>
             <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
               Description
@@ -452,11 +379,10 @@ const AdminProducts = () => {
               name="description"
               value={formData.description}
               onChange={handleInputChange}
-              placeholder="e.g., A stunning diamond ring -s ring..."
+              placeholder="e.g., A stunning diamond ring..."
               className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300 h-32 resize-none"
             />
           </motion.div>
-
           <motion.div variants={itemVariants}>
             <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
               Product Images (Max 10)
@@ -484,7 +410,6 @@ const AdminProducts = () => {
               </div>
             )}
           </motion.div>
-
           <div className="flex gap-4">
             <motion.button
               type="submit"
@@ -549,30 +474,8 @@ const AdminProducts = () => {
               value={filters.keyword}
               onChange={handleFilterChange}
               placeholder="Search products..."
-              className="p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
+              className="p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300 md:w-88 lg:w-120"
             />
-            <select
-              name="metal"
-              value={filters.metal}
-              onChange={handleFilterChange}
-              className="p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
-            >
-              <option value="">All Metals</option>
-              <option value="Gold">Gold</option>
-              <option value="Silver">Silver</option>
-              <option value="Platinum">Platinum</option>
-            </select>
-            <select
-              name="gender"
-              value={filters.gender}
-              onChange={handleFilterChange}
-              className="p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 transition-all duration-300"
-            >
-              <option value="">All Genders</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Unisex">Unisex</option>
-            </select>
           </div>
 
           {products.length === 0 ? (
@@ -582,24 +485,14 @@ const AdminProducts = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => {
-                // Find the jewellery type and product category names
-                const jewelleryTypeName =
-                  jewelleryCategories.find(
-                    (cat) => cat._id === product.jewelleryType[0]
-                  )?.name || "N/A";
-                const productCategoryName =
-                  productCategories.find(
-                    (cat) => cat._id === product.productCategory[0]
-                  )?.name || "N/A";
-
                 return (
                   <motion.div
                     key={product._id}
                     variants={cardVariants}
                     whileHover="hover"
-                    className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl shadow-lg border border-amber-300/30 dark:border-gray-600/30 transition-all duration-300 "
+                    className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl shadow-lg border border-amber-300/30 dark:border-gray-600/30 transition-all duration-300"
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 flex-wrap">
                       {product.images[0]?.url && (
                         <motion.img
                           src={product.images[0].url}
@@ -614,12 +507,31 @@ const AdminProducts = () => {
                         <h4 className="text-lg font-serif font-semibold text-amber-800 dark:text-amber-100 capitalize">
                           {product.name}
                         </h4>
-                        <p className="text-amber-600 dark:text-amber-300">
-                          ₹{product.price}
-                        </p>
                         <p className="text-sm text-amber-700 dark:text-amber-200">
-                          {product.metal} - {product.gender} -{" "}
-                          {jewelleryTypeName} - {productCategoryName}
+                          {product.metal} -{" "}
+                          {Array.isArray(product.jewelleryType) &&
+                          product.jewelleryType.length > 0
+                            ? product.jewelleryType.map((type, index) => (
+                                <span key={type._id || index}>
+                                  {type.name}
+                                  {index < product.jewelleryType.length - 1
+                                    ? ", "
+                                    : ""}
+                                </span>
+                              ))
+                            : "N/A"}{" "}
+                          -{" "}
+                          {Array.isArray(product.productCategory) &&
+                          product.productCategory.length > 0
+                            ? product.productCategory.map((cat, index) => (
+                                <span key={cat._id || index}>
+                                  {cat.name}
+                                  {index < product.productCategory.length - 1
+                                    ? ", "
+                                    : ""}
+                                </span>
+                              ))
+                            : "N/A"}
                         </p>
                         {product.bestseller === "Yes" && (
                           <span className="text-xs text-amber-500 dark:text-amber-400 font-semibold">
@@ -628,13 +540,24 @@ const AdminProducts = () => {
                         )}
                       </div>
                     </div>
-                    <div className="flex gap-3 mt-4">
+                    <div className="flex gap-3 mt-4 flex-wrap">
+                      <motion.button
+                        variants={buttonVariants}
+                        whileHover="hover"
+                        whileTap="tap"
+                        onClick={() => {
+                          navigate(`/products/${product._id}`);
+                        }}
+                        className="px-4 py-2 bg-amber-900 text-white rounded-lg shadow-md hover:bg-amber-800 transition-all duration-300 cursor-pointer"
+                      >
+                        View
+                      </motion.button>
                       <motion.button
                         variants={buttonVariants}
                         whileHover="hover"
                         whileTap="tap"
                         onClick={() => handleEdit(product)}
-                        className="px-4 py-2 bg-amber-600 text-white rounded-lg shadow-md hover:bg-amber-700 transition-all duration-300"
+                        className="px-4 py-2 bg-amber-600 text-white rounded-lg shadow-md hover:bg-amber-700 transition-all duration-300 cursor-pointer"
                       >
                         Edit
                       </motion.button>
@@ -643,7 +566,7 @@ const AdminProducts = () => {
                         whileHover="hover"
                         whileTap="tap"
                         onClick={() => handleDelete(product._id)}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
+                        className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300 cursor-pointer"
                       >
                         Delete
                       </motion.button>

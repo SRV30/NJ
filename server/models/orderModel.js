@@ -24,12 +24,6 @@ const orderSchema = new mongoose.Schema(
           required: true,
           min: [1, "Quantity should be at least 1"],
         },
-        price: {
-          type: Number,
-        },
-        totalPrice: {
-          type: Number,
-        },
         images: [
           {
             public_id: {
@@ -40,48 +34,18 @@ const orderSchema = new mongoose.Schema(
             },
           },
         ],
-        selectedColor: {
-          type: String,
-          default: "",
-        },
-        selectedSize: {
-          type: String,
-          default: "",
-        },
       },
     ],
-    totalAmount: {
-      type: Number,
-      required: true,
-    },
-    couponCode: {
-      type: String,
-      default: "",
-    },
-    discountAmount: {
-      type: Number,
-      default: 0,
-    },
-    paymentStatus: {
-      type: String,
-      enum: ["PENDING", "COMPLETED", "FAILED", "REFUNDED"],
-      default: "PENDING",
-    },
-    paymentMethod: {
-      type: String,
-      enum: ["COD", "ONLINE"],
-      required: true,
-    },
     orderStatus: {
       type: String,
-      enum: ["PENDING", "SHIPPED", "DELIVERED", "CANCELLED"],
-      default: "PENDING",
+      enum: ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"],
+      default: "BOOKED",
     },
     orderHistory: [
       {
         status: {
           type: String,
-          enum: ["PENDING", "SHIPPED", "DELIVERED", "CANCELLED"],
+          enum: ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"],
         },
         changedAt: {
           type: Date,
@@ -90,38 +54,13 @@ const orderSchema = new mongoose.Schema(
         changedBy: {
           type: String,
         },
-        notes: {
-          type: String,
-          default: "",
-        },
       },
     ],
-    deliveryDate: { type: String, default: "To be delivered" },
-    trackingId: {
-      type: String,
-      default: "",
-    },
-    transactionId: {
-      type: String,
-      default: "",
-    },
-    notes: {
-      type: String,
-      default: "",
-    },
-    orderDate: { type: Date, default: Date.now },
-    total: { type: Number, required: true },
   },
   {
     timestamps: true,
   }
 );
-
-orderSchema.pre("save", function (next) {
-  this.totalAmountWithGST = this.totalAmount + (this.gst || 0);
-  this.totalAmountWithShipping = this.totalAmountWithGST + (this.shipping || 0);
-  next();
-});
 
 orderSchema.index({ user: 1 });
 orderSchema.index({ orderStatus: 1 });

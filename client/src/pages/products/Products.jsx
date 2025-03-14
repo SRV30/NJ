@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { getProducts } from "@/store/product-slice/product";
 import { fetchJewelleryCategories } from "@/store/product-slice/jewelleryType";
 import { fetchCategories } from "@/store/product-slice/category";
-// import { showJewelryToast } from "../extras/showJewelryToast";
 import MetaData from "../extras/MetaData";
 import Typewriter from "typewriter-effect/dist/core";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -30,8 +29,6 @@ const ProductsPage = () => {
 
   const [filters, setFilters] = useState({
     keyword: "",
-    priceRange: [0, 100000],
-    sort: "newest",
     jewelleryType: "",
     productCategory: "",
     metalColour: "",
@@ -45,7 +42,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      dispatch(getProducts({ ...filters, priceRange: filters.priceRange }));
+      dispatch(getProducts({ ...filters }));
     }, 300);
     dispatch(fetchJewelleryCategories());
     dispatch(fetchCategories());
@@ -95,24 +92,9 @@ const ProductsPage = () => {
     setFilters((prev) => ({ ...prev, [key]: value, page: 1 }));
   };
 
-  const handlePriceRangeChange = (index, value) => {
-    const newRange = [...filters.priceRange];
-    const parsedValue = parseInt(value);
-    newRange[index] = isNaN(parsedValue)
-      ? index === 0
-        ? 0
-        : 100000
-      : Math.max(0, Math.min(parsedValue, 100000));
-    if (index === 0 && newRange[0] > newRange[1]) newRange[0] = newRange[1];
-    if (index === 1 && newRange[1] < newRange[0]) newRange[1] = newRange[0];
-    setFilters((prev) => ({ ...prev, priceRange: newRange, page: 1 }));
-  };
-
   const clearAllFilters = () => {
     setFilters({
       keyword: "",
-      priceRange: [0, 100000],
-      sort: "newest",
       jewelleryType: "",
       productCategory: "",
       metalColour: "",
@@ -215,129 +197,7 @@ const ProductsPage = () => {
           </div>
 
           <div className="space-y-8">
-            <div>
-              <h3 className="text-sm uppercase tracking-wider text-amber-500 dark:text-amber-300 font-medium mb-4">
-                Price Range
-              </h3>
-              <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-                <input
-                  type="number"
-                  min="0"
-                  max="100000"
-                  step="1000"
-                  value={filters.priceRange[0]}
-                  onChange={(e) => handlePriceRangeChange(0, e.target.value)}
-                  className="w-24 lg:w-36 px-2 py-1 border border-amber-300 dark:border-amber-700 rounded-md text-sm bg-white dark:bg-slate-900 text-gray-800 dark:text-amber-300 focus:ring-amber-500 focus:outline-none"
-                />
-                <motion.span
-                  className="relative text-gray-600 dark:text-amber-400 font-semibold tracking-wide px-2 text-md flex items-center mx-8 lg:mx-12"
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                >
-                  <span className="absolute left-0 top-1/2 w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent dark:via-amber-400"></span>
-                  To
-                </motion.span>
-
-                <input
-                  type="number"
-                  min="0"
-                  max="100000"
-                  step="1000"
-                  value={filters.priceRange[1]}
-                  onChange={(e) => handlePriceRangeChange(1, e.target.value)}
-                  className="w-24 lg:w-36 px-2 py-1 border border-amber-300 dark:border-amber-700 rounded-md text-sm bg-white dark:bg-slate-900 text-gray-800 dark:text-amber-300 focus:ring-amber-500 focus:outline-none"
-                />
-              </div>
-
-              <div className="flex items-center gap-2 my-4">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-                <span className="text-amber-600 dark:text-amber-300 text-sm font-semibold tracking-wide relative">
-                  OR
-                  <motion.div
-                    className="absolute left-0 top-1/2 w-full h-0.5 bg-amber-500 opacity-50"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </span>
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-              </div>
-
-              <div className="flex justify-between text-sm text-gray-600 dark:text-amber-400 mb-2">
-                <span>₹{filters.priceRange[0].toLocaleString()}</span>
-                <span>₹{filters.priceRange[1].toLocaleString()}</span>
-              </div>
-
-              <div className="relative h-1 bg-amber-100 dark:bg-amber-900/50 rounded-full mt-4">
-                <motion.div
-                  className="absolute h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full"
-                  style={{
-                    left: `${(filters.priceRange[0] / 100000) * 100}%`,
-                    width: `${
-                      ((filters.priceRange[1] - filters.priceRange[0]) /
-                        100000) *
-                      100
-                    }%`,
-                  }}
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-                <input
-                  type="range"
-                  min="0"
-                  max="100000"
-                  step="1000"
-                  value={filters.priceRange[0]}
-                  onChange={(e) => handlePriceRangeChange(0, e.target.value)}
-                  className="absolute w-full h-2 opacity-0 cursor-pointer"
-                />
-                <input
-                  type="range"
-                  min="0"
-                  max="100000"
-                  step="1000"
-                  value={filters.priceRange[1]}
-                  onChange={(e) => handlePriceRangeChange(1, e.target.value)}
-                  className="absolute w-full h-2 opacity-0 cursor-pointer"
-                />
-                <motion.div
-                  className="absolute w-4 h-4 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full -top-1.5 shadow-lg shadow-amber-200 dark:shadow-amber-900"
-                  style={{
-                    left: `calc(${
-                      (filters.priceRange[0] / 100000) * 100
-                    }% - 8px)`,
-                  }}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div
-                  className="absolute w-4 h-4 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full -top-1.5 shadow-lg shadow-amber-200 dark:shadow-amber-900"
-                  style={{
-                    left: `calc(${
-                      (filters.priceRange[1] / 100000) * 100
-                    }% - 8px)`,
-                  }}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                />
-              </div>
-            </div>
-
             {[
-              {
-                label: "Sort By",
-                key: "sort",
-                options: [
-                  { value: "newest", label: "Latest Arrivals" },
-                  { value: "price-low", label: "Price: Low to High" },
-                  { value: "price-high", label: "Price: High to Low" },
-                  { value: "rating", label: "Top Rated" },
-                ],
-              },
               {
                 label: "Jewelry Type",
                 key: "jewelleryType",
@@ -365,10 +225,12 @@ const ProductsPage = () => {
                 key: "metalColour",
                 options: [
                   { value: "", label: "All Colors" },
-                  { value: "Gold", label: "Yellow Gold" },
-                  { value: "Rose Gold", label: "Rose Gold" },
-                  { value: "White Gold", label: "White Gold" },
                   { value: "Silver", label: "Silver" },
+                  { value: "Yellow", label: "Yellow" },
+                  { value: "Rose", label: "Rose" },
+                  { value: "White and Rose", label: "White and Rose" },
+                  { value: "Yellow and Rose", label: "Yellow and Rose" },
+                  { value: "Yellow and White", label: "Yellow and White" },
                 ],
               },
               {
@@ -541,26 +403,34 @@ const ProductsPage = () => {
                           {product.name}
                         </h3>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-light tracking-wide">
-                          {product.metalColour} · {product.metal}
+                          {product.metalColour} ·{" "}
+                          {Array.isArray(product.jewelleryType) &&
+                          product.jewelleryType.length > 0
+                            ? product.jewelleryType.map((type, index) => (
+                                <span key={type._id || index}>
+                                  {type.name}
+                                  {index < product.jewelleryType.length - 1
+                                    ? ", "
+                                    : ""}
+                                </span>
+                              ))
+                            : "N/A"}{" "}
+                          .{" "}
+                          {Array.isArray(product.productCategory) &&
+                          product.productCategory.length > 0
+                            ? product.productCategory.map((cat, index) => (
+                                <span key={cat._id || index}>
+                                  {cat.name}
+                                  {index < product.productCategory.length - 1
+                                    ? ", "
+                                    : ""}
+                                </span>
+                              ))
+                            : "N/A"}
                         </p>
                       </div>
 
                       <div className="flex justify-between items-center mt-4">
-                        <div className="flex flex-col">
-                          <span className="text-amber-700 dark:text-amber-300 font-medium text-lg tracking-wide">
-                            ₹
-                            {Math.round(
-                              product.price -
-                                (product.price * product.discount) / 100
-                            ).toLocaleString()}
-                          </span>
-                          {product.discount > 0 && (
-                            <span className="text-xs text-gray-500 dark:text-gray-400 line-through font-light">
-                              ₹{product.price.toLocaleString()}
-                            </span>
-                          )}
-                        </div>
-
                         <div className="flex gap-2 text-amber-800 dark:text-amber-300">
                           View Details
                         </div>
@@ -571,7 +441,6 @@ const ProductsPage = () => {
               ))}
             </AnimatePresence>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

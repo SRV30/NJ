@@ -232,7 +232,7 @@ const AdminOrdersPage = () => {
       transition={{ duration: 0.6 }}
       className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-6 lg:p-8"
     >
-      <MetaData title="Admin Orders Dashboard | Faith AND Fast" />
+      <MetaData title="Admin Orders Dashboard | Nandani Jewellers" />
       {/* Header */}
       <motion.header
         initial={{ y: -50 }}

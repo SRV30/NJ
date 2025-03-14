@@ -11,11 +11,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please Enter Product Description"],
     },
-    price: {
-      type: Number,
-      required: [true, "Please Enter Product Price"],
-      default: 0,
-    },
     ratings: {
       type: Number,
       default: 0,
@@ -46,32 +41,14 @@ const productSchema = new mongoose.Schema(
         ref: "Category",
       },
     ],
-    gender: {
-      type: String,
-      required: [true, "Please specify the target color for the product"],
-      enum: ["Male", "Female", "Kids", "Unisex"],
-    },
-    karatage: {
-      type: String,
-      default: "",
-    },
     metal: {
       type: String,
       required: [true, "Please specify the metal type"],
-    },
-    diamondClarity: {
-      type: String,
-      default: "",
+      enum: ["Gold", "Silver", "Diamond", "Other"],
     },
     metalColour: {
       type: String,
       default: "",
-    },
-    stock: {
-      type: Number,
-      required: [true, "Please Enter Product Stock"],
-      default: 0,
-      min: [0, "Stock cannot be negative"],
     },
     numOfReviews: {
       type: Number,
@@ -89,11 +66,6 @@ const productSchema = new mongoose.Schema(
       ],
       default: [],
     },
-    discount: {
-      type: Number,
-      default: 0,
-      min: 0,
-    },
     bestseller: {
       type: String,
       default: "No",
@@ -103,7 +75,6 @@ const productSchema = new mongoose.Schema(
       ref: "User",
     },
   },
-
   {
     timestamps: true,
   }

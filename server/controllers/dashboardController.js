@@ -1,6 +1,4 @@
 import Notification from "../models/notificationModel.js";
-import Product from "../models/productModel.js";
-import Order from "../models/orderModel.js";
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 
 export const createNotification = catchAsyncErrors(async (message) => {
@@ -43,9 +41,4 @@ export const deleteNotification = catchAsyncErrors(async (req, res, next) => {
 
   await notification.deleteOne();
   res.status(200).json({ success: true, message: "Notification deleted" });
-});
-
-export const getLowStockProducts = catchAsyncErrors(async (req, res, next) => {
-  const lowStockProducts = await Product.find({ stock: { $lt: 5 } });
-  res.status(200).json({ success: true, lowStockProducts });
 });

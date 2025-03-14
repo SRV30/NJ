@@ -12,6 +12,8 @@ import { showJewelryToast } from "../extras/showJewelryToast";
 import MetaData from "../extras/MetaData";
 import { Rating } from "@mui/material";
 import ShareButton from "../extras/ShareButton";
+import { addToCart } from "@/store/order-slice/addToCart";
+import { addToWishList } from "@/store/order-slice/addToWishList";
 
 const SingleProductPage = () => {
   const { productId } = useParams();
@@ -27,7 +29,6 @@ const SingleProductPage = () => {
   const { user } = useSelector((state) => state.auth);
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [visibleReviews, setVisibleReviews] = useState([]);
@@ -70,19 +71,18 @@ const SingleProductPage = () => {
     }
   }, [dispatch, product?.jewelleryType, product?.productCategory]);
 
-  const handleQuantityChange = (value) => {
-    const newQuantity = Math.max(1, Math.min(10, quantity + value));
-    setQuantity(newQuantity);
-  };
-
-  const handleAddToCart = () => {
-    if (product?.stock > 0) {
-      showJewelryToast(`Added ${quantity} item(s) to your cart!`);
+  const handleAddToCart = (productId) => {
+    if (!productId) {
+      showJewelryToast("Error: productId not found!", "error");
+      return;
     }
+    dispatch(addToCart({ productId: productId._id }));
+    showJewelryToast(`"${productId.name}" added to cart!`, "success");
   };
 
-  const calculateDiscountedPrice = (price, discount) => {
-    return Math.round(price - (price * discount) / 100).toLocaleString();
+  const handleAddWishList = (productId) => {
+    dispatch(addToWishList(productId._id));
+    showJewelryToast(`"${productId.name}" added to wishlist!`, "success");
   };
 
   if (error) {
@@ -215,7 +215,6 @@ const SingleProductPage = () => {
               className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Left side - Product Images */}
                 <div className="p-6 lg:p-8">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -289,21 +288,22 @@ const SingleProductPage = () => {
                   </motion.div>
                 </div>
 
-                {/* Right side - Product Details */}
                 <div className="p-6 lg:p-8 flex flex-col">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <h1 className="font-serif text-2xl md:text-3xl text-amber-950 dark:text-amber-100 mb-2">
+                    <h1 className="font-serif text-2xl md:text-3xl text-amber-950 dark:text-amber-100 mb-2 capitalize">
                       {product.name}
                     </h1>
 
                     <h1 className="font-mono text-sm md:text-sm text-amber-950 dark:text-amber-100 mb-2">
                       NJ{product._id}
                     </h1>
-
+                    <div className="flex items-baseline gap-3 mb-6">
+                      <ShareButton />
+                    </div>
                     <div className="flex items-center gap-2 mb-4">
                       <div className="flex">
                         {Array.from({ length: 5 }).map((_, i) => (
@@ -325,28 +325,6 @@ const SingleProductPage = () => {
                         ({product.numOfReviews || 0} reviews)
                       </span>
                     </div>
-
-                    <div className="flex items-baseline gap-3 mb-6">
-                      <span className="text-3xl font-medium text-amber-700 dark:text-amber-300">
-                        ₹
-                        {calculateDiscountedPrice(
-                          product.price,
-                          product.discount || 0
-                        )}
-                      </span>
-                      {product.discount > 0 && (
-                        <>
-                          <span className="text-lg text-gray-500 dark:text-gray-400 line-through font-light">
-                            ₹{product.price.toLocaleString()}
-                          </span>
-                          <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                            {product.discount}% OFF
-                          </span>
-
-                          <ShareButton />
-                        </>
-                      )}
-                    </div>
                   </motion.div>
 
                   <motion.div
@@ -356,14 +334,6 @@ const SingleProductPage = () => {
                     className="mb-6 bg-amber-50/80 dark:bg-amber-900/30 p-4 rounded-lg"
                   >
                     <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          Metal
-                        </p>
-                        <p className="font-medium text-amber-950 dark:text-amber-100">
-                          {product.metal || "N/A"}
-                        </p>
-                      </div>
                       <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                           Color
@@ -410,24 +380,10 @@ const SingleProductPage = () => {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          Stock
-                        </p>
-                        <p
-                          className={`font-medium ${
-                            product.stock > 0
-                              ? "text-green-600 dark:text-green-400"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          Weight
+                          Metal Type
                         </p>
                         <p className="font-medium text-amber-950 dark:text-amber-100">
-                          {product.weight || "N/A"}
+                          {product.metal || "N/A"}
                         </p>
                       </div>
                     </div>
@@ -448,65 +404,7 @@ const SingleProductPage = () => {
                     </p>
                   </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mb-8"
-                  >
-                    <h3 className="text-lg font-medium text-amber-950 dark:text-amber-200 mb-2">
-                      Quantity
-                    </h3>
-                    <div className="flex items-center">
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleQuantityChange(-1)}
-                        className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200 flex items-center justify-center"
-                        disabled={quantity <= 1}
-                      >
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M20 12H4"
-                          />
-                        </svg>
-                      </motion.button>
-
-                      <span className="w-16 text-center font-medium text-amber-950 dark:text-amber-100">
-                        {quantity}
-                      </span>
-
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleQuantityChange(1)}
-                        className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200 flex items-center justify-center"
-                        disabled={quantity >= 10 || product.stock <= quantity}
-                      >
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 4v16m8-8H4"
-                          />
-                        </svg>
-                      </motion.button>
-                    </div>
-                  </motion.div>
+                  
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -517,7 +415,8 @@ const SingleProductPage = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center gap-2 py-4 rounded-full bg-white dark:bg-slate-800 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/30 transition-all duration-300 font-medium"
+                      onClick={() => handleAddWishList(product)}
+                      className="flex items-center justify-center gap-2 py-4 rounded-full bg-white dark:bg-slate-800 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/30 transition-all duration-300 font-medium cursor-pointer"
                     >
                       <svg
                         className="w-5 h-5"
@@ -538,13 +437,8 @@ const SingleProductPage = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={handleAddToCart}
-                      disabled={product.stock <= 0}
-                      className={`flex items-center justify-center gap-2 py-4 rounded-full bg-gradient-to-r from-amber-100 to-amber-300 text-amber-800 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-300 font-medium ${
-                        product.stock <= 0
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
-                      }`}
+                      onClick={() => handleAddToCart(product)}
+                      className="flex items-center justify-center gap-2 py-4 rounded-full bg-gradient-to-r from-amber-100 to-amber-300 text-amber-800 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-300 font-medium cursor-pointer"
                     >
                       <svg
                         className="w-5 h-5"
@@ -559,13 +453,12 @@ const SingleProductPage = () => {
                           d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                         />
                       </svg>
-                      {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
+                      Book Now
                     </motion.button>
                   </motion.div>
                 </div>
               </div>
 
-              {/* Product Reviews Section */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -858,12 +751,6 @@ const SingleProductPage = () => {
                             <h3 className="text-sm font-semibold text-amber-950 dark:text-amber-100 truncate">
                               {prod.name}
                             </h3>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">
-                              ₹
-                              {Math.round(
-                                prod.price - (prod.price * prod.discount) / 100
-                              )}
-                            </p>
                           </div>
                         </Link>
                       </motion.div>

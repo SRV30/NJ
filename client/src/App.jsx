@@ -15,7 +15,7 @@ import About from "./pages/components/About";
 import ContactUs from "./pages/components/ContactUs";
 import ScrollToTop from "./pages/extras/ScrollToTop";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductsPage from "./pages/products/Products";
 import SingleProductPage from "./pages/products/SingleProduct";
 import UpdatePassword from "./pages/my-profile/UpdatePassword";
@@ -24,12 +24,30 @@ import SavedAddress from "./pages/my-profile/SavedAddress";
 import MyOrders from "./pages/my-profile/MyOrders";
 import VerifyOtp from "./pages/auth-page/ResetVerifyOtp";
 import AdminSingleUser from "./pages/admin/AdminSingleUser";
+import Cart from "./pages/orders/Cart";
+import Wishlist from "./pages/orders/Wishlist";
+import { useEffect } from "react";
+import { getCartItems } from "./store/order-slice/addToCart";
+import { getWishListItems } from "./store/order-slice/addToWishList";
+// import FAQPage from "./pages/extras/FAQPage";
+// import PrivacyPolicy from "./pages/extras/PrivacyPolicy";
+// import TermsAndServices from "./pages/extras/TermsAndServices";
+import Checkout from "./pages/orders/Checkout";
+import OrderSuccess from "./pages/orders/OrderSuccess";
+import OrderDetails from "./pages/my-profile/OrderDetails";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCartItems());
+    dispatch(getWishListItems());
+  }, [dispatch]);
+
   return (
-    <div className="flex flex-col mt-15 sm:mt-20 overflow-hidden bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300">
+    <div className="flex flex-col mt-15 sm:mt-17 lg:mt-20 overflow-hidden bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -72,6 +90,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+          <Route
+          path="/order/:Id"
+          element={
+            <ProtectedRoute>
+              <OrderDetails />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/update-password"
           element={
@@ -96,12 +122,49 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <ProtectedRoute>
+              <Wishlist />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/order-success"
+          element={
+            <ProtectedRoute>
+              <OrderSuccess />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* <Route path="/faqs" element={<FAQPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsAndServices />} /> */}
+
+    
 
         {isAuthenticated && user?.role === "ADMIN" && (
           <>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/users/:id" element={<AdminSingleUser />} />
-
           </>
         )}
       </Routes>

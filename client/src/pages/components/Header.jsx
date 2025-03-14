@@ -7,6 +7,7 @@ import { logoutUser } from "@/store/auth-slice/user";
 import { showJewelryToast } from "../extras/showJewelryToast";
 import PropTypes from "prop-types";
 import DarkModeToggle from "../extras/DarkModeToggle";
+import Logo from "../../assets/Logo.png"
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
@@ -15,6 +16,9 @@ export default function Header() {
   const location = useLocation();
 
   const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { WishListItems } = useSelector((state) => state.wishList);
+  const { cartItems = [] } = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -98,14 +102,13 @@ export default function Header() {
       >
         <a href="/" className="flex items-center gap-2">
           <img
-            src={""} // Replace with your logo path
+            src={Logo}
             alt="Nandani Jewellers Logo"
-            className="h-10 w-auto lg:h-12"
+            className="h-10 w-auto lg:h-12 rounded-full"
           />
         </a>
       </motion.div>
 
-      {/* Desktop Navigation */}
       <motion.nav
         className="hidden md:flex space-x-6 lg:space-x-10 font-sans font-medium text-amber-900 dark:text-amber-100 tracking-wide"
         variants={navVariants}
@@ -148,32 +151,53 @@ export default function Header() {
         })}
       </motion.nav>
 
-      {/* Right Icons */}
       <div className="flex items-center space-x-4 lg:space-x-6 text-amber-900 dark:text-amber-100">
         <motion.a
           href="/products"
           whileHover={{ scale: 1.15, rotate: 10 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Search className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-amber-600 transition-colors" />
+          <Search className="w-6 h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-30" />
         </motion.a>
 
         <motion.a
           href="/wishlist"
-          className="relative"
-          whileHover={{ scale: 1.15, rotate: 10 }}
+          className="relative flex items-center justify-center p-2 rounded-full group"
+          whileHover={{ scale: 1.2, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
+          aria-label="Wishlist"
         >
-          <Heart className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-amber-600 transition-colors" />
+          <Heart className="w-6 h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-30" />
+          {WishListItems.length > 0 && (
+            <motion.span
+              className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-xs font-bold text-white bg-amber-600 dark:bg-amber-500 rounded-full shadow-md"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              {WishListItems.length}
+            </motion.span>
+          )}
         </motion.a>
 
         <motion.a
           href="/cart"
-          className="relative"
-          whileHover={{ scale: 1.15, rotate: 10 }}
+          className="relative flex items-center justify-center p-2 rounded-full group"
+          whileHover={{ scale: 1.2, rotate: -5 }}
           whileTap={{ scale: 0.9 }}
+          aria-label="Cart"
         >
-          <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer hover:text-amber-600 transition-colors" />
+          <ShoppingCart className="w-6 h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-300" />
+          {cartItems.length > 0 && (
+            <motion.span
+              className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-xs font-bold text-white bg-amber-600 dark:bg-amber-500 rounded-full shadow-md"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              {cartItems.length}
+            </motion.span>
+          )}
         </motion.a>
 
         <motion.div
@@ -251,7 +275,6 @@ export default function Header() {
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.nav

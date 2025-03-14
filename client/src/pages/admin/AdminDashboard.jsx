@@ -55,9 +55,7 @@ const AdminDashboard = () => {
   const { categories: productCategory = [] } = useSelector(
     (state) => state.category || {}
   );
-  const { notifications, lowStockProducts } = useSelector(
-    (state) => state.dashboard
-  );
+  const { notifications } = useSelector((state) => state.dashboard);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -163,7 +161,6 @@ const AdminDashboard = () => {
               </p>
             </motion.div>
 
-            {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {dashboardStats.map((stat, index) => (
                 <motion.div
@@ -193,74 +190,6 @@ const AdminDashboard = () => {
                 </motion.div>
               ))}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden"
-            >
-              <div className="p-5 border-b border-gray-200 dark:border-gray-700">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  Low Stock Alert
-                </h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Products with stock less than 5
-                </p>
-              </div>
-              <div className="p-5">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Product
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Price
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Stock
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          View Product
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                      {lowStockProducts.map((product, index) => (
-                        <tr
-                          key={index}
-                          className="hover:bg-gray-50 dark:hover:bg-gray-700"
-                        >
-                          <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-200">
-                            {product.name}
-                          </td>
-                          <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
-                            ₹{product.price}
-                          </td>
-                          <td className="px-4 py-3">
-                            <span className="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                              {product.stock} left
-                            </span>
-                          </td>
-                          <td className="px-10 py-3 text-sm font-medium text-gray-800 dark:text-gray-200">
-                            <button
-                              onClick={() =>
-                                navigate(`/products/${product._id}`)
-                              }
-                              className="text-amber-800 hover:text-amber-700 dark:text-amber-300 dark:hover:text-amber-100"
-                            >
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </motion.div>
           </div>
         );
       case "Users":
@@ -282,7 +211,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      {/* Sidebar */}
       <motion.aside
         initial={{ x: -250 }}
         animate={{ x: isSidebarOpen ? 0 : -250 }}
@@ -291,7 +219,6 @@ const AdminDashboard = () => {
           border-r border-gray-200 dark:border-gray-700 md:translate-x-0 flex flex-col
           backdrop-blur-xl bg-opacity-90 dark:bg-opacity-90`}
       >
-        {/* Sidebar Header */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-2">
             <Gem className="h-6 w-6 text-amber-500" />
@@ -304,7 +231,6 @@ const AdminDashboard = () => {
           </button>
         </div>
 
-        {/* Admin Profile */}
         <div className="flex items-center space-x-3 px-5 py-4 border-b border-gray-200 dark:border-gray-700">
           <div className="w-10 h-10 rounded-full bg-amber-200 dark:bg-amber-800 flex items-center justify-center">
             <span className="text-amber-800 dark:text-amber-200 font-semibold text-lg uppercase">
@@ -395,7 +321,6 @@ const AdminDashboard = () => {
               )}
             </button>
 
-            {/* Notification Dropdown */}
             {isOpen && (
               <div className="absolute right-0 mt-3 w-80 bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 transform transition-all duration-200 z-50">
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
