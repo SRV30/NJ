@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminProducts = () => {
   const [formData, setFormData] = useState({
+    product_id: "",
     name: "",
     description: "",
     jewelleryType: [],
@@ -27,7 +28,6 @@ const AdminProducts = () => {
     bestseller: "No",
     images: [],
   });
-
   const [imagePreviews, setImagePreviews] = useState([]);
   const [editId, setEditId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -92,36 +92,45 @@ const AdminProducts = () => {
     setImagePreviews(files.map((file) => URL.createObjectURL(file)));
   };
 
+  const generateProductId = () => {
+    return "JD" + Math.random().toString(36).substring(2, 8).toUpperCase();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const productData = new FormData();
     Object.keys(formData).forEach((key) => {
-      if (!["images", "jewelleryType", "productCategory"].includes(key)) {
+      if (key === "product_id") {
+        productData.append(key, formData.product_id || generateProductId());
+      } else if (!["images", "jewelleryType", "productCategory"].includes(key)) {
         productData.append(key, formData[key]);
       }
     });
     formData.images.forEach((image) => productData.append("images", image));
-
     if (formData.jewelleryType.length > 0) {
       productData.set("jewelleryType", JSON.stringify(formData.jewelleryType));
     }
     if (formData.productCategory.length > 0) {
-      productData.set(
-        "productCategory",
-        JSON.stringify(formData.productCategory)
-      );
+      productData.set("productCategory", JSON.stringify(formData.productCategory));
     }
-
+    
+    // Debug: log the FormData content (for debugging only – remove in production)
+    for (let pair of productData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+  
     if (editId) {
       dispatch(updateProduct({ id: editId, productData }));
     } else {
       dispatch(createProduct(productData));
     }
   };
+  
 
   const handleEdit = (product) => {
     setEditId(product._id);
     setFormData({
+      product_id: product.product_id,
       name: product.name,
       description: product.description,
       jewelleryType:
@@ -158,6 +167,7 @@ const AdminProducts = () => {
   const handleCancelEdit = () => {
     setEditId(null);
     setFormData({
+      product_id: "",
       name: "",
       description: "",
       jewelleryType: [],
@@ -248,6 +258,19 @@ const AdminProducts = () => {
             variants={itemVariants}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
+            <div>
+              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
+                Product Id
+              </label>
+              <input
+                type="text"
+                name="product_id"
+                value={formData.product_id}
+                onChange={handleInputChange}
+                placeholder="e.g., JDH45W5FW"
+                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300"
+              />
+            </div>
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Product Name
@@ -421,24 +444,9 @@ const AdminProducts = () => {
             >
               {productLoading ? (
                 <span className="flex items-center justify-center">
-                  <svg
-                    className="animate-spin h-5 w-5 mr-2"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      fill="none"
-                      className="opacity-25"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v8z"
-                      className="opacity-75"
-                    />
+                  <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" className="opacity-25" />
+                    <path fill="currentColor" d="M4 12a8 8 0 018-8v8z" className="opacity-75" />
                   </svg>
                   {editId ? "Updating..." : "Creating..."}
                 </span>
@@ -504,6 +512,9 @@ const AdminProducts = () => {
                         />
                       )}
                       <div>
+                        <p className="text-sm text-amber-700 dark:text-amber-200">
+                          {product.product_id}
+                        </p>
                         <h4 className="text-lg font-serif font-semibold text-amber-800 dark:text-amber-100 capitalize">
                           {product.name}
                         </h4>

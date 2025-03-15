@@ -92,8 +92,6 @@ const BestSeller = ({ product, index }) => {
 BestSeller.propTypes = {
   product: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    discount: PropTypes.number.isRequired,
     bestseller: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     images: PropTypes.arrayOf(
       PropTypes.shape({

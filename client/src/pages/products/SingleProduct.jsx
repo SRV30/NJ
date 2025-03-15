@@ -299,7 +299,7 @@ const SingleProductPage = () => {
                     </h1>
 
                     <h1 className="font-mono text-sm md:text-sm text-amber-950 dark:text-amber-100 mb-2">
-                      NJ{product._id}
+                      {product.product_id}
                     </h1>
                     <div className="flex items-baseline gap-3 mb-6">
                       <ShareButton />

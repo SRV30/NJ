@@ -1,138 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import MetaData from "./MetaData";
-
-const faqs = [
-  {
-    question: "What payment methods do you accept?",
-    answer: "We accept payment through Razorpay and cash on delivery.",
-  },
-  {
-    question: "What payment methods does Razorpay accept in India?",
-    answer:
-      "Razorpay supports credit/debit cards, UPI, Net Banking, Wallets, and EMI options.",
-  },
-  {
-    question: "What is Razorpay?",
-    answer: (
-      <>
-        Razorpay is a secure online payment gateway that allows you to make fast
-        and safe transactions. Learn more on their official website:{" "}
-        <a
-          href="https://razorpay.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-indigo-500 dark:text-indigo-400 hover:underline"
-        >
-          Razorpay.com
-        </a>
-      </>
-    ),
-  },
-  {
-    question: "What is Cash on Delivery?",
-    answer:
-      "Cash on Delivery (COD) allows you to pay for your order in cash when it’s delivered to your doorstep.",
-  },
-  {
-    question: "How is a 'business day' different from a regular day?",
-    answer:
-      "A business day refers to working days (Monday to Friday), excluding public holidays and weekends.",
-  },
-  {
-    question: "How much is the platform fee?",
-    answer:
-      "Our platform is totally free! No extra charges for browsing or purchasing products.",
-  },
-  {
-    question: "What's not allowed in product reviews?",
-    answer:
-      "Fake, abusive, or promotional content is not allowed in product reviews.",
-  },
-  {
-    question: "What can I write in product reviews?",
-    answer: "You can write about your personal experience with the product.",
-  },
-  {
-    question: "Are there any guidelines for writing product reviews?",
-    answer:
-      "Yes. Reviews should be honest, relevant, and respectful. Avoid spam, advertisements, or offensive content.",
-  },
-  {
-    question:
-      "If I have found a security Bug/Vulnerability/Issue, what should I do?",
-    answer: (
-      <>
-        Please report security vulnerabilities by emailing us at{" "}
-        <strong>support@nandanijewellers.com</strong> with the following details:
-        <ol className="list-decimal ml-5 mt-2">
-          <li>Steps to reproduce the bug/issue.</li>
-          <li>Your web browser/mobile browser’s name and version.</li>
-          <li>Screenshot/screencast (if any).</li>
-        </ol>
-      </>
-    ),
-  },
-  {
-    question: "Do I need to verify my email address while signing up?",
-    answer:
-      "Yes, email verification is required to ensure account security and prevent fraud.",
-  },
-  {
-    question: "Why do I need to verify my email address while signing up?",
-    answer:
-      "Email verification helps protect your account from unauthorized access and allows us to send important order updates.",
-  },
-  {
-    question: "How long does shipping take?",
-    answer:
-      "Shipping usually takes 5-10 business days depending on your location.",
-  },
-  {
-    question: "How can I track my order?",
-    answer:
-      "You will receive a tracking number on your My Orders page once your order has been shipped.",
-  },
-  {
-    question: "What is an OTP or verification code?",
-    answer:
-      "An OTP (One-Time Password) is a temporary code sent to your registered email or phone for security verification.",
-  },
-  {
-    question: "Will I have to pay a cancellation fee?",
-    answer: "No, there is no cancellation fee.",
-  },
-  {
-    question: "How long does it take to cancel an order?",
-    answer:
-      "If the seller hasn’t shipped the order, it will be cancelled immediately. If already shipped, cancellation is not possible.",
-  },
-  {
-    question: "How do I contact customer support?",
-    answer: (
-      <>
-        You can reach us via email at <strong>support@nandanijewellers.com</strong>.
-      </>
-    ),
-  },
-  {
-    question: "How can I contact you?",
-    answer: (
-      <>
-        You can visit our{" "}
-        <Link
-          to="/contact-us"
-          className="text-indigo-500 dark:text-indigo-400 hover:underline"
-        >
-          Contact Us
-        </Link>{" "}
-        page for any inquiries.
-      </>
-    ),
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFAQs } from "@/store/extra/faqSlice";
+import Loader from "./Loader";
 
 const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -141,12 +14,20 @@ const FAQPage = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const { faqs, error, loading } = useSelector((state) => state.faq);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFAQs());
+  }, [dispatch]);
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.1 },
     },
   };
 
@@ -155,16 +36,30 @@ const FAQPage = () => {
     visible: {
       opacity: 1,
       height: "auto",
-      transition: { duration: 0.2, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" },
     },
   };
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950">
+        <p className="text-amber-800 dark:text-amber-300 text-xl font-medium">
+          {error}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <motion.section
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-16 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 py-16 px-4 sm:px-6 lg:px-8"
     >
       <MetaData
         title="FAQs | Nandani Jewellers"
@@ -173,37 +68,60 @@ const FAQPage = () => {
       />
 
       <div className="max-w-4xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white text-center mb-12 tracking-tight"
-        >
-          Frequently Asked Questions
-        </motion.h1>
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center justify-center mb-6"
+          >
+            <Sparkles className="w-8 h-8 text-amber-600 dark:text-amber-400 mr-2" />
+            <span className="h-px w-12 bg-amber-300 dark:bg-amber-700" />
+          </motion.div>
 
-        <div className="space-y-6">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl sm:text-5xl font-extrabold text-amber-800 dark:text-amber-300 text-center mb-4 tracking-tight"
+          >
+            Frequently Asked Questions
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-amber-700 dark:text-amber-400 text-lg max-w-2xl mx-auto"
+          >
+            Find answers to common questions about our jewelry, ordering
+            process, and policies
+          </motion.p>
+        </div>
+
+        <div className="space-y-5">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden transform hover:shadow-2xl transition-all duration-300 group"
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm shadow-xl rounded-xl overflow-hidden border border-amber-200 dark:border-amber-900 transform hover:shadow-amber-200/30 dark:hover:shadow-amber-700/20 transition-all duration-300"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center p-6 text-left text-xl font-semibold text-gray-800 dark:text-gray-100 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none transition-colors duration-200"
+                className="w-full flex justify-between items-center p-6 text-left text-xl font-medium text-amber-900 dark:text-amber-200 hover:text-amber-600 dark:hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 focus:ring-inset transition-colors duration-200"
               >
-                <span>{faq.question}</span>
+                <span className="pr-8">{faq.question}</span>
                 <motion.div
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
+                  className="flex-shrink-0"
                 >
                   {openIndex === index ? (
-                    <ChevronUp className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                    <ChevronUp className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400" />
+                    <ChevronDown className="w-6 h-6 text-amber-500/70 dark:text-amber-500/70" />
                   )}
                 </motion.div>
               </button>
@@ -215,9 +133,11 @@ const FAQPage = () => {
                     initial="hidden"
                     animate="visible"
                     exit="hidden"
-                    className="px-6 pb-6 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50"
+                    className="px-6 pb-6 text-amber-700 dark:text-amber-300 bg-amber-50/50 dark:bg-slate-800/50"
                   >
-                    <p>{faq.answer}</p>
+                    <div className="pt-2 border-t border-amber-200 dark:border-amber-800/50">
+                      <p className="leading-relaxed">{faq.answer}</p>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -229,17 +149,20 @@ const FAQPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="text-center mt-12"
+          className="mt-16 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm p-8 rounded-xl border border-amber-200 dark:border-amber-900 shadow-lg text-center"
         >
-          <p className="text-gray-600 dark:text-gray-300 text-lg">
-            Still have questions?{" "}
-            <Link
-              to="/contactus"
-              className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline transition-colors duration-200"
-            >
-              Get in Touch
-            </Link>
+          <h3 className="text-2xl font-bold text-amber-800 dark:text-amber-300 mb-3">
+            Still have questions?
+          </h3>
+          <p className="text-amber-700 dark:text-amber-400 text-lg mb-6">
+            We&apos;re here to help with any questions you might have
           </p>
+          <Link
+            to="/contactus"
+            className="inline-flex items-center px-6 py-3 bg-amber-600 hover:bg-amber-700 dark:bg-amber-800 dark:hover:bg-amber-700 text-white font-medium rounded-lg transition-colors duration-200 transform hover:scale-105"
+          >
+            Get in Touch
+          </Link>
         </motion.div>
       </div>
     </motion.section>

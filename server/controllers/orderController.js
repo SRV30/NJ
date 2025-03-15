@@ -38,7 +38,7 @@ export const createOrder = catchAsyncErrors(async (req, res) => {
       html: receiptHTML,
     });
 
-     await createNotification(`New booking created by ${user.name}`);
+    await createNotification(`New booking created by ${user.name}`);
     res.status(201).json({ success: true, order: populatedOrder });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -135,10 +135,10 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
   try {
     const { orderId } = req.params;
     const { orderStatus } = req.body;
-    const userId  =
+    const userId =
       req.user && req.user._id ? req.user._id.toString() : "Unknown";
 
-      const validStatuses = ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"];
+    const validStatuses = ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"];
     if (!validStatuses.includes(orderStatus)) {
       return res.status(400).json({
         success: false,
@@ -155,16 +155,31 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
     }
 
     if (orderStatus !== "CANCELLED" && req.user.role !== "ADMIN") {
-      return res.status(403).json({ success: false, message: "Only admin can change order status" });
+      return res
+        .status(403)
+        .json({
+          success: false,
+          message: "Only admin can change order status",
+        });
     }
 
     if (orderStatus === "CANCELLED" && req.user.role !== "ADMIN") {
       if (order.user.toString() !== userId) {
-        return res.status(403).json({ success: false, message: "Unauthorized to cancel this order" });
+        return res
+          .status(403)
+          .json({
+            success: false,
+            message: "Unauthorized to cancel this order",
+          });
       }
 
       if (order.orderStatus === "PURCHASED") {
-        return res.status(400).json({ success: false, message: "Cannot cancel an order that has been purchased" });
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Cannot cancel an order that has been purchased",
+          });
       }
     }
 
@@ -173,7 +188,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
     order.orderHistory.push({
       status: orderStatus,
       changedAt: new Date(),
-      changedBy: adminId.toString(),
+      changedBy: userId.toString(),
     });
 
     await order.save();
@@ -184,6 +199,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
       order,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -215,7 +231,12 @@ export const cancelOrder = catchAsyncErrors(async (req, res) => {
     }
 
     if (order.orderStatus !== "BOOKED") {
-      return res.status(400).json({ success: false, message: "Only orders with status BOOKED can be cancelled" });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Only orders with status BOOKED can be cancelled",
+        });
     }
 
     if (

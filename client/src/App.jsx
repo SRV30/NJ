@@ -29,12 +29,15 @@ import Wishlist from "./pages/orders/Wishlist";
 import { useEffect } from "react";
 import { getCartItems } from "./store/order-slice/addToCart";
 import { getWishListItems } from "./store/order-slice/addToWishList";
-// import FAQPage from "./pages/extras/FAQPage";
-// import PrivacyPolicy from "./pages/extras/PrivacyPolicy";
-// import TermsAndServices from "./pages/extras/TermsAndServices";
 import Checkout from "./pages/orders/Checkout";
 import OrderSuccess from "./pages/orders/OrderSuccess";
 import OrderDetails from "./pages/my-profile/OrderDetails";
+import NotFoundPage from "./pages/extras/NotFoundPage ";
+import CreateTestimonialPage from "./pages/extras/CreateTestimonialPage";
+import FAQPage from "./pages/extras/FAQPage";
+import PrivacyPolicy from "./pages/extras/PrivacyPolicy";
+import TermsAndServices from "./pages/extras/TermsAndServices";
+import Photo from "./pages/extras/Photo";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -90,7 +93,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-          <Route
+        <Route
           path="/order/:Id"
           element={
             <ProtectedRoute>
@@ -138,7 +141,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/checkout"
           element={
             <ProtectedRoute>
@@ -146,7 +149,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/order-success"
           element={
             <ProtectedRoute>
@@ -154,12 +157,11 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
-        {/* <Route path="/faqs" element={<FAQPage />} />
+        <Route path="/testimonials" element={<CreateTestimonialPage />} />
+        <Route path="/faqs" element={<FAQPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsAndServices />} /> */}
-
-    
+        <Route path="/terms" element={<TermsAndServices />} />
+        <Route path="/photo" element={<Photo />} />
 
         {isAuthenticated && user?.role === "ADMIN" && (
           <>
@@ -167,6 +169,8 @@ const App = () => {
             <Route path="/admin/users/:id" element={<AdminSingleUser />} />
           </>
         )}
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <ScrollToTop />

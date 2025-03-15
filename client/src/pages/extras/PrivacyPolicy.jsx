@@ -1,140 +1,198 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPrivacyPolicies } from "@/store/extra/privacyPolicySlice";
+import Loader from "./Loader";
+import MetaData from "./MetaData";
 import { motion } from "framer-motion";
-import PropTypes from "prop-types";
 
 const PrivacyPolicy = () => {
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  };
+  const dispatch = useDispatch();
+  const { policies, loading, error } = useSelector(
+    (state) => state.privacyPolicy
+  );
 
-  return (
-    <motion.section
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-16 px-6 sm:px-12 lg:px-16"
-    >
-      <div className="max-w-4xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white text-center mb-4 tracking-tight"
-        >
-          Privacy Policy
-        </motion.h1>
+  useEffect(() => {
+    dispatch(fetchPrivacyPolicies());
+  }, [dispatch]);
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-center text-gray-600 dark:text-gray-400 text-sm mb-12 italic"
-        >
-          Last Updated: March 2025
-        </motion.p>
+  let latestUpdated = null;
+  if (policies && policies.length > 0) {
+    latestUpdated = new Date(
+      Math.max(...policies.map((policy) => new Date(policy.lastUpdated)))
+    );
+  }
 
-        <div className="space-y-8">
-          <Section
-            title="1. Information We Collect"
-            content="We collect personal information like name, email, phone number, and payment details when you register, make a purchase, or interact with our platform."
-          />
+  if (loading)
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 flex items-center justify-center">
+        <Loader />
+      </div>
+    );
 
-          <Section
-            title="2. How We Use Your Information"
-            content="We use your information to process orders, provide customer support, improve our services, and ensure security. We do not sell your personal data to third parties."
-          />
-
-          <Section
-            title="3. Payment Security"
-            content={
-              <>
-                Payments are securely processed through{" "}
-                <a
-                  href="https://razorpay.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-yellow-500 dark:text-red-600 font-medium hover:underline transition-colors duration-200"
-                >
-                  Razorpay
-                </a>
-                . We do not store your payment details on our servers.
-              </>
-            }
-          />
-
-          <Section
-            title="4. Advertisements on Platform"
-            content="We may display third-party advertisements based on your interactions with our platform. These ads may use cookies or similar technologies to provide relevant content."
-          />
-
-          <Section
-            title="5. Children’s Information"
-            content="Our platform is not intended for children under 18. We do not knowingly collect personal data from children. If you believe a child has provided us with their information, please contact us immediately."
-          />
-
-          <Section
-            title="6. Cookies and Tracking Technologies"
-            content="We use cookies to enhance user experience, analyze traffic, and personalize content. You can manage cookie preferences in your browser settings."
-          />
-
-          <Section
-            title="7. Data Protection and Security"
-            content="We implement strict security measures to protect your personal data. However, no online service is completely secure. We recommend using strong passwords and keeping your login credentials confidential."
-          />
-
-          <Section
-            title="8. Changes to This Privacy Policy"
-            content="We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date."
-          />
-
-          <Section
-            title="9. Contact Us"
-            content={
-              <>
-                If you have any questions about this Privacy Policy, please{" "}
-                <a
-                  href="/contactus"
-                  className="text-yellow-500 dark:text-red-600 font-medium hover:underline transition-colors duration-200"
-                >
-                  contact us
-                </a>
-                .
-              </>
-            }
-          />
+  if (error)
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 flex items-center justify-center">
+        <div className="bg-white dark:bg-slate-900 shadow-lg rounded-lg p-6 max-w-md w-full border-l-4 border-red-500">
+          <h2 className="text-xl font-semibold text-red-600 dark:text-red-400 mb-2">
+            Error Occurred
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300">{error}</p>
+          <button
+            onClick={() => dispatch(fetchPrivacyPolicies())}
+            className="mt-4 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md transition-colors duration-200 inline-flex items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            Try Again
+          </button>
         </div>
       </div>
-    </motion.section>
-  );
-};
-
-const Section = ({ title, content }) => {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  };
+    );
 
   return (
-    <motion.div
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="bg-white dark:bg-gray-800/90 shadow-xl rounded-xl p-8 transform hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-gray-200 dark:border-gray-700"
-    >
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 border-b border-indigo-500 dark:border-indigo-400 pb-2">
-        {title}
-      </h2>
-      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-        {content}
-      </p>
-    </motion.div>
-  );
-};
+    <section className="min-h-screen py-16 px-6 bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950">
+      <MetaData title="Privacy Policy| Nandani Jewellers" />
+      <div className="max-w-4xl mx-auto">
+        <header className="mb-12 text-center">
+          <h1 className="text-4xl font-bold text-amber-800 dark:text-amber-300 mb-3">
+            Privacy Policies
+          </h1>
+          <div className="w-20 h-1 bg-amber-600 dark:bg-amber-500 mx-auto rounded-full "></div>
+          {latestUpdated && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="text-center text-amber-700 dark:text-amber-400 text-sm mb-4 mt-5"
+            >
+              Last Updated:{" "}
+              <span className="font-medium">
+                {latestUpdated.toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
+            </motion.p>
+          )}
 
-Section.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+          <p className="mt-4 text-amber-700 dark:text-amber-400 max-w-xl mx-auto">
+            Our commitment to protecting your data and respecting your privacy
+          </p>
+        </header>
+
+        {policies.length === 0 ? (
+          <div className="bg-white dark:bg-slate-900 shadow-lg rounded-lg p-8 text-center border border-amber-200 dark:border-amber-900">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-16 w-16 text-amber-400 mx-auto mb-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <p className="text-lg text-amber-800 dark:text-amber-300">
+              No privacy policies found.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            {policies.map((policy) => (
+              <div
+                key={policy._id}
+                className="bg-white dark:bg-slate-900 shadow-lg rounded-lg overflow-hidden border-l-4 border-amber-500 dark:border-amber-600 transition-all hover:shadow-xl group"
+              >
+                <div className="p-6">
+                  <h2 className="text-2xl font-bold mb-4 text-amber-800 dark:text-amber-300 group-hover:text-amber-600 dark:group-hover:text-amber-200 transition-colors capitalize">
+                    {policy.title}
+                  </h2>
+                  <div className="prose max-w-none text-amber-800 dark:text-amber-300 opacity-90">
+                    <p className="line-clamp-4">{policy.content}</p>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-amber-50 to-amber-100 dark:from-slate-800 dark:to-slate-900 py-3 px-6 flex justify-between items-center">
+                  <p className="text-sm text-amber-700 dark:text-amber-400 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-1 inline"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    Last Updated:{" "}
+                    <span className="font-medium ml-1">
+                      {new Date(policy.lastUpdated).toLocaleDateString(
+                        undefined,
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <footer className="mt-16 text-center text-amber-700 dark:text-amber-400 text-sm bg-white dark:bg-slate-900 py-6 px-8 rounded-lg shadow-md border-t-2 border-amber-200 dark:border-amber-800">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+            <p>
+              If you have any questions about our policies, please contact our
+              support team.
+            </p>
+            <a
+              href="/contactus"
+              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md transition-colors duration-200 inline-flex items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              Contact Us
+            </a>
+          </div>
+        </footer>
+      </div>
+    </section>
+  );
 };
 
 export default PrivacyPolicy;

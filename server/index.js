@@ -76,15 +76,25 @@ import getintouchRouter from "./route/getintouchRoute.js";
 import cartRouter from "./route/cartRoute.js";
 import orderRouter from "./route/orderRoute.js";
 import wishListRouter from "./route/wishListRoute.js";
+import testimonalRouter from "./route/testimonialRoutes.js";
+import faqRouter from "./route/faqRoute.js";
+import privacyRouter from "./route/privacyPolicyRoutes.js";
+import photoRouter from "./route/photoRoute.js";
+import termsRouter from "./route/termsRoute.js";
 
 app.use("/api/address", addressRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/category", categoryRouter);
-app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/contact", getintouchRouter);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/faqs", faqRouter);
 app.use("/api/jewellery", jewelleryRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/photo", photoRouter);
+app.use("/api/privacy", privacyRouter);
 app.use("/api/product", productRouter);
+app.use("/api/terms", termsRouter);
+app.use("/api/testimonials", testimonalRouter);
 app.use("/api/user", userRouter);
 app.use("/api/wishlist", wishListRouter);
 

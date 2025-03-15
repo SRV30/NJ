@@ -399,7 +399,7 @@ const ProductsPage = () => {
 
                     <div className="p-5">
                       <div className="mb-2">
-                        <h3 className="font-serif text-lg text-amber-950 dark:text-amber-100 tracking-wide truncate group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300">
+                        <h3 className="font-serif text-lg text-amber-950 dark:text-amber-100 tracking-wide truncate group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300 capitalize">
                           {product.name}
                         </h3>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-light tracking-wide">

@@ -93,7 +93,7 @@ const Cart = () => {
                     transition={{ duration: 0.4 }}
                     className="flex flex-col md:flex-row md:items-center justify-between p-4 mb-4 border-b border-slate-200 dark:border-slate-800 last:border-b-0 last:mb-0"
                   >
-                    <div className="flex items-center mb-4 md:mb-0">
+                    <div className="flex items-center mb-4 md:mb-0 flex-wrap">
                       <div className="relative h-24 w-24 md:h-24 md:w-24 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-md">
                         <img
                           src={
@@ -106,7 +106,7 @@ const Cart = () => {
 
                       <div className="ml-4 md:ml-6">
                         <h3 className="text-md font-mono font-medium text-slate-900 dark:text-slate-200 mb-1">
-                          NJ{item.productId._id}
+                          {item.productId.product_id}
                         </h3>
                         <h3 className="text-lg font-serif font-medium text-slate-900 dark:text-slate-200 mb-1 capitalize">
                           {item.productId.name}

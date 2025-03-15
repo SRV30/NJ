@@ -12,6 +12,7 @@ import {
   Check,
   Trash2,
   Contact,
+  PaperclipIcon,
 } from "lucide-react";
 import AdminUsers from "./AdminUsers";
 import AdminProducts from "./AdminProducts";
@@ -20,7 +21,7 @@ import { motion } from "framer-motion";
 import AdminOrdersPage from "./AdminOrdersPage";
 import AdminJewellery from "./AdminJewellery";
 import ManageCategory from "./AdminCategory";
-import { Category } from "@mui/icons-material";
+import { Category, Photo, PrivacyTip } from "@mui/icons-material";
 import { getProducts } from "@/store/product-slice/product";
 import { fetchJewelleryCategories } from "@/store/product-slice/jewelleryType";
 import { fetchCategories } from "@/store/product-slice/category";
@@ -35,6 +36,12 @@ import {
   deleteNotification,
 } from "@/store/extra/dashboardSlice";
 import AdminContact from "./AdminGetInTouch";
+import { getAllOrders } from "@/store/order-slice/AdminOrderSlice";
+import AdminFaq from "./AdminFaq";
+import { FaQ } from "react-icons/fa6";
+import AdminPolicy from "./AdminPolicy";
+import AdminPhoto from "./AdminPhoto";
+import AdminTerms from "./AdminTerms";
 
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -56,6 +63,7 @@ const AdminDashboard = () => {
     (state) => state.category || {}
   );
   const { notifications } = useSelector((state) => state.dashboard);
+  const { orders } = useSelector((state) => state.adminOrders);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,6 +75,7 @@ const AdminDashboard = () => {
     dispatch(fetchCategories());
     dispatch(fetchNotifications());
     dispatch(fetchLowStockProducts());
+    dispatch(getAllOrders());
   }, [dispatch, page, search]);
 
   const handleLogout = () => {
@@ -102,9 +111,8 @@ const AdminDashboard = () => {
     },
     {
       title: "Orders",
-      count: 245,
+      count: orders.length,
       icon: Package,
-      newCount: 18,
       color: "green",
     },
     {
@@ -204,6 +212,14 @@ const AdminDashboard = () => {
         return <AdminOrdersPage />;
       case "Contact Form":
         return <AdminContact />;
+      case "Photos":
+        return <AdminPhoto />;
+      case "Privacy Policy":
+        return <AdminPolicy />;
+      case "FAQs":
+        return <AdminFaq />;
+      case "Terms & Conditions":
+        return <AdminTerms />;
       default:
         return null;
     }
@@ -256,6 +272,10 @@ const AdminDashboard = () => {
             { icon: ShoppingBag, text: "Products" },
             { icon: Package, text: "Orders" },
             { icon: Contact, text: "Contact Form" },
+            { icon: Photo, text: "Photos" },
+            { icon: PrivacyTip, text: "Privacy Policy" },
+            { icon: FaQ, text: "FAQs" },
+            { icon: PaperclipIcon, text: "Terms & Conditions" },
           ].map((item) => (
             <motion.button
               key={item.text}

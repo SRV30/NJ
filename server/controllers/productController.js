@@ -11,6 +11,7 @@ import wishListProductModel from "../models/wishlistModel.js";
 export const createProduct = catchAsyncErrors(async (req, res, next) => {
   try {
     const {
+      product_id,
       name,
       description,
       jewelleryType,
@@ -20,10 +21,14 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
       bestseller,
     } = req.body;
 
+    if (!product_id) {
+      return next(new ErrorHandler("Please enter id", 400));
+    }
+
     if (!name || !description || !metal) {
       return next(
         new ErrorHandler(
-          "Please enter all required fields (name, description , metal)",
+          "Please enter all required fields (id, name, description, metal)",
           400
         )
       );
@@ -55,6 +60,7 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     const product = new ProductModel({
+      product_id,
       name,
       description,
       jewelleryType: jewelleryType ? JSON.parse(jewelleryType) : [],
@@ -275,6 +281,7 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     const {
+      product_id,
       name,
       description,
       jewelleryType,
@@ -299,6 +306,7 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
       product.images = newImages;
     }
 
+    product.product_id = product_id || product.product_id;
     product.name = name || product.name;
     product.description = description || product.description;
     if (jewelleryType) {
@@ -357,11 +365,11 @@ export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     await User.updateMany(
-      {}, 
+      {},
       {
-        $pull: { 
-          shoppingCart: deleteId, 
-          shoppingWishlist: deleteId 
+        $pull: {
+          shoppingCart: deleteId,
+          shoppingWishlist: deleteId,
         },
       }
     );

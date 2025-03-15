@@ -53,6 +53,12 @@ const Checkout = () => {
     }
   }, [success, navigate, dispatch, cartItems]);
 
+  useEffect(() => {
+    if (address.length > 0 && !selectedAddress) {
+      setSelectedAddress(address[0]._id);
+    }
+  }, [address, selectedAddress, setSelectedAddress]);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -60,7 +66,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 py-8 px-4 sm:px-6">
-    <MetaData title = "Checkout | Nandani Jewellers" />
+      <MetaData title="Checkout | Nandani Jewellers" />
       <motion.div
         initial="hidden"
         animate="visible"
@@ -229,10 +235,17 @@ const Checkout = () => {
                             className="w-full h-full object-fit"
                           />
                         </motion.div>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-amber-800 dark:text-amber-300 capitalize">
-                            {item.productId.name}
-                          </h4>
+                        <div className="flex flex-col">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-amber-800 dark:text-amber-300 capitalize">
+                              {item.productId.name}
+                            </h4>
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-amber-800 dark:text-amber-300 capitalize">
+                              {item.productId.product_id}
+                            </h4>
+                          </div>
                         </div>
                       </motion.div>
                     ))}

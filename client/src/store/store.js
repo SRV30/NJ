@@ -12,6 +12,12 @@ import productSlice from "./product-slice/getbySlice";
 import cartReducer from "./order-slice/addToCart";
 import wishListReducer from "./order-slice/addToWishList";
 import orderReducer from "./order-slice/order";
+import adminOrdersReducer from "./order-slice/AdminOrderSlice";
+import testimonialsReducer from "./extra/testimonialSlice";
+import faqSlice from "./extra/faqSlice";
+import privacyPolicyReducer from "./extra/privacyPolicySlice";
+import photoSlice from "./extra/photoSlice";
+import termsReducer from "./extra/termsSlice";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +34,12 @@ const store = configureStore({
     cart: cartReducer,
     wishList: wishListReducer,
     order: orderReducer,
+    adminOrders: adminOrdersReducer,
+    testimonials: testimonialsReducer,
+    faq: faqSlice,
+    privacyPolicy: privacyPolicyReducer,
+    photo: photoSlice,
+    terms: termsReducer,
   },
 });
 

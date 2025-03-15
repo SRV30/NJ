@@ -13,9 +13,7 @@ import { showJewelryToast } from "../extras/showJewelryToast";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
-  const { WishListItems, loading } = useSelector(
-    (state) => state.wishList
-  );
+  const { WishListItems, loading } = useSelector((state) => state.wishList);
 
   useEffect(() => {
     dispatch(getWishListItems());
@@ -28,6 +26,12 @@ const Wishlist = () => {
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
+    WishListItems.forEach((item) => {
+      dispatch(deleteWishListItem(item._id));
+    });
+
+    dispatch(getWishListItems());
+
     showJewelryToast("Item added to cart", "success");
   };
 
@@ -129,7 +133,6 @@ const Wishlist = () => {
         </p>
       </motion.div>
 
-     
       {!loading && (!WishListItems || WishListItems.length === 0) && (
         <motion.div
           className="flex flex-col items-center justify-center py-16"

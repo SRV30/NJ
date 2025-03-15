@@ -223,7 +223,7 @@ const OrderDetails = () => {
                                   "/default-image.jpg"
                                 }
                                 alt={item.product?.name}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-fit"
                               />
                             </motion.div>
                           </div>
