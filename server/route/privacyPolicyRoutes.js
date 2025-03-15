@@ -6,7 +6,7 @@ import {
   updatePrivacyPolicy,
   deletePrivacyPolicy,
 } from "../controllers/privacyPolicyController.js";
-import admin from "../middleware/admin.js";
+import admin from "../middleware/Admin.js";
 import auth from "../middleware/auth.js";
 
 const privacyRouter = express.Router();
