@@ -223,16 +223,22 @@ const SingleProductPage = () => {
                     className="relative aspect-square overflow-hidden rounded-xl mb-4"
                   >
                     {product.images?.length > 0 && (
-                      <motion.img
-                        key={selectedImage}
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        src={product.images[selectedImage]?.url}
-                        alt={product.name}
-                        className="w-full h-full object-fit object-center"
-                      />
+                      <a
+                        href={product.images[selectedImage]?.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <motion.img
+                          key={selectedImage}
+                          initial={{ opacity: 0, scale: 1.1 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          src={product.images[selectedImage]?.url}
+                          alt={product.name}
+                          className="w-full h-full object-fit object-center hover:scale-105 cursor-pointer"
+                        />
+                      </a>
                     )}
                     <div className="absolute top-3 left-3 right-3 flex justify-between z-20">
                       {new Date(product.createdAt) >=
@@ -275,13 +281,13 @@ const SingleProductPage = () => {
                           selectedImage === index
                             ? "border-amber-500 shadow-lg shadow-amber-500/20"
                             : "border-transparent"
-                        }`}
+                        } hover:scale-105`}
                         onClick={() => setSelectedImage(index)}
                       >
                         <img
                           src={image.url}
                           alt={`${product.name} view ${index + 1}`}
-                          className="w-full h-full object-fit object-center"
+                          className="w-full h-full object-fit object-center "
                         />
                       </motion.div>
                     ))}
@@ -403,8 +409,6 @@ const SingleProductPage = () => {
                         "No description available for this product."}
                     </p>
                   </motion.div>
-
-                  
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MetaData from "./MetaData";
 import { useEffect } from "react";
 import { fetchTerms } from "@/store/extra/termsSlice";
+import { Link } from "react-router-dom";
 
 const Section = ({ title, content, lastUpdated }) => {
   const sectionVariants = {
@@ -189,6 +190,26 @@ const TermsAndServices = () => {
             </motion.div>
           )
         )}
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-16 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm p-8 rounded-xl border border-amber-200 dark:border-amber-900 shadow-lg text-center"
+        >
+          <h3 className="text-2xl font-bold text-amber-800 dark:text-amber-300 mb-3">
+            Still have questions?
+          </h3>
+          <p className="text-amber-700 dark:text-amber-400 text-lg mb-6">
+            We&apos;re here to help with any questions you might have
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center px-6 py-3 bg-amber-600 hover:bg-amber-700 dark:bg-amber-800 dark:hover:bg-amber-700 text-white font-medium rounded-lg transition-colors duration-200 transform hover:scale-105"
+          >
+            Get in Touch
+          </Link>
+        </motion.div>
       </div>
     </motion.section>
   );

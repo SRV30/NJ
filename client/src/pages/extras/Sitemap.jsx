@@ -18,7 +18,7 @@ const Sitemap = () => {
     { path: "/cart", name: "Cart" },
     { path: "/wishlist", name: "Wishlist" },
     { path: "/about", name: "About Us" },
-    { path: "/contactus", name: "Contact Us" },
+    { path: "/contact", name: "Contact Us" },
     { path: "/signup", name: "Sign Up" },
     { path: "/faqs", name: "FAQs" },
     { path: "/privacy-policy", name: "Privacy Policy" },

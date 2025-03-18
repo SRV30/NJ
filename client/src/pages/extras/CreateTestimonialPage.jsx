@@ -44,6 +44,7 @@ const CreateTestimonialPage = () => {
         country,
       })
     );
+    window.location.reload();
   };
 
   return (

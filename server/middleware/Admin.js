@@ -12,7 +12,7 @@ const admin = async (req, res, next) => {
 
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (decodedData.role !== "ADMIN") {
+    if (decodedData.role !== "ADMIN" && decodedData.role !== "MANAGER") {
       return res.status(401).json({
         success: false,
         message: "Not Authorized Login Again",

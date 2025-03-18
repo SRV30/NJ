@@ -158,7 +158,7 @@ const FAQPage = () => {
             We&apos;re here to help with any questions you might have
           </p>
           <Link
-            to="/contactus"
+            to="/contact"
             className="inline-flex items-center px-6 py-3 bg-amber-600 hover:bg-amber-700 dark:bg-amber-800 dark:hover:bg-amber-700 text-white font-medium rounded-lg transition-colors duration-200 transform hover:scale-105"
           >
             Get in Touch

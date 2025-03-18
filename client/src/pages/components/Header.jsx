@@ -115,7 +115,7 @@ export default function Header() {
         initial="hidden"
         animate="visible"
       >
-        {["/", "/products", "/about", "/contactus"].map((path, index) => {
+        {["/", "/products", "/about", "/contact"].map((path, index) => {
           const label =
             path === "/"
               ? "Home"
@@ -229,7 +229,7 @@ export default function Header() {
               >
                 {isAuthenticated ? (
                   <>
-                    {user.role === "ADMIN" && (
+                    {(user.role === "ADMIN" || user.role === "MANAGER") && (
                       <DropdownLink
                         href="/admin/dashboard"
                         text="Admin Dashboard"
@@ -284,7 +284,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            {["/", "/products", "/about", "/contactus"].map((path, index) => {
+            {["/", "/products", "/about", "/contact"].map((path, index) => {
               const label =
                 path === "/"
                   ? "Home"

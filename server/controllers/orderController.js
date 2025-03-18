@@ -154,7 +154,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
       });
     }
 
-    if (orderStatus !== "CANCELLED" && req.user.role !== "ADMIN") {
+    if (orderStatus !== "CANCELLED" && req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
       return res
         .status(403)
         .json({
@@ -163,7 +163,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
         });
     }
 
-    if (orderStatus === "CANCELLED" && req.user.role !== "ADMIN") {
+    if (orderStatus === "CANCELLED" && req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
       if (order.user.toString() !== userId) {
         return res
           .status(403)
@@ -241,7 +241,8 @@ export const cancelOrder = catchAsyncErrors(async (req, res) => {
 
     if (
       order.user._id.toString() !== userId.toString() &&
-      req.user.role !== "ADMIN"
+      req.user.role !== "ADMIN" &&
+      req.user.role !== "MANAGER"
     ) {
       return res.status(403).json({
         success: false,
@@ -294,7 +295,7 @@ export const deleteOrder = catchAsyncErrors(async (req, res) => {
       });
     }
 
-    if (req.user.role !== "ADMIN") {
+    if (req.user.role !== "ADMIN" && req.user.role !== "MANAGER" ) {
       return res.status(403).json({
         success: false,
         message: "Unauthorized to delete this order",

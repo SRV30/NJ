@@ -327,10 +327,10 @@ const generateReceiptHTML = (order) => {
             <p>Timeless Elegance, Crafted with Passion</p>
           </div>
           
-          <h2>Order Confirmation</h2>
+          <h2>Booking Confirmation</h2>
           
           <p>Dear <strong>${user.name}</strong>,</p>
-          <p>Thank you for choosing Nandani Jewellers. We're delighted to confirm that your order has been successfully placed. Here are your order details:</p>
+          <p>Thank you for choosing Nandani Jewellers. We're delighted to confirm that your order has been successfully booked. Here are your order details:</p>
 
           <div class="order-summary">
             <h3>Order Summary</h3>
@@ -340,7 +340,7 @@ const generateReceiptHTML = (order) => {
             <p><span>Total Items:</span> <strong>${totalItems}</strong></p>
           </div>
 
-          <h3>Products Ordered</h3>
+          <h3>Products Booked</h3>
           <table>
             <thead>
               <tr>
@@ -357,7 +357,9 @@ const generateReceiptHTML = (order) => {
           <div class="divider"></div>
 
           <div class="footer">
-            <p>We will notify you once your order has been shipped.</p>
+            <p>Please visit our
+                    showrooms within 7 days of booking for final fitting and
+                    collection of your selected pieces.</p>
             <p>Thank you for trusting <strong>Nandani Jewellers</strong> with your jewelry needs!</p>
           </div>
 

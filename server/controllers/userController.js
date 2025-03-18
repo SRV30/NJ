@@ -650,7 +650,7 @@ export const updateUserDetails = catchAsyncErrors(async (req, res) => {
 // Admin
 export const getAllUsers = catchAsyncErrors(async (req, res) => {
   try {
-    if (req.user.role !== "ADMIN") {
+    if (req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
       return res.status(403).json({
         message: "Access denied. Admins only.",
         error: true,
@@ -696,7 +696,7 @@ export const getAllUsers = catchAsyncErrors(async (req, res) => {
 // Admin
 export const getSingleUser = catchAsyncErrors(async (req, res) => {
   try {
-    if (req.user.role !== "ADMIN") {
+    if (req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
       return res.status(403).json({
         message: "Permission denied. Admins only.",
         error: true,
@@ -734,9 +734,9 @@ export const getSingleUser = catchAsyncErrors(async (req, res) => {
 // Admin
 export const updateUserRole = catchAsyncErrors(async (req, res) => {
   try {
-    if (req.user.role !== "ADMIN") {
+    if (req.user.role !== "MANAGER") {
       return res.status(403).json({
-        message: "Permission denied. Admins only.",
+        message: "Permission denied. Managers only.",
         error: true,
         success: false,
       });
@@ -744,9 +744,9 @@ export const updateUserRole = catchAsyncErrors(async (req, res) => {
 
     const { email, role } = req.body;
 
-    if (!role || !["USER", "ADMIN"].includes(role)) {
+    if (!role || !["USER", "ADMIN", "MANAGER"].includes(role)) {
       return res.status(400).json({
-        message: "Invalid role. Role must be either 'USER' or 'ADMIN'.",
+        message: "Invalid role. Role must be either 'USER', 'MANAGER', or 'ADMIN'.",
         error: true,
         success: false,
       });
@@ -785,7 +785,7 @@ export const deleteUser = catchAsyncErrors(async (req, res) => {
   try {
     const userId = req.params.id;
 
-    if (req.user.role !== "ADMIN") {
+    if (req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
       return res.status(403).json({
         message: "Permission denied. Admins only.",
         error: true,

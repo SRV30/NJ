@@ -52,7 +52,6 @@ const AdminSingleUser = () => {
         updateUserRole({ email: singleUser.email, role: selectedRole })
       );
       showJewelryToast("Role updated successfully", "success");
-      navigate("/admin/dashboard");
     } catch (error) {
       showJewelryToast(error || "Failed to update role", "error");
     }
@@ -220,7 +219,7 @@ const AdminSingleUser = () => {
                           >
                             <div className="w-2 h-2 bg-amber-500 dark:bg-amber-500 rounded-full" />
                           </motion.div>
-                          Role
+                          Role (Refresh the page after updating role)
                         </label>
                         <div className="flex flex-col sm:flex-row gap-3">
                           <select
@@ -236,7 +235,9 @@ const AdminSingleUser = () => {
                           >
                             <option value="USER">User</option>
                             <option value="ADMIN">Admin</option>
+                            <option value="MANAGER">Main Admin</option>
                           </select>
+                          <p>Only Main Admin can change role</p>
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}

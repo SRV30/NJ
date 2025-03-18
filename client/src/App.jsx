@@ -74,7 +74,7 @@ const App = () => {
         <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/About" element={<About />} />
-        <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:productId" element={<SingleProductPage />} />
         <Route
@@ -163,7 +163,7 @@ const App = () => {
         <Route path="/terms" element={<TermsAndServices />} />
         <Route path="/photo" element={<Photo />} />
 
-        {isAuthenticated && user?.role === "ADMIN" && (
+        {isAuthenticated && (user?.role === "ADMIN" || user?.role === "MANAGER") && (
           <>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/users/:id" element={<AdminSingleUser />} />

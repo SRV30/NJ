@@ -1,12 +1,6 @@
 import { motion } from "framer-motion";
-import {
-  FaTwitter,
-  FaFacebook,
-  FaLinkedin,
-  FaYoutube,
-  FaInstagram,
-} from "react-icons/fa";
-import Logo from "../../assets/Logo.png"
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import Logo from "../../assets/Logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -56,7 +50,6 @@ const Footer = () => {
         animate="visible"
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 relative z-10"
       >
-        {/* Logo Section */}
         <motion.div
           variants={itemVariants}
           className="flex flex-col space-y-5 items-center md:items-start text-center md:text-left"
@@ -66,14 +59,13 @@ const Footer = () => {
             alt="Nandani Jewellers Logo"
             className="h-14 lg:h-16 w-auto"
           />
-          
+
           <p className="text-amber-800 dark:text-amber-300 text-sm lg:text-base font-sans tracking-wider max-w-sm">
             Crafting elegance since 2002. Discover the art of luxury with{" "}
             <span className="font-medium">Nandani Jewellers</span>.
           </p>
         </motion.div>
 
-     
         <div className="grid grid-cols-2 gap-8 md:col-span-2 md:grid-cols-4 text-center md:text-left ">
           {[
             {
@@ -89,7 +81,7 @@ const Footer = () => {
             {
               title: "Help",
               links: ["FAQ", "Contact Us"],
-              hrefs: ["/faqs", "/contactus"],
+              hrefs: ["/faqs", "/contact"],
             },
             {
               title: "Policies",
@@ -126,7 +118,6 @@ const Footer = () => {
         </div>
       </motion.div>
 
-    
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -152,28 +143,32 @@ const Footer = () => {
           >
             Terms
           </a>
-          
         </motion.p>
-
 
         <motion.div
           variants={itemVariants}
-          className="flex space-x-5 mt-6 md:mt-0"
+          className="flex space-x-5 mt-6 md:mt-0   md:mr-30"
         >
-          {[FaTwitter, FaFacebook, FaLinkedin, FaInstagram, FaYoutube].map(
-            (Icon, index) => (
-              <motion.a
-                key={index}
-                href="#"
-                variants={iconVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="p-2 rounded-full bg-amber-700/60 dark:bg-gray-700/60 text-amber-100 hover:bg-amber-800 dark:hover:bg-gray-600 shadow-lg transition-all duration-300 border border-amber-300/20 dark:border-gray-500/20"
-              >
-                <Icon className="w-5 h-5 lg:w-6 lg:h-6" />
-              </motion.a>
-            )
-          )}
+          {[
+            {
+              Icon: FaFacebook,
+              link: "https://www.facebook.com/NANDANIJEWELLERS",
+            },
+            { Icon: FaInstagram, link: "https://www.instagram.com/nandaninj" },
+          ].map(({ Icon, link }, index) => (
+            <motion.a
+              key={index}
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={iconVariants}
+              whileHover="hover"
+              whileTap="tap"
+              className="p-2 rounded-full bg-amber-700/60 dark:bg-gray-700/60 text-amber-100 hover:bg-amber-800 dark:hover:bg-gray-600 shadow-lg transition-all duration-300 border border-amber-300/20 dark:border-gray-500/20"
+            >
+              <Icon className="w-5 h-5 lg:w-6 lg:h-6" />
+            </motion.a>
+          ))}
         </motion.div>
       </motion.div>
     </footer>

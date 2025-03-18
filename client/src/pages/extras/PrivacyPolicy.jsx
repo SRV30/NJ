@@ -169,7 +169,7 @@ const PrivacyPolicy = () => {
               support team.
             </p>
             <a
-              href="/contactus"
+              href="/contact"
               className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md transition-colors duration-200 inline-flex items-center"
             >
               <svg

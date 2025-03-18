@@ -223,7 +223,7 @@ const AdminUsers = () => {
                             {user.email}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            {user.role === "ADMIN" ? (
+                            {(user.role === "ADMIN" || user.role === "MANAGER")? (
                               <span className="px-3 py-1 text-xs font-medium rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
                                 {user.role}
                               </span>

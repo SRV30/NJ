@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import MetaData from "../extras/MetaData";
 import { useState, useEffect } from "react";
+import p1 from "../../assets/nandani.jpg";
+import p2 from "../../assets/p2.jpg";
 
 const About = () => {
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -69,11 +72,6 @@ const About = () => {
     },
   };
 
-  const parallaxVariants = {
-    initial: { y: 0 },
-    animate: { y: -scrollY * 0.2 },
-  };
-
   return (
     <div className="text-gray-800 dark:text-white overflow-hidden">
       <MetaData
@@ -84,11 +82,14 @@ const About = () => {
 
       <div className="relative h-[80vh] overflow-hidden">
         <motion.div
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/jewellery-hero.jpg')" }}
-          variants={parallaxVariants}
-          initial="initial"
-          animate="animate"
+          className="relative w-full h-[80vh] bg-contain bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              "url('https://res.cloudinary.com/dmv1hs8b9/image/upload/v1742287557/NJ_jmvjki.png')",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex items-center justify-center">
           <motion.div
@@ -170,7 +171,7 @@ const About = () => {
                   backgroundColor: "rgba(255,255,255,0.1)",
                 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => navigate("/contactus")}
+                onClick={() => navigate("/contact")}
                 className="px-8 py-4 bg-transparent text-white rounded-full font-medium border border-white/30 hover:border-white/70 transition-all duration-300"
               >
                 Our Showrooms
@@ -197,7 +198,7 @@ const About = () => {
         <motion.div
           className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
           style={{
-            backgroundImage: "url('/images/mandala-pattern.png')",
+            backgroundImage: `url("https://res.cloudinary.com/dmv1hs8b9/image/upload/v1742229643/4_zi5ydh.png")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -269,7 +270,7 @@ const About = () => {
                 transition={{ duration: 0.4 }}
               >
                 <img
-                  src="https://www.nandanijewellers.com/wp-content/uploads/2025/03/nandani.webp"
+                  src={p1}
                   alt="Nandani Jewellers artisans at work"
                   className="w-full h-full object-fit"
                 />
@@ -473,11 +474,7 @@ const About = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
               >
-                <img
-                  src="/images/csr-image.jpg"
-                  alt="Nandani Jewellers CSR Initiative"
-                  className="w-full h-full object-fit"
-                />
+                <img src={p2} className="w-full h-full object-fit" />
               </motion.div>
 
               <motion.div

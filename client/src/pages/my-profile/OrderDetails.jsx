@@ -188,6 +188,12 @@ const OrderDetails = () => {
                   </div>
                 </motion.div>
 
+                <p>
+                  {" "}
+                  Please visit our showrooms within 7 days of booking for final
+                  fitting and collection of your selected pieces.
+                </p>
+
                 <motion.div variants={itemVariants}>
                   <h4 className="text-xl font-serif font-semibold mb-6 text-amber-800 dark:text-amber-300 flex items-center gap-3">
                     <span className="inline-block w-8 h-px bg-amber-800 dark:bg-amber-500"></span>

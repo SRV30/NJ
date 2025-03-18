@@ -115,8 +115,8 @@ const ContactUs = () => {
       />
 
       <motion.section
-        className="relative h-[60vh] bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: "url('/images/contact-hero.jpg')" }}
+        className="relative w-full h-[80vh] bg-contain bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('https://res.cloudinary.com/dmv1hs8b9/image/upload/v1742287557/NJ_jmvjki.png')" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
