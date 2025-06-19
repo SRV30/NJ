@@ -43,7 +43,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (success) {
-      showJewelryToast("Order placed successfully", "success");
+      showJewelryToast("Order booked successfully", "success");
       cartItems.forEach((item) => {
         dispatch(deleteCartItem(item._id));
       });
@@ -77,7 +77,7 @@ const Checkout = () => {
         <div className="border-b border-amber-200 dark:border-amber-800">
           <div className="px-6 py-4 bg-gradient-to-r from-amber-100 to-amber-200 dark:from-amber-800 dark:to-amber-800">
             <h2 className="text-2xl font-bold text-amber-800 dark:text-amber-300">
-              Complete Your Purchase
+              Book Your Order Online
             </h2>
           </div>
         </div>
@@ -92,9 +92,7 @@ const Checkout = () => {
               <div className="bg-amber-600 dark:bg-amber-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-3">
                 1
               </div>
-              <h3 className="font-semibold text-lg text-amber-800 dark:text-amber-300">
-                Select Delivery Address
-              </h3>
+              <h3 className="font-semibold text-lg text-amber-800 dark:text-amber-300"></h3>
             </div>
 
             <div className="pl-11">
@@ -119,17 +117,17 @@ const Checkout = () => {
                       >
                         <div className="flex justify-between items-start">
                           <div>
-                            <p className="font-medium text-amber-800 dark:text-amber-300">
+                            {/* <p className="font-medium text-amber-800 dark:text-amber-300">
                               {addr.address_line}
                             </p>
                             <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
                               {addr.city}, {addr.state}, {addr.pincode}
-                            </p>
-                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                            </p> */}
+                            {/* <p className="text-gray-600 dark:text-gray-400 text-sm">
                               {addr.country}
-                            </p>
-                            <p className="text-amber-700 dark:text-amber-400 font-medium mt-2">
-                              {addr.mobile}
+                            </p> */}
+                            <p className="text-amber-700 dark:text-amber-400 font-medium">
+                             📱{addr.mobile}
                             </p>
                           </div>
                           {selectedAddress === addr._id && (
@@ -337,7 +335,7 @@ const Checkout = () => {
                 </>
               ) : (
                 <>
-                  Complete Purchase
+                  Book Online
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -361,7 +359,7 @@ const Checkout = () => {
               animate={{ opacity: 0.8 }}
               className="text-center text-xs text-gray-500 dark:text-gray-400 mt-4"
             >
-              By completing this purchase, you agree to our Terms of Service and
+              By booking this order, you agree to our Terms of Service and
               Privacy Policy
             </motion.p>
           </motion.div>

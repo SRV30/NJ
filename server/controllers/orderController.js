@@ -51,7 +51,8 @@ export const getSingleOrder = catchAsyncErrors(async (req, res) => {
 
     const order = await OrderModel.findById(orderId)
       .populate("user", "name email")
-      .populate("address", "address_line city pincode state country mobile")
+      // .populate("address", "address_line city pincode state country mobile")
+      .populate("address", "mobile")
       .populate("products.product", "name images");
 
     if (!order) {
@@ -78,7 +79,8 @@ export const myOrders = catchAsyncErrors(async (req, res) => {
     const userId = req.user._id;
 
     const orders = await OrderModel.find({ user: userId })
-      .populate("address", "address_line city pincode state country mobile")
+      // .populate("address", "address_line city pincode state country mobile")
+      .populate("address", "mobile")
       .populate("products.product", "name images")
       .sort({ createdAt: -1 });
 
@@ -106,7 +108,8 @@ export const getAllOrders = catchAsyncErrors(async (req, res) => {
   try {
     const orders = await OrderModel.find()
       .populate("user", "name email")
-      .populate("address", "address_line city pincode state country mobile")
+      // .populate("address", "address_line city pincode state country mobile")
+      .populate("address", "mobile")
       .populate("products.product", "name images")
       .sort({ createdAt: -1 });
 
@@ -154,32 +157,34 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
       });
     }
 
-    if (orderStatus !== "CANCELLED" && req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
-      return res
-        .status(403)
-        .json({
-          success: false,
-          message: "Only admin can change order status",
-        });
+    if (
+      orderStatus !== "CANCELLED" &&
+      req.user.role !== "ADMIN" &&
+      req.user.role !== "MANAGER"
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Only admin can change order status",
+      });
     }
 
-    if (orderStatus === "CANCELLED" && req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
+    if (
+      orderStatus === "CANCELLED" &&
+      req.user.role !== "ADMIN" &&
+      req.user.role !== "MANAGER"
+    ) {
       if (order.user.toString() !== userId) {
-        return res
-          .status(403)
-          .json({
-            success: false,
-            message: "Unauthorized to cancel this order",
-          });
+        return res.status(403).json({
+          success: false,
+          message: "Unauthorized to cancel this order",
+        });
       }
 
       if (order.orderStatus === "PURCHASED") {
-        return res
-          .status(400)
-          .json({
-            success: false,
-            message: "Cannot cancel an order that has been purchased",
-          });
+        return res.status(400).json({
+          success: false,
+          message: "Cannot cancel an order that has been purchased",
+        });
       }
     }
 
@@ -231,12 +236,10 @@ export const cancelOrder = catchAsyncErrors(async (req, res) => {
     }
 
     if (order.orderStatus !== "BOOKED") {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Only orders with status BOOKED can be cancelled",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Only orders with status BOOKED can be cancelled",
+      });
     }
 
     if (
@@ -295,7 +298,7 @@ export const deleteOrder = catchAsyncErrors(async (req, res) => {
       });
     }
 
-    if (req.user.role !== "ADMIN" && req.user.role !== "MANAGER" ) {
+    if (req.user.role !== "ADMIN" && req.user.role !== "MANAGER") {
       return res.status(403).json({
         success: false,
         message: "Unauthorized to delete this order",

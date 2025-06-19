@@ -6,7 +6,8 @@ import mongoose from "mongoose";
 export const addAddress = catchAsyncErrors(async (req, res) => {
   try {
     const userId = req.user._id;
-    const { address_line, city, state, pincode, country, mobile } = req.body;
+    // const { address_line, city, state, pincode, country, mobile } = req.body;
+    const { mobile } = req.body;
 
     const user = await UserModel.findById(userId);
     if (!user) {
@@ -19,8 +20,8 @@ export const addAddress = catchAsyncErrors(async (req, res) => {
 
     const existingAddress = await AddressModel.findOne({
       userId,
-      address_line,
-      pincode,
+      // address_line,
+      // pincode,
     });
     if (existingAddress) {
       return res.status(400).json({
@@ -31,11 +32,11 @@ export const addAddress = catchAsyncErrors(async (req, res) => {
     }
 
     const newAddress = new AddressModel({
-      address_line,
-      city,
-      state,
-      country,
-      pincode,
+      // address_line,
+      // city,
+      // state,
+      // country,
+      // pincode,
       mobile,
       userId,
     });
@@ -108,8 +109,8 @@ export const getAddress = catchAsyncErrors(async (req, res) => {
 export const updateAddress = catchAsyncErrors(async (req, res) => {
   try {
     const userId = req.user._id;
-    const { _id, address_line, city, state, country, pincode, mobile } =
-      req.body;
+    // const { _id, address_line, city, state, country, pincode, mobile } = req.body;
+    const { _id, mobile } = req.body;
 
     if (!_id) {
       return res.status(400).json({
@@ -121,7 +122,9 @@ export const updateAddress = catchAsyncErrors(async (req, res) => {
 
     const updateAddress = await AddressModel.findOneAndUpdate(
       { _id, userId },
-      { address_line, city, state, country, mobile, pincode },
+      // { address_line, city, state, country, mobile, pincode },
+      { mobile },
+
       { new: true, runValidators: true }
     );
 
@@ -156,7 +159,6 @@ export const deleteAddress = catchAsyncErrors(async (req, res) => {
     console.log("User ID:", userId);
     console.log("Address ID to Delete:", id);
 
-
     if (!id) {
       return res.status(400).json({
         message: "Address ID is required",
@@ -164,11 +166,10 @@ export const deleteAddress = catchAsyncErrors(async (req, res) => {
         success: false,
       });
     }
-    const address = await AddressModel.findOne({ 
-      _id: new mongoose.Types.ObjectId(id), 
-      userId: new mongoose.Types.ObjectId(userId) 
+    const address = await AddressModel.findOne({
+      _id: new mongoose.Types.ObjectId(id),
+      userId: new mongoose.Types.ObjectId(userId),
     });
-    
 
     console.log("Address Found in DB:", address);
     if (!address) {

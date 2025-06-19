@@ -51,7 +51,6 @@ const OrderDetails = () => {
     }
   };
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -162,12 +161,12 @@ const OrderDetails = () => {
                     <span className="inline-block w-6 h-px bg-amber-800 dark:bg-amber-500"></span>
                   </h4>
                   <div className="space-y-3 text-amber-700 dark:text-amber-400">
-                    <p>{order.address.address_line}</p>
+                    {/* <p>{order.address.address_line}</p>
                     <p>
                       {order.address.city}, {order.address.state}{" "}
                       {order.address.pincode}
                     </p>
-                    <p>{order.address.country}</p>
+                    <p>{order.address.country}</p> */}
                     <p className="mt-4 font-medium flex items-center gap-2">
                       <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-200/50 dark:bg-amber-900/30">
                         📱

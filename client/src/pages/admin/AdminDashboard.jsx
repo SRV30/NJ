@@ -57,7 +57,7 @@ const AdminDashboard = () => {
   const { products = [] } = useSelector((state) => state.product || {});
   const { users = [] } = useSelector((state) => state.auth || {});
   const { categories: jewelleryType = [] } = useSelector(
-    (state) => state.category || {}
+    (state) => state.jewellery || {}
   );
   const { categories: productCategory = [] } = useSelector(
     (state) => state.category || {}

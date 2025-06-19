@@ -209,12 +209,12 @@ const SavedAddress = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [formData, setFormData] = useState({
-    address_line: "",
-    city: "",
-    state: "",
-    pincode: "",
+    // address_line: "",
+    // city: "",
+    // state: "",
+    // pincode: "",
     mobile: "",
-    country: "IN",
+    // country: "IN",
   });
   const [formErrors, setFormErrors] = useState({});
   const [countries, setCountries] = useState([]);
@@ -235,13 +235,13 @@ const SavedAddress = () => {
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.address_line.trim())
-      errors.address_line = "Address is required";
-    if (!formData.city) errors.city = "City is required";
-    if (!formData.state) errors.state = "State is required";
-    if (!formData.pincode) errors.pincode = "Pincode is required";
-    else if (formData.pincode.length !== 6)
-      errors.pincode = "Pincode must be 6 digits";
+    // if (!formData.address_line.trim())
+    //   errors.address_line = "Address is required";
+    // if (!formData.city) errors.city = "City is required";
+    // if (!formData.state) errors.state = "State is required";
+    // if (!formData.pincode) errors.pincode = "Pincode is required";
+    // else if (formData.pincode.length !== 6)
+    //   errors.pincode = "Pincode must be 6 digits";
     if (!formData.mobile) errors.mobile = "Mobile number is required";
     else if (formData.mobile.length !== 10)
       errors.mobile = "Mobile number must be 10 digits";
@@ -262,7 +262,7 @@ const SavedAddress = () => {
     setEditData(item);
     setFormData({
       ...item,
-      pincode: String(item.pincode),
+      // pincode: String(item.pincode),
       mobile: String(item.mobile),
     });
     setIsEditing(true);
@@ -272,10 +272,10 @@ const SavedAddress = () => {
   const closeEditModal = () => {
     setIsEditing(false);
     setFormData({
-      address_line: "",
-      city: "",
-      state: "",
-      pincode: "",
+      // address_line: "",
+      // city: "",
+      // state: "",
+      // pincode: "",
       mobile: "",
       country: "IN",
     });
@@ -328,10 +328,10 @@ const SavedAddress = () => {
         window.location.reload();
         setIsAdding(false);
         setFormData({
-          address_line: "",
-          city: "",
-          state: "",
-          pincode: "",
+          // address_line: "",
+          // city: "",
+          // state: "",
+          // pincode: "",
           mobile: "",
           country: "IN",
         });

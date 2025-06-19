@@ -4,27 +4,27 @@ const addressSchema = new mongoose.Schema(
   {
     address_line: {
       type: String,
-      required: [true, "Please provide an address"],
+      // required: [true, "Please provide an address"],
       trim: true,
     },
     city: {
       type: String,
-      required: [true, "Please provide a city"],
+      // required: [true, "Please provide a city"],
       trim: true,
     },
     state: {
       type: String,
-      required: [true, "Please provide a state"],
+      // required: [true, "Please provide a state"],
       trim: true,
     },
     pincode: {
       type: String,
-      required: [true, "Please provide a pincode"],
+      // required: [true, "Please provide a pincode"],
       trim: true,
     },
     country: {
       type: String,
-      required: [true, "Please provide a country"],
+      // required: [true, "Please provide a country"],
       trim: true,
       default: "India",
     },

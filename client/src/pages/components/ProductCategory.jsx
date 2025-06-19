@@ -250,7 +250,7 @@ const ProductCategory = () => {
               exit={{ opacity: 0, x: -100, filter: "blur(10px)" }}
               transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-10">
                 {getVisibleCategories().map((category, idx) => (
                   <Link
                     key={category._id}

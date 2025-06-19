@@ -1,113 +1,60 @@
-# Nandani Jewellers
+# 💎 Nandani Jewellers
+
+A beautifully crafted jewellery collection and booking website developed as a freelance project.
+
+🌐 [Visit Website →](https://www.nandanijewellers.com/)
 
 ---
 
-## 🚀 Steps to Setup
+## ✨ Overview
 
-1. **Fork the Repository**
-   - Fork this repository to your GitHub account.
-
-2. **Clone the Repository**
-   - Open your terminal and run:
-     ```bash
-     git clone https://github.com/your-username/repository-name.git
-     ```
-
-3. **Install Client Dependencies**
-   - Navigate to the client directory:
-     ```bash
-     cd client
-     ```
-   - Install the necessary dependencies:
-     ```bash
-     npm install
-     ```
-   - Run the client app:
-     ```bash
-     npm run dev
-     ```
-
-4. **Install Server Dependencies**
-   - Navigate to the server directory:
-     ```bash
-     cd server
-     ```
-   - Install the server dependencies:
-     ```bash
-     npm install
-     ```
-   - Start the server:
-     ```bash
-     npm run dev
-     ```
-
-5. **Push Changes and Create Pull Request**
-   - After coding each page, **push** your changes to your existing repo.
-   - Create a **Pull Request** from your forked repo to the main repository.
+**Nandani Jewellers** is a modern, responsive web application designed for showcasing premium jewellery collections and allowing customers to book appointments or inquire directly. The platform delivers a seamless user experience across devices, blending aesthetic elegance with robust functionality.
 
 ---
 
-## 💻 Steps for Coding
+## 🛠️ Features
 
-### 0. Theme Color for Website
+- 🌟 Elegant & Responsive UI
+- 💍 Jewellery collection gallery with images and details
+- 📅 Booking & appointment system
+- ✉️ Email verification & OTP-based registration
+- 🔐 Secure login and user authentication
+- 🛒 Order tracking and user dashboard
+- 📲 Mobile-friendly design
+- 🔔 Admin notifications on new user signups
 
-- **Light Theme:**
-  - Background: `bg-red-50`
-  - Text: `text-black`
+---
 
-- **Dark Theme:**
-  - Background: `bg-black`
-  - Text: `text-white` or `text-yellow-500`
+## 🔧 Tech Stack
 
-### 1. Use `MetaData` File for Web Page Title
+- **Frontend**: React.js (Vite), Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB (Mongoose)
+- **Authentication**: JWT, OTP-based Email Verification
+- **Email Service**: Brevo (Sendinblue)
 
-```jsx
-<MetaData title="Admin Login | City Smile Dental Clinic" />
-```
+---
 
-### 2. Circular Progress for Loader and Data Fetching
+## 🧑‍💻 Developed By
 
-```jsx
-import { CircularProgress } from "@mui/material";
-<CircularProgress />
-```
+This project was developed as a freelance assignment by **Code v**.
 
-### 3. Implement Dark Mode Theme
-```jsx
-<div className="flex flex-col overflow-hidden bg-white dark:bg-black text-black dark:text-white">
-```
-### 4. Use Toastify for Alerts
+---
 
-```jsx
-import { toast } from "react-toastify";
-toast.success("Login successful!");
-```
+## 📬 Contact
 
-### 5. Use Dummy Data
-### 6. Code Comments
+Feel free to reach out:
 
-### 7. Terminal Errors
-```jsx
-// eslint-disable-next-line
-```
+- 📧 Email: [sahilrv196@gmail.com](mailto:sahilrv196@gmail.com)
 
-### 8. Code Formatting and Readability
 
-### 9. Buttons
-```jsx
-<button>{submitting ? "Logging in..." : "Login"}</button>
-```
+---
 
-### 10. Make Pages Responsive for Laptop, Tablet, Mobile
+## 📄 License
 
-### 11. TailwindCSS and MUI CSS
-### 12. GSAP and Motion for Animations
+This project is for demonstration and client use. Not open source.
 
-### 13. Use MUI Icons for Icons
-```jsx
-import { IconName } from "@mui/icons-material";
-<IconName />
-```
 
-### 14. Simple Routes
-### 15. Use Placeholder Where Required
+---
+
+© SRV30
