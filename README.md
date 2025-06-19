@@ -35,12 +35,6 @@ A beautifully crafted jewellery collection and booking website developed as a fr
 
 ---
 
-## 🧑‍💻 Developed By
-
-This project was developed as a freelance assignment by **Code v**.
-
----
-
 ## 📬 Contact
 
 Feel free to reach out:
