@@ -364,7 +364,7 @@ const ProductsPage = () => {
                         <motion.img
                           src={product.images[0]?.url}
                           alt={product.name}
-                          className="w-full h-80 object-fit object-fit"
+                          className="w-full h-50 md:h-80"
                           whileHover={{ scale: 1.08 }}
                           transition={{ duration: 0.7 }}
                         />
