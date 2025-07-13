@@ -42,7 +42,7 @@ const FAQPage = lazy(() => import("./pages/extras/FAQPage"));
 const PrivacyPolicy = lazy(() => import("./pages/extras/PrivacyPolicy"));
 const TermsAndServices = lazy(() => import("./pages/extras/TermsAndServices"));
 const Photo = lazy(() => import("./pages/extras/Photo"));
-const NotFoundPage = lazy(() => import("./pages/extras/NotFoundPage"));
+const NotFoundPage = lazy(() => import("./pages/extras/NotFoundPage "));
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
