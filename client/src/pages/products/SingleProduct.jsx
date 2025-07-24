@@ -26,7 +26,7 @@ const SingleProductPage = () => {
     similarProducts,
     reviewPosting,
   } = useSelector((state) => state.product);
-  const { user } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -350,6 +350,14 @@ const SingleProductPage = () => {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
+                          Weight
+                        </p>
+                        <p className="font-medium text-amber-950 dark:text-amber-100">
+                          {product.gram ? `${product.gram}g` : "N/A"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                           Jewelry Type
                         </p>
                         <p className="font-medium text-amber-950 dark:text-amber-100">
@@ -479,28 +487,30 @@ const SingleProductPage = () => {
                       <span className="block h-1 w-12 bg-gradient-to-r from-amber-300 to-amber-400 mt-2 rounded-full"></span>
                     </h2>
 
-                    <motion.button
-                      whileHover={{ scale: 1.03, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => setShowReviewForm(true)}
-                      className="py-3 px-8 rounded-full bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 hover:shadow-lg hover:shadow-amber-300/20 dark:hover:shadow-amber-600/30 transition-all duration-300 font-medium flex items-center gap-2"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
+                    {isAuthenticated && (
+                      <motion.button
+                        whileHover={{ scale: 1.03, y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setShowReviewForm(true)}
+                        className="py-3 px-8 rounded-full bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 hover:shadow-lg hover:shadow-amber-300/20 dark:hover:shadow-amber-600/30 transition-all duration-300 font-medium flex items-center gap-2"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 4v16m8-8H4"
-                        ></path>
-                      </svg>
-                      Write a Review
-                    </motion.button>
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 4v16m8-8H4"
+                          ></path>
+                        </svg>
+                        Write a Review
+                      </motion.button>
+                    )}
                   </div>
 
                   {visibleReviews && visibleReviews.length > 0 ? (
@@ -597,7 +607,6 @@ const SingleProductPage = () => {
                   )}
                 </div>
 
-                {/* Review Form Popup */}
                 <AnimatePresence>
                   {showReviewForm && (
                     <motion.div
@@ -651,7 +660,7 @@ const SingleProductPage = () => {
                               value={rating}
                               onChange={(e, newValue) => setRating(newValue)}
                               size="large"
-                              classname="text-amber-500 dark:text-amber-300"
+                              className="text-amber-500 dark:text-amber-300"
                             />
                           </div>
 

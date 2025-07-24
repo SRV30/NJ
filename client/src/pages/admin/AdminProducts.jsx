@@ -27,6 +27,7 @@ const AdminProducts = () => {
     metalColour: "",
     bestseller: "No",
     images: [],
+    gram: 0,
   });
   const [imagePreviews, setImagePreviews] = useState([]);
   const [editId, setEditId] = useState(null);
@@ -83,7 +84,10 @@ const AdminProducts = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "gram" ? parseFloat(value) || 0 : value,
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -114,7 +118,6 @@ const AdminProducts = () => {
       productData.set("productCategory", JSON.stringify(formData.productCategory));
     }
     
-    // Debug: log the FormData content (for debugging only – remove in production)
     for (let pair of productData.entries()) {
       console.log(pair[0] + ": " + pair[1]);
     }
@@ -125,7 +128,6 @@ const AdminProducts = () => {
       dispatch(createProduct(productData));
     }
   };
-  
 
   const handleEdit = (product) => {
     setEditId(product._id);
@@ -145,6 +147,7 @@ const AdminProducts = () => {
       metalColour: product.metalColour || "",
       bestseller: product.bestseller || "No",
       images: [],
+      gram: product.gram || 0,
     });
     setImagePreviews(product.images.map((img) => img.url));
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -176,6 +179,7 @@ const AdminProducts = () => {
       metalColour: "",
       bestseller: "No",
       images: [],
+      gram: 0,
     });
     setImagePreviews([]);
   };
@@ -286,6 +290,22 @@ const AdminProducts = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
+                Weight (grams)
+              </label>
+              <input
+                type="number"
+                name="gram"
+                value={formData.gram}
+                onChange={handleInputChange}
+                placeholder="e.g., 10.5"
+                min="0"
+                step="0.01"
+                required
+                className="w-full p-4 rounded-xl border border-amber-300/50 dark:border-gray-600 bg-amber-50/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-amber-400 text-amber-800 dark:text-amber-100 placeholder-amber-700/50 transition-all duration-300"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Jewellery Type
               </label>
               <select
@@ -312,7 +332,6 @@ const AdminProducts = () => {
                 ))}
               </select>
             </div>
-
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Product Category
@@ -355,9 +374,9 @@ const AdminProducts = () => {
                 <option value="Gold">Gold</option>
                 <option value="Silver">Silver</option>
                 <option value="Diamond">Diamond</option>
+                <option value="Other">Other</option>
               </select>
             </div>
-
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Metal Colour
@@ -378,7 +397,6 @@ const AdminProducts = () => {
                 <option value="Yellow and White">Yellow and White</option>
               </select>
             </div>
-
             <div>
               <label className="block text-sm font-medium text-amber-700 dark:text-amber-200 mb-2">
                 Bestseller
@@ -519,7 +537,7 @@ const AdminProducts = () => {
                           {product.name}
                         </h4>
                         <p className="text-sm text-amber-700 dark:text-amber-200">
-                          {product.metal} -{" "}
+                          {product.metal} - {product.gram}g -{" "}
                           {Array.isArray(product.jewelleryType) &&
                           product.jewelleryType.length > 0
                             ? product.jewelleryType.map((type, index) => (

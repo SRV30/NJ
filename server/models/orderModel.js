@@ -7,9 +7,9 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "User ID is required"],
     },
-    address: {
-      type: mongoose.Schema.ObjectId,
-      ref: "address",
+     mobile: {
+      type: String,
+      required: [true, "User mobile number is required"],
     },
     products: [
       {
@@ -37,14 +37,14 @@ const orderSchema = new mongoose.Schema(
     ],
     orderStatus: {
       type: String,
-      enum: ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"],
+      enum: ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED", "OUT_OF_STOCK"],
       default: "BOOKED",
     },
     orderHistory: [
       {
         status: {
           type: String,
-          enum: ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"],
+          enum: ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED", "OUT_OF_STOCK"],
         },
         changedAt: {
           type: Date,

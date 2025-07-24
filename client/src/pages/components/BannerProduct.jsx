@@ -30,9 +30,12 @@ const BannerProduct = () => {
   useEffect(() => {
     if (isHovering) return;
 
-    const interval = setInterval(() => {
-      nextImage();
-    }, 8000);
+    const interval = setInterval(
+      () => {
+        nextImage();
+      },
+      window.innerWidth < 768 ? 12000 : 8000
+    ); // slower on mobile
 
     return () => clearInterval(interval);
   }, [nextImage, isHovering]);
@@ -125,7 +128,7 @@ const BannerProduct = () => {
   return (
     <div className="container mx-auto px-4 mt-5">
       <motion.div
-        className="h-100 md:h-120 lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
+        className="h-[300px] sm:h-[300px] md:h-[400px] lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
         variants={containerVariants}
         whileHover="hover"
         onMouseEnter={() => setIsHovering(true)}
@@ -162,6 +165,7 @@ const BannerProduct = () => {
           </motion.button>
         </div>
 
+        {/* Desktop Slider */}
         <div className="hidden md:flex h-full w-full overflow-hidden perspective-1000">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
@@ -185,6 +189,7 @@ const BannerProduct = () => {
           </AnimatePresence>
         </div>
 
+        {/* Mobile Slider */}
         <div className="flex md:hidden h-full w-full overflow-hidden perspective-1000">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div

@@ -189,7 +189,7 @@ const MyProfile = () => {
                   icon: Lock,
                   label: "Update Password",
                 },
-                { to: "/saved-address", icon: MapPin, label: "Saved Address" },
+                // { to: "/saved-address", icon: MapPin, label: "Saved Address" },
                 {
                   to: "/update-profile",
                   icon: FaUserEdit,

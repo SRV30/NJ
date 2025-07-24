@@ -162,6 +162,7 @@ const AdminOrdersPage = () => {
               <option value="PURCHASED">Purchased</option>
               <option value="EXPIRED">Expired</option>
               <option value="CANCELLED">Cancelled</option>
+              <option value="OUT_OF_STOCK">Out of Stock</option>
             </select>
           </div>
 
@@ -289,6 +290,8 @@ const AdminOrdersPage = () => {
                                 ? "bg-amber-200 dark:bg-amber-700"
                                 : order.orderStatus === "PURCHASED"
                                 ? "bg-green-200 dark:bg-green-700"
+                                : order.orderStatus === "OUT_OF_STOCK"
+                                ? "bg-red-200 dark:bg-red-700"
                                 : "bg-red-200 dark:bg-red-700"
                             }`}
                           >
@@ -367,6 +370,7 @@ const AdminOrdersPage = () => {
               <option value="PURCHASED">PURCHASED</option>
               <option value="EXPIRED">EXPIRED</option>
               <option value="CANCELLED">CANCELLED</option>
+              <option value="OUT_OF_STOCK">OUT OF STOCK</option>
             </select>
           </div>
         </DialogContent>

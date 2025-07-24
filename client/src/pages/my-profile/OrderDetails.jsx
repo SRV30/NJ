@@ -161,17 +161,11 @@ const OrderDetails = () => {
                     <span className="inline-block w-6 h-px bg-amber-800 dark:bg-amber-500"></span>
                   </h4>
                   <div className="space-y-3 text-amber-700 dark:text-amber-400">
-                    {/* <p>{order.address.address_line}</p>
-                    <p>
-                      {order.address.city}, {order.address.state}{" "}
-                      {order.address.pincode}
-                    </p>
-                    <p>{order.address.country}</p> */}
-                    <p className="mt-4 font-medium flex items-center gap-2">
+                    <p className="flex items-center gap-2">
                       <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-200/50 dark:bg-amber-900/30">
-                        📱
+                        📞
                       </span>
-                      {order.address.mobile}
+                      Mobile: {order.mobile}
                     </p>
                     <p className="flex items-center gap-2">
                       <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-200/50 dark:bg-amber-900/30">
@@ -187,11 +181,49 @@ const OrderDetails = () => {
                   </div>
                 </motion.div>
 
-                <p>
-                  {" "}
-                  Please visit our showrooms within 7 days of booking for final
-                  fitting and collection of your selected pieces.
-                </p>
+                {order.orderStatus === "BOOKED" && (
+                  <p>
+                    Please visit our showrooms within 7 days of booking for
+                    final fitting and collection of your selected pieces.
+                  </p>
+                )}
+
+                {order.orderStatus === "PURCHASED" && (
+                  <p className="text-green-600 font-medium">
+                    Thank you for your purchase! We hope to serve you again
+                    soon.
+                  </p>
+                )}
+
+                {order.orderStatus === "CANCELLED" && (
+                  <p className="text-red-500 font-medium">
+                    This order has been cancelled. If this is a mistake, please
+                    contact support.
+                  </p>
+                )}
+
+                {order.orderStatus === "EXPIRED" && (
+                  <p className="text-yellow-600 font-medium">
+                    This order has expired. Kindly place a new order if you are
+                    still interested.
+                  </p>
+                )}
+
+                {order.orderStatus === "OUT_OF_STOCK" && (
+                  <p className="text-rose-600 font-medium">
+                    We&apos;re sorry! This item is currently out of stock. Please
+                    explore other products{" "}
+                    <a
+                      href="https://www.nandanijewellers.com/products"
+                      className="underline text-blue-600"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      here
+                    </a>
+                    .
+                  </p>
+                )}
 
                 <motion.div variants={itemVariants}>
                   <h4 className="text-xl font-serif font-semibold mb-6 text-amber-800 dark:text-amber-300 flex items-center gap-3">

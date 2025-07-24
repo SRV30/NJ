@@ -8,11 +8,19 @@ import { createNotification } from "./dashboardController.js";
 
 export const createOrder = catchAsyncErrors(async (req, res) => {
   try {
-    const { userId, addressId, products } = req.body;
+    const { userId, products } = req.body;
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
     const newOrder = new OrderModel({
       user: userId,
-      address: addressId,
+      mobile: user.mobile,
       products,
       orderStatus: "BOOKED",
     });
@@ -20,12 +28,10 @@ export const createOrder = catchAsyncErrors(async (req, res) => {
     await newOrder.save();
 
     const populatedOrder = await OrderModel.findById(newOrder._id)
-      .populate("user", "name email")
+      .populate("user", "name email mobile")
       .populate("products.product", "name images");
 
     const receiptHTML = generateReceiptHTML(populatedOrder);
-    const user = await UserModel.findById(userId);
-
     sendEmail({
       sendTo: user.email,
       subject: "Order Confirmation",
@@ -34,11 +40,11 @@ export const createOrder = catchAsyncErrors(async (req, res) => {
 
     sendEmail({
       sendTo: "nandaniwebsite@gmail.com",
-      subject: `New Order Booking by ${user.name}`,
+      subject: `New Order Booking by ${user.name} (${user.mobile})`,
       html: receiptHTML,
     });
 
-    await createNotification(`New booking created by ${user.name}`);
+    await createNotification(`New booking created by ${user.name} (${user.mobile})`);
     res.status(201).json({ success: true, order: populatedOrder });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -50,9 +56,7 @@ export const getSingleOrder = catchAsyncErrors(async (req, res) => {
     const { orderId } = req.params;
 
     const order = await OrderModel.findById(orderId)
-      .populate("user", "name email")
-      // .populate("address", "address_line city pincode state country mobile")
-      .populate("address", "mobile")
+      .populate("user", "name email mobile")
       .populate("products.product", "name images");
 
     if (!order) {
@@ -79,8 +83,7 @@ export const myOrders = catchAsyncErrors(async (req, res) => {
     const userId = req.user._id;
 
     const orders = await OrderModel.find({ user: userId })
-      // .populate("address", "address_line city pincode state country mobile")
-      .populate("address", "mobile")
+      .populate("user", "name email mobile")
       .populate("products.product", "name images")
       .sort({ createdAt: -1 });
 
@@ -107,9 +110,7 @@ export const myOrders = catchAsyncErrors(async (req, res) => {
 export const getAllOrders = catchAsyncErrors(async (req, res) => {
   try {
     const orders = await OrderModel.find()
-      .populate("user", "name email")
-      // .populate("address", "address_line city pincode state country mobile")
-      .populate("address", "mobile")
+      .populate("user", "name email mobile")
       .populate("products.product", "name images")
       .sort({ createdAt: -1 });
 
@@ -133,7 +134,6 @@ export const getAllOrders = catchAsyncErrors(async (req, res) => {
   }
 });
 
-// Admin
 export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
   try {
     const { orderId } = req.params;
@@ -141,7 +141,13 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
     const userId =
       req.user && req.user._id ? req.user._id.toString() : "Unknown";
 
-    const validStatuses = ["BOOKED", "PURCHASED", "CANCELLED", "EXPIRED"];
+    const validStatuses = [
+      "BOOKED",
+      "PURCHASED",
+      "CANCELLED",
+      "EXPIRED",
+      "OUT_OF_STOCK",
+    ];
     if (!validStatuses.includes(orderStatus)) {
       return res.status(400).json({
         success: false,
@@ -149,7 +155,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
       });
     }
 
-    const order = await OrderModel.findById(orderId);
+    const order = await OrderModel.findById(orderId).populate("user", "name email mobile");
     if (!order) {
       return res.status(404).json({
         success: false,
@@ -164,7 +170,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
     ) {
       return res.status(403).json({
         success: false,
-        message: "Only admin can change order status",
+        message: "Only admin or manager can change this status",
       });
     }
 
@@ -173,7 +179,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
       req.user.role !== "ADMIN" &&
       req.user.role !== "MANAGER"
     ) {
-      if (order.user.toString() !== userId) {
+      if (order.user._id.toString() !== userId) {
         return res.status(403).json({
           success: false,
           message: "Unauthorized to cancel this order",
@@ -188,12 +194,36 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
       }
     }
 
-    order.orderStatus = orderStatus;
+    let emailSent = false;
 
+    if (orderStatus === "OUT_OF_STOCK") {
+      const receiptHTML = `
+        <div style="font-family:sans-serif;">
+          <h2 style="color:#bfa046;">Nandani Jewellers</h2>
+          <p>Dear ${order.user.name},</p>
+          <p>We regret to inform you that your order with ID <strong>${order._id}</strong> is currently <strong>out of stock</strong>.</p>
+          <p>Contact Number: ${order.user.mobile}</p>
+          <p>Please feel free to explore our latest collection at 
+            <a href="https://www.nandanijewellers.com" style="color:#bfa046;">nandanijewellers.com</a>.
+          </p>
+          <p>We apologize for the inconvenience caused.</p>
+          <br/>
+          <p>Regards,<br/>Team Nandani Jewellers</p>
+        </div>
+      `;
+
+      emailSent = await sendEmail({
+        sendTo: order.user.email,
+        subject: "Your Order is Out of Stock - Nandani Jewellers",
+        html: receiptHTML,
+      });
+    }
+
+    order.orderStatus = orderStatus;
     order.orderHistory.push({
       status: orderStatus,
       changedAt: new Date(),
-      changedBy: userId.toString(),
+      changedBy: userId,
     });
 
     await order.save();
@@ -201,6 +231,7 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Order status updated successfully",
+      emailSent,
       order,
     });
   } catch (error) {
@@ -219,7 +250,7 @@ export const cancelOrder = catchAsyncErrors(async (req, res) => {
 
     const order = await OrderModel.findById(orderId)
       .populate("products.product")
-      .populate("user");
+      .populate("user", "name email mobile");
 
     if (!order) {
       return res.status(404).json({
@@ -265,7 +296,7 @@ export const cancelOrder = catchAsyncErrors(async (req, res) => {
     const receiptHTML = generateOrderCancellationEmail(order);
     const emailSent = await sendEmail({
       sendTo: order.user.email,
-      subject: "Your Order Has Been Cancelled - Nandani Jewellers",
+      subject: `Your Order Has Been Cancelled - Nandani Jewellers (${order.user.mobile})`,
       html: receiptHTML,
     });
 

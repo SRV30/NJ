@@ -19,16 +19,17 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
       metal,
       metalColour,
       bestseller,
+      gram,
     } = req.body;
 
     if (!product_id) {
       return next(new ErrorHandler("Please enter id", 400));
     }
 
-    if (!name || !description || !metal) {
+    if (!name || !description || !metal || !gram) {
       return next(
         new ErrorHandler(
-          "Please enter all required fields (id, name, description, metal)",
+          "Please enter all required fields (id, name, description, metal, gram)",
           400
         )
       );
@@ -67,6 +68,7 @@ export const createProduct = catchAsyncErrors(async (req, res, next) => {
       productCategory: productCategory ? JSON.parse(productCategory) : [],
       metal: metal || "",
       metalColour: metalColour || "",
+      gram: parseFloat(gram),
       bestseller: bestseller || "No",
       images: uploadedImages,
     });
@@ -289,6 +291,7 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
       metal,
       metalColour,
       bestseller,
+      gram,
     } = req.body;
 
     if (req.files && Array.isArray(req.files) && req.files.length > 0) {
@@ -317,6 +320,16 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
     product.metal = metal || product.metal;
     product.metalColour = metalColour || product.metalColour;
+    if (gram !== undefined) {
+      const parsedGram = parseFloat(gram); // Convert gram to number
+      if (isNaN(parsedGram)) {
+        return next(new ErrorHandler("Gram must be a valid number", 400));
+      }
+      if (parsedGram < 0) {
+        return next(new ErrorHandler("Gram cannot be negative", 400));
+      }
+      product.gram = parsedGram;
+    }
     product.bestseller = bestseller || product.bestseller;
 
     const updatedProduct = await product.save();

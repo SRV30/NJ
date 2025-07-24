@@ -1,42 +1,46 @@
 import { showJewelryToast } from "../extras/showJewelryToast";
 import { deleteCartItem, getCartItems } from "@/store/order-slice/addToCart";
 import { createOrder } from "@/store/order-slice/order";
-import { userAddress } from "@/store/address-slice/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../extras/MetaData";
 
 const Checkout = () => {
   const { user } = useSelector((state) => state.auth);
-  const { address } = useSelector((state) => state.address);
   const { cartItems = [] } = useSelector((state) => state.cart);
   const { loading: orderLoading, success } = useSelector(
     (state) => state.order
   );
 
-  const [selectedAddress, setSelectedAddress] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(userAddress());
     dispatch(getCartItems());
   }, [dispatch]);
 
   const handleOrder = () => {
-    if (!selectedAddress) {
-      showJewelryToast("Please select an address to continue", "error");
+    if (cartItems.length === 0) {
+      showJewelryToast("Your cart is empty", "error");
+      return;
+    }
+    if (!user?.mobile) {
+      showJewelryToast(
+        "Please add your mobile number in your profile to continue",
+        "error"
+      );
+      navigate("/update-profile");
       return;
     }
     const orderData = {
       userId: user?._id,
-      addressId: selectedAddress,
       products: cartItems.map((item) => ({
         product: item.productId._id,
         quantity: item.quantity,
       })),
+      mobile: user.mobile,
     };
     dispatch(createOrder(orderData));
   };
@@ -47,17 +51,10 @@ const Checkout = () => {
       cartItems.forEach((item) => {
         dispatch(deleteCartItem(item._id));
       });
-
       dispatch(getCartItems());
       navigate("/order-success");
     }
   }, [success, navigate, dispatch, cartItems]);
-
-  useEffect(() => {
-    if (address.length > 0 && !selectedAddress) {
-      setSelectedAddress(address[0]._id);
-    }
-  }, [address, selectedAddress, setSelectedAddress]);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -92,70 +89,27 @@ const Checkout = () => {
               <div className="bg-amber-600 dark:bg-amber-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-3">
                 1
               </div>
-              <h3 className="font-semibold text-lg text-amber-800 dark:text-amber-300"></h3>
+              <h3 className="font-semibold text-lg text-amber-800 dark:text-amber-300">
+                Contact Information
+              </h3>
             </div>
 
             <div className="pl-11">
-              {address.length > 0 ? (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <AnimatePresence>
-                    {address.map((addr) => (
-                      <motion.div
-                        key={addr._id}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3 }}
-                        className={`border rounded-xl cursor-pointer p-4 transition-all ${
-                          selectedAddress === addr._id
-                            ? "border-amber-600 bg-amber-50 dark:bg-amber-900/30 shadow-md"
-                            : "border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700"
-                        }`}
-                        onClick={() => setSelectedAddress(addr._id)}
-                        whileHover={{ y: -4 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            {/* <p className="font-medium text-amber-800 dark:text-amber-300">
-                              {addr.address_line}
-                            </p>
-                            <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                              {addr.city}, {addr.state}, {addr.pincode}
-                            </p> */}
-                            {/* <p className="text-gray-600 dark:text-gray-400 text-sm">
-                              {addr.country}
-                            </p> */}
-                            <p className="text-amber-700 dark:text-amber-400 font-medium">
-                             📱{addr.mobile}
-                            </p>
-                          </div>
-                          {selectedAddress === addr._id && (
-                            <motion.div
-                              initial={{ opacity: 0, scale: 0 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              className="bg-amber-600 dark:bg-amber-500 rounded-full w-6 h-6 flex items-center justify-center text-white"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                            </motion.div>
-                          )}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
+              {user?.mobile ? (
+                <div className="bg-amber-50/50 dark:bg-amber-900/10 rounded-xl overflow-hidden border border-amber-200 dark:border-amber-800 p-4">
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block font-medium text-amber-800 dark:text-amber-300 mb-2">
+                        Mobile Number
+                      </label>
+                      <input
+                        type="text"
+                        value={user.mobile}
+                        readOnly
+                        className="w-full p-2 rounded-lg border-2 border-amber-300 bg-amber-50/50 dark:bg-amber-900/50 dark:border-amber-700 text-amber-800 dark:text-amber-300 cursor-not-allowed"
+                      />
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <motion.div
@@ -164,9 +118,9 @@ const Checkout = () => {
                   className="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-4 border border-amber-200 dark:border-amber-800"
                 >
                   <p className="text-gray-600 dark:text-gray-400 mb-3">
-                    No saved addresses found. Please add an address to continue.
+                    No mobile number found. Please add your mobile number to continue.
                   </p>
-                  <Link to="/saved-address">
+                  <Link to="/update-profile">
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
@@ -186,7 +140,7 @@ const Checkout = () => {
                           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                         />
                       </svg>
-                      Add New Address
+                      Add Mobile Number
                     </motion.button>
                   </Link>
                 </motion.div>
@@ -286,15 +240,13 @@ const Checkout = () => {
             <motion.button
               className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 shadow-md"
               onClick={handleOrder}
-              disabled={
-                orderLoading || cartItems.length === 0 || !selectedAddress
-              }
+              disabled={orderLoading || cartItems.length === 0 || !user?.mobile}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0.9 }}
               animate={{
                 opacity:
-                  orderLoading || cartItems.length === 0 || !selectedAddress
+                  orderLoading || cartItems.length === 0 || !user?.mobile
                     ? 0.7
                     : 1,
                 y: [0, -5, 0],

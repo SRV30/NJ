@@ -54,6 +54,11 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    gram: {
+      type: Number,
+      required: [true, "Please enter the weight in grams"],
+      min: [0, "Weight cannot be negative"],
+    },
     numOfReviews: {
       type: Number,
       default: 0,
