@@ -208,7 +208,7 @@ const JewelleryType = () => {
 
         <h3 className="text-6xl md:text-5xl font-bold text-center text-amber-800 dark:text-amber-300 font-mono relative inline-block w-full">
           <span className="relative">
-            Jewelry Type
+            Jewellery Type
             <motion.span
               className="absolute -bottom-2 left-1/2 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
               initial={{ width: 0, x: "-50%" }}
