@@ -46,4 +46,4 @@ The application combines **luxury UI design with robust backend architecture**, 
 
 ## 🎥 Live Demo
 
-> *(Add your screen recording GIF here for maximum impact)*
+
