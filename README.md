@@ -4,7 +4,7 @@
 
 <br/>
 
-[![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-nandanijewellers.com-gold?style=for-the-badge&labelColor=1a1a1a)](https://www.nandanijewellers.com/)
+[![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-nandanijewellers.com-gold?style=for-the-badge&labelColor=1a1a1a)](https://nandanijewellers.vercel.app/)
 [![Status](https://img.shields.io/badge/Status-Live%20%26%20Active-brightgreen?style=for-the-badge&labelColor=1a1a1a)](https://www.nandanijewellers.com/)
 [![Type](https://img.shields.io/badge/Type-Freelance%20Project-blue?style=for-the-badge&labelColor=1a1a1a)](/)
 [![License](https://img.shields.io/badge/License-Client%20Proprietary-red?style=for-the-badge&labelColor=1a1a1a)](/)
