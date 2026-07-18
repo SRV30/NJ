@@ -62,9 +62,9 @@ const FAQPage = () => {
       className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 py-16 px-4 sm:px-6 lg:px-8"
     >
       <MetaData
-        title="FAQs | Nandani Jewellers"
-        description="Find answers to frequently asked questions about Nandani Jewellers, including payments, shipping, order tracking, and more."
-        keywords="Nandani Jewellers FAQs, online shopping questions, payment methods, shipping details, order tracking, cancellation policy"
+        title="FAQs | Gitanjali Jewellers"
+        description="Find answers to frequently asked questions about Gitanjali Jewellers, including payments, shipping, order tracking, and more."
+        keywords="Gitanjali Jewellers FAQs, online shopping questions, payment methods, shipping details, order tracking, cancellation policy"
       />
 
       <div className="max-w-4xl mx-auto">

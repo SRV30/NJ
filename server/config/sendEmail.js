@@ -1,13 +1,13 @@
 import axios from "axios";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: "./config.env" });
 
 const sendEmail = async ({ sendTo, subject, html }) => {
   try {
     const response = await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
-        sender: { email: "support@nandanijewellers.com", name: "Nandani Jewellers" },
+        sender: { email: "gitanjalijewellers22k@gmail.com", name: "Gitanjali Jewellers" },
         to: [{ email: sendTo }],
         subject: subject,
         htmlContent: html,

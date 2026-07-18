@@ -97,7 +97,7 @@ const TermsAndServices = () => {
       animate="visible"
       className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 py-16 px-6 sm:px-12 lg:px-16"
     >
-      <MetaData title="Terms & Conditions | Nandani Jewellers" />
+      <MetaData title="Terms & Conditions | Gitanjali Jewellers" />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <motion.div
@@ -144,7 +144,7 @@ const TermsAndServices = () => {
             className="max-w-2xl mx-auto text-amber-700 dark:text-amber-400"
           >
             Please read these terms carefully before using our services. By
-            accessing or using Nandani Jewellers services, you agree to be bound
+            accessing or using Gitanjali Jewellers services, you agree to be bound
             by these terms and conditions.
           </motion.p>
         </div>

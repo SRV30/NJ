@@ -141,9 +141,9 @@ const ManageCategory = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 py-16 px-4 sm:px-6 lg:px-8">
       <MetaData
-        title="Manage Category | Nandani Jewellers Admin"
-        description="Admin panel to manage categories for Nandani Jewellers. Add, update, and delete luxury gold, diamond, and silver with ease."
-        keywords="Nandani Jewellers admin, manage categories, luxury jewelry management, gold jewelry categories, diamond, jewelry admin panel"
+        title="Manage Category | Gitanjali Jewellers Admin"
+        description="Admin panel to manage categories for Gitanjali Jewellers. Add, update, and delete luxury gold, diamond, and silver with ease."
+        keywords="Gitanjali Jewellers admin, manage categories, luxury jewelry management, gold jewelry categories, diamond, jewelry admin panel"
       />
 
       <motion.div

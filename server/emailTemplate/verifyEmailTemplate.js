@@ -7,7 +7,7 @@ const verifyEmailTemplate = ({ name, otp }) => {
       
       <!-- OTP Message -->
       <p style="font-size: 16px; line-height: 1.6;">
-        Welcome to <strong>Nandani Jewellers</strong>! 🎉 We're excited to have you with us.
+        Welcome to <strong>Gitanjali Jewellers</strong>! 🎉 We're excited to have you with us.
         To complete your registration, please use the OTP below to verify your email address.
       </p>
   
@@ -25,19 +25,19 @@ const verifyEmailTemplate = ({ name, otp }) => {
   
       <!-- Security Notice -->
       <p style="font-size: 14px; color: #777;">
-        If you didn't sign up for Nandani Jewellers, please ignore this email.
+        If you didn't sign up for Gitanjali Jewellers, please ignore this email.
         Your OTP is part of the verification process for your registration.
       </p>
   
       <!-- Signature -->
       <p style="font-size: 16px; font-weight: bold; margin-top: 20px;">Best Regards,</p>
-      <p style="font-size: 16px; font-weight: bold; color: #ff8c00;">Nandani Jewellers</p>
+      <p style="font-size: 16px; font-weight: bold; color: #ff8c00;">Gitanjali Jewellers</p>
   
       <!-- Footer -->
       <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
       <p style="font-size: 12px; text-align: center; color: #777;">
         Need help? Contact us at 
-        <a href="mailto:support@nandanijewellers.com" style="color: #ff8c00; text-decoration: none;">support@nandanijewellers.com</a>
+        <a href="mailto:gitanjalijewellers22k@gmail.com" style="color: #ff8c00; text-decoration: none;">gitanjalijewellers22k@gmail.com</a>
       </p>
     </div>
   `;

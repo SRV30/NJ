@@ -330,7 +330,7 @@ const ProductCategory = () => {
             </motion.div>
           </AnimatePresence>
           {shuffledCategories.length > itemsPerPage && (
-            <div className="absolute bottom-16 left-0 right-0 flex justify-center space-x-3 z-20">
+            <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-20">
               {Array.from({ length: totalSlides }).map((_, index) => (
                 <motion.div
                   key={index}
@@ -384,6 +384,7 @@ const ProductCategory = () => {
                     repeat: Infinity,
                     duration: 1.5,
                     ease: "easeInOut",
+
                   }}
                 >
                   <ArrowRight />

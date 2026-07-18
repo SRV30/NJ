@@ -74,7 +74,7 @@ const AdminFaq = () => {
 
   return (
     <div className="bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300 min-h-screen p-8 rounded-lg">
-      <MetaData title="Nandani Jewellers - Admin FAQs" />
+      <MetaData title="Gitanjali Jewellers - Admin FAQs" />
       <div className="max-w-4xl mx-auto">
         <div className="bg-white dark:bg-slate-900 shadow-xl rounded-xl overflow-hidden mb-8">
           <div className="p-6 border-b border-amber-200 dark:border-amber-800">

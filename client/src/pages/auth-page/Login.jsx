@@ -73,9 +73,9 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <MetaData
-        title="Login | Nandani Jewellers - Elegant Access"
-        description="Sign in to your Nandani Jewellers account with elegance. Track your precious orders and unlock exclusive jewelry collections."
-        keywords="Nandani Jewellers login, luxury jewelry login, premium account access, secure shopping"
+        title="Login | Gitanjali Jewellers - Elegant Access"
+        description="Sign in to your Gitanjali Jewellers account with elegance. Track your precious orders and unlock exclusive jewelry collections."
+        keywords="Gitanjali Jewellers login, luxury jewelry login, premium account access, secure shopping"
       />
 
       <motion.div
@@ -175,7 +175,7 @@ const Login = () => {
           variants={itemVariants}
           className="mt-6 text-center text-amber-700 dark:text-amber-300"
         >
-          New to Nandani Jewellers?
+          New to Gitanjali Jewellers?
           <Link
             to="/signup"
             className="ml-1 text-amber-600 hover:text-amber-700 dark:text-amber-300 dark:hover:text-amber-400 font-medium transition-colors duration-200"

@@ -130,9 +130,9 @@ const ManageJewelleryType = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 py-16 px-4 sm:px-6 lg:px-8">
       <MetaData
-        title="Manage Jewelry Types | Nandani Jewellers Admin"
-        description="Admin panel to manage jewelry categories for Nandani Jewellers. Add, update, and delete luxury gold, diamond, and silver jewelry types with ease."
-        keywords="Nandani Jewellers admin, manage jewelry types, luxury jewelry management, gold jewelry categories, diamond jewelry types, jewelry admin panel"
+        title="Manage Jewelry Types | Gitanjali Jewellers Admin"
+        description="Admin panel to manage jewelry categories for Gitanjali Jewellers. Add, update, and delete luxury gold, diamond, and silver jewelry types with ease."
+        keywords="Gitanjali Jewellers admin, manage jewelry types, luxury jewelry management, gold jewelry categories, diamond jewelry types, jewelry admin panel"
       />
 
       <motion.div

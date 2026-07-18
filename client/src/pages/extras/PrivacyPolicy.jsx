@@ -63,7 +63,7 @@ const PrivacyPolicy = () => {
 
   return (
     <section className="min-h-screen py-16 px-6 bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950">
-      <MetaData title="Privacy Policy| Nandani Jewellers" />
+      <MetaData title="Privacy Policy| Gitanjali Jewellers" />
       <div className="max-w-4xl mx-auto">
         <header className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-amber-800 dark:text-amber-300 mb-3">

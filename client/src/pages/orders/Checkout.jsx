@@ -63,7 +63,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 py-8 px-4 sm:px-6">
-      <MetaData title="Checkout | Nandani Jewellers" />
+      <MetaData title="Checkout | Gitanjali Jewellers" />
       <motion.div
         initial="hidden"
         animate="visible"

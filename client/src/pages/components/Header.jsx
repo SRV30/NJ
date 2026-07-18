@@ -7,7 +7,7 @@ import { logoutUser } from "@/store/auth-slice/user";
 import { showJewelryToast } from "../extras/showJewelryToast";
 import PropTypes from "prop-types";
 import DarkModeToggle from "../extras/DarkModeToggle";
-import Logo from "../../assets/Logo.png"
+import Logo from "../../assets/Logo.png";
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
@@ -89,7 +89,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-amber-900 dark:via-amber-900 dark:to-amber-900 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500 w-full"
+      className="  fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-amber-900 dark:via-amber-900 dark:to-amber-900 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500 w-full"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
@@ -100,11 +100,11 @@ export default function Header() {
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
       >
-        <a href="/" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2 mx-10">
           <img
             src={Logo}
-            alt="Nandani Jewellers Logo"
-            className="h-10 w-auto lg:h-12 rounded-full"
+            alt="Gitanjali Jewellers Logo"
+            className="h-14 w-auto lg:h-17 rounded-full"
           />
         </a>
       </motion.div>
@@ -120,10 +120,10 @@ export default function Header() {
             path === "/"
               ? "Home"
               : path === "/products"
-              ? "Shop"
-              : path === "/about"
-              ? "About"
-              : "Contact";
+                ? "Shop"
+                : path === "/about"
+                  ? "About"
+                  : "Contact";
 
           return (
             <motion.a
@@ -229,7 +229,7 @@ export default function Header() {
               >
                 {isAuthenticated ? (
                   <>
-                    {(user.role === "ADMIN" || user.role === "MANAGER") && (
+                    {(user?.role === "ADMIN" || user?.role === "MANAGER") && (
                       <DropdownLink
                         href="/admin/dashboard"
                         text="Admin Dashboard"
@@ -289,10 +289,10 @@ export default function Header() {
                 path === "/"
                   ? "Home"
                   : path === "/products"
-                  ? "Shop"
-                  : path === "/about"
-                  ? "About"
-                  : "Contact";
+                    ? "Shop"
+                    : path === "/about"
+                      ? "About"
+                      : "Contact";
 
               return (
                 <motion.a

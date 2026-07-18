@@ -36,7 +36,7 @@ const generateReceiptHTML = (order) => {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nandani Jewellers - Order Confirmation</title>
+        <title>Gitanjali Jewellers - Order Confirmation</title>
         <style>
           :root {
             --primary-color: #b8860b;
@@ -323,14 +323,14 @@ const generateReceiptHTML = (order) => {
       <body>
         <div class="container">
           <div class="header">
-            <div class="logo">NANDANI JEWELLERS</div>
+            <div class="logo">Gitanjali JEWELLERS</div>
             <p>Timeless Elegance, Crafted with Passion</p>
           </div>
           
           <h2>Booking Confirmation</h2>
           
           <p>Dear <strong>${user.name}</strong>,</p>
-          <p>Thank you for choosing Nandani Jewellers. We're delighted to confirm that your order has been successfully booked. Here are your order details:</p>
+          <p>Thank you for choosing Gitanjali Jewellers. We're delighted to confirm that your order has been successfully booked. Here are your order details:</p>
 
           <div class="order-summary">
             <h3>Order Summary</h3>
@@ -360,16 +360,16 @@ const generateReceiptHTML = (order) => {
             <p>Please visit our
                     showrooms within 7 days of booking for final fitting and
                     collection of your selected pieces.</p>
-            <p>Thank you for trusting <strong>Nandani Jewellers</strong> with your jewelry needs!</p>
+            <p>Thank you for trusting <strong>Gitanjali Jewellers</strong> with your jewelry needs!</p>
           </div>
 
           <div class="contact">
-            <p><strong>Questions?</strong> Contact our support team at <a href="mailto:support@nandanijewellers.com">support@nandanijewellers.com</a></p>
-            <p>Visit our <a href="https://www.nandanijewellers.com">website</a> to explore our complete collection.</p>
+            <p><strong>Questions?</strong> Contact our support team at <a href="mailto:gitanjalijewellers22k@gmail.com">gitanjalijewellers22k@gmail.com</a></p>
+            <p>Visit our <a href="https://www.Gitanjalijewellers22k.com">website</a> to explore our complete collection.</p>
             
             <div class="social-icons">
-              <a href="https://www.facebook.com/nandanijewellers">Facebook</a> |
-              <a href="https://www.instagram.com/nandaninj">Instagram</a> |
+              <a href="https://www.facebook.com/">Facebook</a> |
+              <a href="https://www.instagram.com/gitanjali_jewellers_22K">Instagram</a> |
             </div>
           </div>
         </div>

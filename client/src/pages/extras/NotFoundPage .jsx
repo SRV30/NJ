@@ -117,7 +117,7 @@ const NotFoundPage = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.7 }}
       >
-        © {new Date().getFullYear()} • Nandani Jewellers
+        © {new Date().getFullYear()} • Gitanjali Jewellers
       </motion.p>
     </div>
   );

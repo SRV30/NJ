@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import MetaData from "../extras/MetaData";
 import { useState, useEffect } from "react";
-import p1 from "../../assets/nandani.jpg";
-import p2 from "../../assets/p2.jpg";
+import p1 from "../../assets/slider/7.png";
+import p2 from "../../assets/slider/8.png";
+import b6 from "../../assets/slider/6.png";
 
 const About = () => {
   const navigate = useNavigate();
@@ -73,118 +74,23 @@ const About = () => {
   };
 
   return (
-    <div className="text-gray-800 dark:text-white overflow-hidden">
+    <div className="text-gray-800 dark:text-white overflow-hidden mt-7">
       <MetaData
-        title="About Us | Nandani Jewellers - Timeless Craftsmanship"
-        description="Learn about Nandani Jewellers' legacy, crafting gold, diamond, and silver jewelry since 2002. Explore our luxurious collections today."
-        keywords="Nandani Jewellers, gold jewelry, diamond rings, silver accessories, handcrafted ornaments, luxury jewelry"
+        title="About Us | Gitanjali Jewellers - Timeless Craftsmanship"
+        description="Learn about Gitanjali Jewellers' legacy, crafting gold, diamond, and silver jewelry since 2024. Explore our luxurious collections today."
+        keywords="Gitanjali Jewellers, gold jewelry, diamond rings, silver accessories, handcrafted ornaments, luxury jewelry"
       />
 
       <div className="relative h-[80vh] overflow-hidden">
         <motion.div
-          className="relative w-full h-[80vh] bg-contain bg-center bg-no-repeat"
+          className="relative w-full h-[80vh] bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage:
-              "url('https://res.cloudinary.com/dmv1hs8b9/image/upload/v1742287557/NJ_jmvjki.png')",
+            backgroundImage: `url(${b6})`,
+            backgroundPosition: "center 21%",
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: 1.5 }}
           transition={{ duration: 1.5 }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex items-center justify-center">
-          <motion.div
-            className="text-center text-white max-w-4xl px-6"
-            variants={staggerContainerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div
-              className="mb-4 overflow-hidden"
-              variants={fadeInUpVariants}
-              custom={0}
-            >
-              <motion.span
-                className="inline-block text-amber-300 text-lg font-light tracking-wider uppercase"
-                variants={shimmerEffect}
-                initial="hidden"
-                animate="visible"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, #fcd34d, transparent)",
-                  backgroundSize: "200% 100%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Since 2002
-              </motion.span>
-            </motion.div>
-
-            <motion.h1
-              variants={fadeInUpVariants}
-              custom={1}
-              className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight leading-tight"
-            >
-              Nandani Jewellers
-            </motion.h1>
-
-            <motion.div
-              variants={fadeInUpVariants}
-              custom={2}
-              className="mt-8 text-xl md:text-2xl font-light text-amber-100"
-            >
-              <Typewriter
-                options={{
-                  strings: [
-                    "Discover the art of timeless elegance",
-                    "Where heritage meets contemporary design",
-                    "Crafting masterpieces for generations",
-                    "Your journey to exquisite luxury",
-                    "Elevating traditions with exceptional artistry",
-                    "Setting trends in fine jewelry",
-                  ],
-                  autoStart: true,
-                  loop: true,
-                  delay: 80,
-                  deleteSpeed: 40,
-                }}
-              />
-            </motion.div>
-
-            <motion.div
-              variants={fadeInUpVariants}
-              custom={3}
-              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05, backgroundColor: "#b45309" }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate("/products")}
-                className="px-8 py-4 bg-amber-600 text-white rounded-full font-medium shadow-lg transition-all duration-300 border border-amber-500"
-              >
-                Explore Collections
-              </motion.button>
-
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate("/contact")}
-                className="px-8 py-4 bg-transparent text-white rounded-full font-medium border border-white/30 hover:border-white/70 transition-all duration-300"
-              >
-                Our Showrooms
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="absolute -bottom-6 left-0 right-0 h-16 bg-gradient-to-t from-white dark:from-slate-950 to-transparent z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
         />
       </div>
 
@@ -198,7 +104,7 @@ const About = () => {
         <motion.div
           className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
           style={{
-            backgroundImage: `url("https://res.cloudinary.com/dmv1hs8b9/image/upload/v1742229643/4_zi5ydh.png")`,
+            backgroundImage: `url(${b6})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -240,7 +146,7 @@ const About = () => {
               </h2>
 
               <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8">
-                Nandani Jewellers has been a trusted name in the world of fine
+                Gitanjali Jewellers has been a trusted name in the world of fine
                 jewelry, offering an extensive range of high-quality diamond,
                 gold, and silver jewelry. Located in the heart of Bettiah,
                 Bihar, we specialize in crafting beautiful, timeless pieces
@@ -271,7 +177,7 @@ const About = () => {
               >
                 <img
                   src={p1}
-                  alt="Nandani Jewellers artisans at work"
+                  alt="Gitanjali Jewellers artisans at work"
                   className="w-full h-full object-fit"
                 />
               </motion.div>
@@ -305,7 +211,7 @@ const About = () => {
               What Defines Us
             </span>
             <h2 className="text-4xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6">
-              Why Choose Nandani Jewellers?
+              Why Choose Gitanjali Jewellers?
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-lg">
               Our collection includes meticulously crafted pieces such as
@@ -418,9 +324,9 @@ const About = () => {
               </h2>
 
               <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8">
-                At Nandani Jewellers, our responsibility extends beyond creating
-                beautiful jewelry. We believe in nurturing the communities and
-                environment that sustain us.
+                At Gitanjali Jewellers, our responsibility extends beyond
+                creating beautiful jewelry. We believe in nurturing the
+                communities and environment that sustain us.
               </p>
 
               <div className="space-y-6">
@@ -504,8 +410,7 @@ const About = () => {
             viewport={{ once: true }}
           >
             <p className="text-2xl md:text-3xl font-serif italic text-amber-800 dark:text-amber-300 my-6 leading-relaxed">
-              Nandani Jewellers is owned and operated by Shri Muneshwar sir and
-              Shri Yogesh sir , whose vision and dedication have played a
+              Gitanjali Jewellers is owned and operated by Vivek Kumar, whose vision and dedication have played a
               pivotal role in shaping the brand&#39;s reputation for
               trustworthiness and excellence in the jewelry industry. Their
               passion for creating stunning jewelry and offering impeccable

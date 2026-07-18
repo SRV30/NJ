@@ -128,7 +128,7 @@ const AdminOrdersPage = () => {
       transition={{ duration: 0.6 }}
       className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300 p-4 sm:p-6 lg:p-8"
     >
-      <MetaData title="Admin Orders Dashboard | Nandani Jewellers" />
+      <MetaData title="Admin Orders Dashboard | Gitanjali Jewellers" />
       <motion.header
         initial={{ y: -50 }}
         animate={{ y: 0 }}

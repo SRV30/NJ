@@ -10,7 +10,7 @@ const LuxuryExperience = () => {
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10">
           At{" "}
           <span className="font-semibold text-amber-600 dark:text-amber-400">
-            Nandani Jewellers
+            Gitanjali Jewellers
           </span>
           , we craft exquisite pieces that blend tradition with modern elegance.
           Explore timeless beauty and unmatched craftsmanship.

@@ -237,9 +237,9 @@ const AdminProducts = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 py-16 px-4 sm:px-6 lg:px-8">
       <MetaData
-        title="Admin Products | Nandani Jewellers"
-        description="Manage luxury jewelry products for Nandani Jewellers admin panel with advanced filtering and pagination."
-        keywords="Nandani Jewellers admin, luxury jewelry, manage products, gold jewelry, diamond jewelry"
+        title="Admin Products | Gitanjali Jewellers"
+        description="Manage luxury jewelry products for Gitanjali Jewellers admin panel with advanced filtering and pagination."
+        keywords="Gitanjali Jewellers admin, luxury jewelry, manage products, gold jewelry, diamond jewelry"
       />
 
       <motion.div

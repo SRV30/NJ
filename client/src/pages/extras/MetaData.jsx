@@ -21,11 +21,11 @@ MetaData.propTypes = {
 };
 
 MetaData.defaultProps = {
-  title: "Nandani Jewellers - Exquisite Gold & Diamond Jewelry",
+  title: "Gitanjali Jewellers - Exquisite Gold & Diamond Jewelry",
   description:
-    "Discover timeless elegance with Nandani Jewellers. Explore our luxurious gold, diamond, and silver jewelry collections crafted with precision.",
+    "Discover timeless elegance with Gitanjali Jewellers. Explore our luxurious gold, diamond, and silver jewelry collections crafted with precision.",
   keywords:
-    "Nandani Jewellers, gold jewelry, diamond rings, silver accessories, wedding jewelry, handcrafted jewelry",
+    "Gitanjali Jewellers, gold jewelry, diamond rings, silver accessories, wedding jewelry, handcrafted jewelry",
 };
 
 export default MetaData;

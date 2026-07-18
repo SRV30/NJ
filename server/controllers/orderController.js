@@ -39,7 +39,7 @@ export const createOrder = catchAsyncErrors(async (req, res) => {
     });
 
     sendEmail({
-      sendTo: "nandaniwebsite@gmail.com",
+      sendTo: "gitanjalijewellers22k@gmail.com",
       subject: `New Order Booking by ${user.name} (${user.mobile})`,
       html: receiptHTML,
     });
@@ -199,22 +199,22 @@ export const updateOrderStatus = catchAsyncErrors(async (req, res) => {
     if (orderStatus === "OUT_OF_STOCK") {
       const receiptHTML = `
         <div style="font-family:sans-serif;">
-          <h2 style="color:#bfa046;">Nandani Jewellers</h2>
+          <h2 style="color:#bfa046;">Gitanjali Jewellers</h2>
           <p>Dear ${order.user.name},</p>
           <p>We regret to inform you that your order with ID <strong>${order._id}</strong> is currently <strong>out of stock</strong>.</p>
           <p>Contact Number: ${order.user.mobile}</p>
           <p>Please feel free to explore our latest collection at 
-            <a href="https://www.nandanijewellers.com" style="color:#bfa046;">nandanijewellers.com</a>.
+            <a href="https://www.Gitanjalijewellers22k.com" style="color:#bfa046;">Gitanjalijewellers22k.com</a>.
           </p>
           <p>We apologize for the inconvenience caused.</p>
           <br/>
-          <p>Regards,<br/>Team Nandani Jewellers</p>
+          <p>Regards,<br/>Team Gitanjali Jewellers</p>
         </div>
       `;
 
       emailSent = await sendEmail({
         sendTo: order.user.email,
-        subject: "Your Order is Out of Stock - Nandani Jewellers",
+        subject: "Your Order is Out of Stock - Gitanjali Jewellers",
         html: receiptHTML,
       });
     }
@@ -296,7 +296,7 @@ export const cancelOrder = catchAsyncErrors(async (req, res) => {
     const receiptHTML = generateOrderCancellationEmail(order);
     const emailSent = await sendEmail({
       sendTo: order.user.email,
-      subject: `Your Order Has Been Cancelled - Nandani Jewellers (${order.user.mobile})`,
+      subject: `Your Order Has Been Cancelled - Gitanjali Jewellers (${order.user.mobile})`,
       html: receiptHTML,
     });
 

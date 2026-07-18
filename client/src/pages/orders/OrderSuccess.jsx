@@ -25,7 +25,7 @@ const OrderSuccess = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300 px-4 sm:px-6 py-8">
-      <MetaData title="Order Booked Successfully | Nandani Jewellers" />
+      <MetaData title="Order Booked Successfully | Gitanjali Jewellers" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -5,6 +5,9 @@ import Typewriter from "typewriter-effect";
 import MetaData from "../extras/MetaData";
 import { submitContactForm } from "@/store/extra/getintouchSlice";
 import { useDispatch, useSelector } from "react-redux";
+import b2 from "../../assets/slider/2.png"
+import b3 from "../../assets/slider/3.png"
+
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -107,91 +110,39 @@ const ContactUs = () => {
     "linear-gradient(135deg, #e6c461 0%, #b8860b 50%, #e6c461 100%)";
 
   return (
-    <div className="">
+    <div className="mt-7">
       <MetaData
-        title="Contact Us | Nandani Jewellers - Timeless Elegance & Craftsmanship"
-        description="Discover the legacy of Nandani Jewellers, where tradition meets innovation. Explore our exquisite collection of gold, diamond, and silver jewelry, crafted with precision and passion."
-        keywords="Nandani Jewellers, gold jewelry, diamond rings, silver accessories, luxury jewelry, fine craftsmanship, bridal jewelry, handcrafted ornaments"
+        title="Contact Us | Gitanjali Jewellers - Timeless Elegance & Craftsmanship"
+        description="Discover the legacy of Gitanjali Jewellers, where tradition meets innovation. Explore our exquisite collection of gold, diamond, and silver jewelry, crafted with precision and passion."
+        keywords="Gitanjali Jewellers, gold jewelry, diamond rings, silver accessories, luxury jewelry, fine craftsmanship, bridal jewelry, handcrafted ornaments"
       />
 
-      <motion.section
-        className="relative w-full h-[80vh] bg-contain bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('https://res.cloudinary.com/dmv1hs8b9/image/upload/v1742287557/NJ_jmvjki.png')" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
-        <motion.div
-          className="absolute inset-0 bg-black/60"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.8 }}
-        />
+     <motion.section
+  className="relative w-full h-[80vh] overflow-hidden"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1.5 }}
+>
+  {/* Background Image */}
+<motion.div
+  className="absolute inset-0 bg-cover bg-no-repeat"
+  style={{
+    backgroundImage: `url(${b3})`,
+    backgroundPosition: "center 21%", // ya "center 10%"
+  }}
+/>
 
-        <motion.div
-          className="absolute top-1/2 left-0 w-full h-[1px] bg-amber-300 overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ delay: 0.5, duration: 1 }}
-        >
-          <motion.div
-            className="h-full w-1/3 bg-amber-100"
-            variants={shimmerVariants}
-            initial="initial"
-            animate="animate"
-          />
-        </motion.div>
+  {/* Overlay */}
+  <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/25 to-black/35"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1.8 }}
+  />
 
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            className="text-center text-white px-6 max-w-4xl"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1
-              variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight"
-            >
-              <span className="block">Contact</span>
-              <span className="relative inline-block mt-1">
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: goldGradient }}
-                >
-                  Nandani Jewellers
-                </span>
-                <motion.span
-                  className="absolute -bottom-4 left-0 w-full h-[2px]"
-                  style={{ backgroundImage: goldGradient }}
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ delay: 1, duration: 1.2 }}
-                />
-              </span>
-            </motion.h1>
-
-            <motion.div
-              variants={itemVariants}
-              className="mt-8 text-lg md:text-xl font-light text-amber-200"
-            >
-              <Typewriter
-                options={{
-                  strings: [
-                    "We're here to assist you in your jewellery journey",
-                    "Your perfect jewel is just a message away",
-                    "Let's craft something timeless together",
-                  ],
-                  autoStart: true,
-                  loop: true,
-                  delay: 50,
-                  deleteSpeed: 30,
-                }}
-              />
-            </motion.div>
-          </motion.div>
-        </div>
-      </motion.section>
+ 
+  
+</motion.section>
 
       <motion.section
         className="max-w-5xl mx-auto px-6 py-16 text-center"
@@ -204,7 +155,7 @@ const ContactUs = () => {
           Reach Out to Us
         </h2>
         <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
-          At Nandani Jewellers, we value every customer and are here to assist
+          At Gitanjali Jewellers, we value every customer and are here to assist
           you with any queries or information you may need. Whether you have
           questions about our collections, need assistance with a purchase, or
           require details about our services, our dedicated team is always ready
@@ -395,7 +346,7 @@ const ContactUs = () => {
                     Phone
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 font-medium">
-                    +91 8434343401
+                    +91 82353 38300
                   </p>
                 </div>
               </motion.div>
@@ -429,7 +380,7 @@ const ContactUs = () => {
                     Email
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 font-medium">
-                    support@nandanijewellers.com
+                   gitanjalijewellers22k@gmail.com 
                   </p>
                 </div>
               </motion.div>
@@ -456,11 +407,9 @@ const ContactUs = () => {
 
             <div className="space-y-8">
               <div className="space-y-3">
-                <h4 className="font-medium text-gray-800 dark:text-gray-200">
-                  Branch 1st Address
-                </h4>
                 <p className="text-gray-700 dark:text-gray-300">
-                  Hazarimull Dharmashala Complex, Lalabazar, Bettiah
+                  Gitanjali Jewellers near Pandit ji Chat House, Lal Bazar,
+                  Bettiah, Bihar - 845438
                 </p>
 
                 <motion.div
@@ -472,41 +421,13 @@ const ContactUs = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7128.661012803554!2d84.50531699999996!3d26.800723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39936ebc6b98a2c3%3A0x388ef3c6789aa6e4!2zTmFuZGFuaSBKZXdlbGxlcnMgLSDgpKjgpKjgpY3gpKbgpKjgpYAg4KSc4KWN4KS14KWH4KSy4KSw4KWN4KS4!5e0!3m2!1sen!2sin!4v1741723538722!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.2454393021276!2d84.5036875!3d26.800312500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39936f0006baf7b7%3A0xfe5b00d605a8bea0!2sGITANJALI%20JEWELLERS!5e0!3m2!1sen!2sin!4v1783885589853!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen=""
                     loading="lazy"
-                    title="Nandani Jewellers Main Branch"
-                  ></iframe>
-                </motion.div>
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="font-medium text-gray-800 dark:text-gray-200">
-                  Branch 2nd Address
-                </h4>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Supriya Road, Near Axis Bank, Bettiah
-                </p>
-
-                <motion.div
-                  className="h-48 w-full rounded-lg overflow-hidden shadow-md"
-                  whileHover={{
-                    y: -5,
-                    boxShadow: "0 20px 25px -5px rgba(0,0,0,0.2)",
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d890.2705277539586!2d84.513862!3d26.805514!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39936f24f87af6bb%3A0xd3714f3fff2f9935!2sNandani%20jewellers!5e0!3m2!1sen!2sin!4v1741723658616!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    title="Nandani Jewellers Premium Showroom"
+                    title="Gitanjali Jewellers Main Branch"
                   ></iframe>
                 </motion.div>
               </div>
@@ -557,7 +478,7 @@ const ContactUs = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             Visit our showrooms today to experience the luxury and craftsmanship
-            of Nandani Jewellers. Our expert team is ready to assist you in
+            of Gitanjali Jewellers. Our expert team is ready to assist you in
             finding the perfect piece to celebrate your special moments.
           </motion.p>
 
