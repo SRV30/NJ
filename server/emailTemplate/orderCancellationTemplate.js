@@ -21,11 +21,11 @@ const generateOrderCancellationEmail = (order) => {
                 .join("")}
             </ul>
             <p style="font-size: 16px;"><strong>Order Created:</strong> ${order.createdAt}</p>
-            <p style="font-size: 16px;">If you have any concerns or questions, feel free to contact our support team at <strong>support@nandanijewellers.com</strong>.</p>
+            <p style="font-size: 16px;">If you have any concerns or questions, feel free to contact our support team at <strong>gitanjalijewellers22k@gmail.com </strong></p>
             <p style="font-size: 16px; text-align: center;">
-              <a href="https://www.nandanijewellers.com" style="color: #fff; background-color: #e91e63; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Visit Nandani Jewellers</a>
+              <a href="https://www.Gitanjalijewellers22K.com" style="color: #fff; background-color: #e91e63; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Visit Gitanjali Jewellers</a>
             </p>
-            <p style="font-size: 16px; text-align: center;">Best regards,<br>Nandani Jewellers</p>
+            <p style="font-size: 16px; text-align: center;">Best regards,<br>Gitanjali Jewellers</p>
           </div>
         </body>
       </html>

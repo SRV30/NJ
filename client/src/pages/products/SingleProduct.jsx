@@ -160,7 +160,7 @@ const SingleProductPage = () => {
             className="text-4xl md:text-5xl font-serif text-center font-light text-amber-950 dark:text-violet-200"
           >
             <span className="font-extralight tracking-widest">
-              Nandani Jewellers
+              Gitanjali Jewellers
             </span>
             <span className="text-lg text-amber-500 ml-2">LUXURY JEWELRY</span>
           </motion.h1>

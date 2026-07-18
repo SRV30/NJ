@@ -73,7 +73,7 @@ const OrderDetails = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300 pt-8 pb-16">
-      <MetaData title="Order Details | Nandani Jewellers" />
+      <MetaData title="Order Details | Gitanjali Jewellers" />
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -214,7 +214,7 @@ const OrderDetails = () => {
                     We&apos;re sorry! This item is currently out of stock. Please
                     explore other products{" "}
                     <a
-                      href="https://www.nandanijewellers.com/products"
+                      href="https://www.Gitanjalijewellers22K.com/products"
                       className="underline text-blue-600"
                       target="_blank"
                       rel="noopener noreferrer"

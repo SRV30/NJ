@@ -56,13 +56,13 @@ const Footer = () => {
         >
           <img
             src={Logo}
-            alt="Nandani Jewellers Logo"
-            className="h-14 lg:h-16 w-auto"
+            alt="Gitanjali Jewellers Logo"
+            className="h-15 lg:h-18 w-auto"
           />
 
           <p className="text-amber-800 dark:text-amber-300 text-sm lg:text-base font-sans tracking-wider max-w-sm">
-            Crafting elegance since 2002. Discover the art of luxury with{" "}
-            <span className="font-medium">Nandani Jewellers</span>.
+            Crafting elegance since 2024. Discover the art of luxury with{" "}
+            <span className="font-medium">Gitanjali Jewellers</span>.
           </p>
         </motion.div>
 
@@ -128,7 +128,7 @@ const Footer = () => {
           variants={itemVariants}
           className="text-amber-900 dark:text-amber-300"
         >
-          © {currentYear} Nandani Jewellers. All Rights Reserved.
+          © {currentYear} Gitanjali Jewellers. All Rights Reserved.
           <span className="mx-2 md:mx-3">•</span>
           <a
             href="/privacy-policy"
@@ -152,9 +152,9 @@ const Footer = () => {
           {[
             {
               Icon: FaFacebook,
-              link: "https://www.facebook.com/NANDANIJEWELLERS",
+              link: "https://www.facebook.com/",
             },
-            { Icon: FaInstagram, link: "https://www.instagram.com/nandaninj" },
+            { Icon: FaInstagram, link: "https://www.instagram.com/gitanjali_jewellers_22k" },
           ].map(({ Icon, link }, index) => (
             <motion.a
               key={index}

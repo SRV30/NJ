@@ -30,7 +30,7 @@ const Cart = () => {
 
   return (
     <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-slate-950 dark:to-slate-900 text-slate-800 dark:text-slate-200 min-h-screen py-12 px-4">
-      <MetaData title="Cart| Nandani Jewellers" />
+      <MetaData title="Cart| Gitanjali Jewellers" />
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">

@@ -239,7 +239,7 @@ const AdminDashboard = () => {
           <div className="flex items-center space-x-2">
             <Gem className="h-6 w-6 text-amber-500" />
             <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">
-              Nandani Jewellers Admin Panel
+              Gitanjali Jewellers Admin Panel
             </h2>
           </div>
           <button onClick={() => setIsSidebarOpen(false)} className="md:hidden">

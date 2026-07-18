@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import b1 from "../../assets/slider/1.png";
 import b2 from "../../assets/slider/4.png";
 import b3 from "../../assets/slider/3.png";
-import b4 from "../../assets/slider/1.png";
 import b5 from "../../assets/slider/2.png";
+import b6 from "../../assets/slider/5.png"
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,8 +12,8 @@ const BannerProduct = () => {
   const [direction, setDirection] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
 
-  const desktopImages = [b1, b2, b3, b4, b5];
-  const mobileImages = [b1, b2, b3, b4, b5];
+  const desktopImages = [b1, b3, b2, b5, b6];
+  const mobileImages = [b1, b3, b2, b5, b6];
 
   const nextImage = useCallback(() => {
     setDirection(1);
@@ -126,7 +126,7 @@ const BannerProduct = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 mt-5">
+    <div className="container mx-auto px-4 mt-7">
       <motion.div
         className="h-[300px] sm:h-[300px] md:h-[400px] lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
         variants={containerVariants}
@@ -180,7 +180,7 @@ const BannerProduct = () => {
               <img
                 src={desktopImages[currentImage]}
                 className="w-full h-full object-fit rounded-xl transform transition-transform duration-1000 hover:scale-105"
-                alt={`Nandani Jewellers Banner ${
+                alt={`Gitanjali Jewellers Banner ${
                   currentImage + 1
                 } - Luxury Jewelry`}
                 loading="lazy"
@@ -204,7 +204,7 @@ const BannerProduct = () => {
               <img
                 src={mobileImages[currentImage]}
                 className="w-full h-full object-fit rounded-xl"
-                alt={`Nandani Jewellers Mobile Banner ${
+                alt={`Gitanjali Jewellers Mobile Banner ${
                   currentImage + 1
                 } - Luxury Jewelry`}
                 loading="lazy"

@@ -83,7 +83,7 @@ const AdminUsers = () => {
       variants={containerVariants}
       className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 p-4 md:p-8"
     >
-      <MetaData title="Admin Users | Nandani Jewellers" />
+      <MetaData title="Admin Users | Gitanjali Jewellers" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
@@ -115,7 +115,7 @@ const AdminUsers = () => {
               User Management
             </h1>
             <p className="text-gray-600 dark:text-gray-400 text-center max-w-lg">
-              Manage all user accounts and permissions for Nandani Jewellers
+              Manage all user accounts and permissions for Gitanjali Jewellers
             </p>
             <motion.div
               className="w-16 h-1 bg-gradient-to-r from-amber-600 to-amber-400 dark:from-amber-400 dark:to-amber-600 rounded-full mt-4"

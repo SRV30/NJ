@@ -58,7 +58,7 @@ const MyProfile = () => {
       initial="hidden"
       animate="visible"
     >
-      <MediData title="My Profile | Nandani Jewellers" />
+      <MediData title="My Profile | Gitanjali Jewellers" />
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8">
           <motion.h1

@@ -44,7 +44,7 @@ const UpdatePassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-10 bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 text-amber-800 dark:text-amber-300">
-      <MetaData title="Update Password | Nandani Jewellers" />
+      <MetaData title="Update Password | Gitanjali Jewellers" />
       <motion.div
         className="w-full max-w-lg p-8 bg-white dark:bg-slate-950 backdrop-blur-lg rounded-3xl shadow-lg border border-amber-300 dark:border-amber-800"
         initial={{ opacity: 0, y: 20 }}

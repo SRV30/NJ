@@ -349,7 +349,7 @@ const SavedAddress = () => {
       initial="hidden"
       animate="visible"
     >
-      <MetaData title="Saved Addresses | Nandani Jewellers" />
+      <MetaData title="Saved Addresses | Gitanjali Jewellers" />
 
       <div className="max-w-4xl mx-auto">
         <Breadcrumb items={breadcrumbItems} />

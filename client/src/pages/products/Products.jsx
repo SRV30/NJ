@@ -125,7 +125,7 @@ const ProductsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 font-sans overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950 font-sans overflow-hidden relative mt-2">
       <MetaData
         title="Luxury Jewelry Collection | Gold, Diamond & Silver Jewellery Online"
         description="Explore an exquisite collection of gold, diamond, and silver jewelry. Shop stunning rings, necklaces, bracelets, and more. Find your perfect jewel today!"
@@ -153,7 +153,7 @@ const ProductsPage = () => {
             className="text-4xl md:text-5xl font-serif text-center font-light text-amber-950 dark:text-amber-200"
           >
             <span className="font-extralight tracking-widest">
-              Nandani Jewellers
+              Gitanjali Jewellers
             </span>
             <span className="text-lg text-amber-500 ml-2">LUXURY JEWELRY</span>
           </motion.h1>

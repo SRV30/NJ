@@ -37,7 +37,7 @@ export const registerUser = catchAsyncErrors(async (req, res) => {
 
     const emailResponse = await sendEmail({
       sendTo: email,
-      subject: "Verify Your Email - Nandani Jewelllers",
+      subject: "Verify Your Email - Gitanjali Jewelllers",
       html: verifyEmailTemplate({ name, otp }),
     });
 
@@ -107,7 +107,7 @@ export const verifyEmailOtp = catchAsyncErrors(async (req, res) => {
 
       const emailResponse = await sendEmail({
         sendTo: email,
-        subject: "New OTP for Email Verification - Nandani Jewellers",
+        subject: "New OTP for Email Verification - Gitanjali Jewellers",
         html: verifyEmailTemplate({ name: user.name, otp: newOtp }),
       });
 
@@ -174,7 +174,7 @@ export const resendOtp = catchAsyncErrors(async (req, res) => {
 
     const emailResponse = await sendEmail({
       sendTo: email,
-      subject: "New OTP for Email Verification - Nandani Jewellers",
+      subject: "New OTP for Email Verification - Gitanjali Jewellers",
       html: verifyEmailTemplate({ name: user.name, otp: newOtp }),
     });
 
@@ -391,7 +391,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res) => {
 
     await sendEmail({
       sendTo: email,
-      subject: "Forgot password from Nandani Jewellers",
+      subject: "Forgot password from Gitanjali Jewellers",
       html: forgotPasswordTemplate({
         name: user.name,
         otp: otp,
@@ -847,24 +847,24 @@ export const updateUserStatus = catchAsyncErrors(async (req, res) => {
     if (status === "Warning") {
       await sendEmail({
         sendTo: user.email,
-        subject: "⚠️ Account Warning - Nandani Jewellers",
+        subject: "⚠️ Account Warning - Gitanjali Jewellers",
         html: `
             <div style="font-family: Arial, sans-serif; color: #333;">
               <div style="background-color: #ffcc00; padding: 10px; text-align: center;">
                 <h2 style="color: #fff;">⚠️ Account Warning ⚠️</h2>
               </div>
               <p>Dear <strong>${user.name}</strong>,</p>
-              <p>We are writing to inform you that your account on <strong>Nandani Jewellers</strong> has been flagged for activities that violate our platform guidelines.</p>
-              <p>Please review the <a href="https://nandanijewellers.com" style="color: #0066cc;">Platform Guidelines</a> to ensure compliance.</p>
+              <p>We are writing to inform you that your account on <strong>Gitanjali Jewellers</strong> has been flagged for activities that violate our platform guidelines.</p>
+              <p>Please review the <a href="https://Gitanjalijewellers22K.com" style="color: #0066cc;">Platform Guidelines</a> to ensure compliance.</p>
               <p><strong>What You Need To Do:</strong></p>
               <ul>
                 <li>Review your recent activities on your account.</li>
                 <li>Make sure you are following the guidelines outlined in the link above.</li>
               </ul>
-              <p>If you have any questions or need assistance, feel free to <a href="mailto:support@nandanijewellers.com" style="color: #0066cc;">contact our support team</a>.</p>
+              <p>If you have any questions or need assistance, feel free to <a href="mailto:gitanjalijewellers22k@gmail.com" style="color: #0066cc;">contact our support team</a>.</p>
               <br>
               <p>Best regards,</p>
-              <p><b>Nandani Jewellers Team</b></p>
+              <p><b>Gitanjali Jewellers Team</b></p>
             </div>
           `,
       });
@@ -873,7 +873,7 @@ export const updateUserStatus = catchAsyncErrors(async (req, res) => {
     if (status === "Suspended") {
       await sendEmail({
         sendTo: user.email,
-        subject: "❌ Account Suspended - Nandani Jewellers",
+        subject: "❌ Account Suspended - Gitanjali Jewellers",
         html: `
             <div style="font-family: Arial, sans-serif; color: #333;">
               <div style="background-color: #f44336; padding: 10px; text-align: center;">
@@ -884,13 +884,13 @@ export const updateUserStatus = catchAsyncErrors(async (req, res) => {
               <p><strong>What You Can Do:</strong></p>
               <ul>
                 <li>Contact our support team to learn more about the suspension.</li>
-                <li>Review our <a href="https://nandanijewellers.com" style="color: #0066cc;">Platform Guidelines</a> and make sure your actions are aligned with them.</li>
+                <li>Review our <a href="https://Gitanjalijewellers22K.com" style="color: #0066cc;">Platform Guidelines</a> and make sure your actions are aligned with them.</li>
               </ul>
-              <p>If you believe this suspension was a mistake, please reach out to our <a href="mailto:support@nandanijewellers.com" style="color: #0066cc;">support team</a>.</p>
+              <p>If you believe this suspension was a mistake, please reach out to our <a href="mailto:gitanjalijewellers22k@gmail.com" style="color: #0066cc;">support team</a>.</p>
               <br>
               <p>We value you as a part of our community, and we hope to resolve this issue quickly.</p>
               <p>Best regards,</p>
-              <p><b>Nandani Jewellers Team</b></p>
+              <p><b>Gitanjali Jewellers Team</b></p>
             </div>
           `,
       });
@@ -899,19 +899,19 @@ export const updateUserStatus = catchAsyncErrors(async (req, res) => {
     if (status === "Active") {
       await sendEmail({
         sendTo: user.email,
-        subject: "✅ Your Account is Active - Nandani Jewellers",
+        subject: "✅ Your Account is Active - Gitanjali Jewellers",
         html: `
             <div style="font-family: Arial, sans-serif; color: #333;">
               <div style="background-color: #4caf50; padding: 10px; text-align: center;">
                 <h2 style="color: #fff;">✅ Your Account is Active</h2>
               </div>
               <p>Dear <strong>${user.name}</strong>,</p>
-              <p>We are happy to inform you that your account is now active and in good standing on <strong>Nandani Jewellers</strong>.</p>
+              <p>We are happy to inform you that your account is now active and in good standing on <strong>Gitanjali Jewellers</strong>.</p>
               <p>You can now access all the platform features and continue to enjoy your experience with us.</p>
-              <p>If you have any questions or need assistance, feel free to <a href="mailto:support@nandanijewellers.com" style="color: #0066cc;">contact our support team</a>.</p>
+              <p>If you have any questions or need assistance, feel free to <a href="mailto:gitanjalijewellers22k@gmail.com" style="color: #0066cc;">contact our support team</a>.</p>
               <br>
               <p>Best regards,</p>
-              <p><b>Nandani Jewellers Team</b></p>
+              <p><b>Gitanjali Jewellers Team</b></p>
             </div>
           `,
       });

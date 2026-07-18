@@ -109,7 +109,7 @@ const Wishlist = () => {
       animate="visible"
       className="min-h-screen pt-20 pb-12 px-4 md:px-8 bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100 dark:from-slate-950 dark:via-amber-950 dark:to-amber-950"
     >
-      <MetaData title="My Wishlist | Nandani Jewellers" />
+      <MetaData title="My Wishlist | Gitanjali Jewellers" />
 
       <nav className="flex mb-6 text-sm font-medium text-amber-700 dark:text-amber-400">
         <motion.a

@@ -119,7 +119,7 @@ const forgotPasswordTemplate = ({ name, otp }) => {
 
             <div class="body">
               <p>Hello <strong>${name}</strong>,</p>
-              <p>We received a request to reset the password for your <strong>Nandani Jewellers</strong> account.</p>
+              <p>We received a request to reset the password for your <strong>Gitanjali Jewellers</strong> account.</p>
               <p>If you didn't request a password reset, please ignore this email.</p>
               <p>To reset your password, use the following OTP:</p>
 
@@ -127,16 +127,16 @@ const forgotPasswordTemplate = ({ name, otp }) => {
                 ${otp}
               </div>
 
-              <p>This OTP is valid for only <strong>10 minutes</strong>. Enter it on the Nandani Jewellers website to proceed.</p>
+              <p>This OTP is valid for only <strong>10 minutes</strong>. Enter it on the Gitanjali Jewellers website to proceed.</p>
             </div>
 
             <div class="button-container">
-              <a href="https://nandanijewellers.com/verify-otp" class="button">Reset Password</a>
+              <a href="https://Gitanjalijewellers22k.com/verify-otp" class="button">Reset Password</a>
             </div>
 
             <div class="footer">
-              <p>Nandani Jewellers | <a href="https://www.nandanijewellers.com" target="_blank">www.nandanijewellers.com</a></p>
-              <p>For assistance, contact <a href="mailto:support@nandanijewellers.com">support@nandanijewellers.com</a></p>
+              <p>Gitanjali Jewellers | <a href="https://www.Gitanjalijewellers22k.com" target="_blank">www.Gitanjalijewellers22k.com</a></p>
+              <p>For assistance, contact <a href="mailto:Gitanjalijewellers22k@gmail.com">Gitanjalijewellers22k@gmail.com</a></p>
             </div>
           </div>
         </body>

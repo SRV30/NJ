@@ -29,7 +29,7 @@ const SignUp = () => {
       return;
     }
     dispatch(signupUser({ name, email, password }));
-    showJewelryToast("Welcome to Nandani Jewellers!", "success");
+    showJewelryToast("Welcome to Gitanjali Jewellers!", "success");
     navigate("/login");
   };
 
@@ -79,7 +79,7 @@ const SignUp = () => {
           variants={itemVariants}
           className="text-3xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6 text-center"
         >
-          Join Nandani Jewellers
+          Join Gitanjali Jewellers
         </motion.h2>
 
         <div className="mb-6 relative">
