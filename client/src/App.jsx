@@ -171,7 +171,7 @@ const App = () => {
           <Route path="/photo" element={<Photo />} />
 
           {isAuthenticated &&
-            (user?.role === "ADMIN" || user?.role === "MANAGER") && (
+            (user?.role === "ADMIN" || user?.role === "MAIN_ADMIN") && (
               <>
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/users/:id" element={<AdminSingleUser />} />

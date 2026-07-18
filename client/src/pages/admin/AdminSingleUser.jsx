@@ -51,6 +51,7 @@ const AdminSingleUser = () => {
       await dispatch(
         updateUserRole({ email: singleUser.email, role: selectedRole })
       );
+      window.location.reload(); 
       showJewelryToast("Role updated successfully", "success");
     } catch (error) {
       showJewelryToast(error || "Failed to update role", "error");
@@ -235,7 +236,7 @@ const AdminSingleUser = () => {
                           >
                             <option value="USER">User</option>
                             <option value="ADMIN">Admin</option>
-                            <option value="MANAGER">Main Admin</option>
+                            <option value="MAIN_ADMIN">Main Admin</option>
                           </select>
                           <p>Only Main Admin can change role</p>
                           <motion.button

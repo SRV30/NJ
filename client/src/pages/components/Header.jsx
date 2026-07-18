@@ -242,7 +242,7 @@ export default function Header() {
               >
                 {isAuthenticated ? (
                   <>
-                    {(user?.role === "ADMIN" || user?.role === "MANAGER") && (
+                    {(user?.role === "ADMIN" || user?.role === "MAIN_ADMIN") && (
                       <DropdownLink
                         href="/admin/dashboard"
                         text="Admin Dashboard"

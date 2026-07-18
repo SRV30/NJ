@@ -80,7 +80,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["ADMIN", "MANAGER" ,"USER"],
+      enum: ["ADMIN", "MAIN_ADMIN" ,"USER"],
       default: "USER",
     },
   },
