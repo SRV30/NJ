@@ -87,6 +87,17 @@ export default function Header() {
     },
   };
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <motion.header
       className="  fixed bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-amber-900 dark:via-amber-900 dark:to-amber-900 flex items-center justify-between px-4 py-3 lg:px-8 lg:py-4 top-0 z-50 shadow-md backdrop-blur-md border-b border-amber-200/20 dark:border-gray-700/20 transition-all duration-500 w-full"
@@ -100,17 +111,17 @@ export default function Header() {
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
       >
-        <a href="/" className="flex items-center gap-2 mx-10">
+        <a href="/" className="flex items-center gap-2 mx-2 sm:mx-4 lg:mx-8">
           <img
             src={Logo}
             alt="Gitanjali Jewellers Logo"
-            className="h-14 w-auto lg:h-17 rounded-full"
+            className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto rounded-full"
           />
         </a>
       </motion.div>
 
       <motion.nav
-        className="hidden md:flex space-x-6 lg:space-x-10 font-sans font-medium text-amber-900 dark:text-amber-100 tracking-wide"
+        className="hidden md:flex md:space-x-4 lg:space-x-8 font-sans font-medium text-amber-900 dark:text-amber-100 tracking-wide md:text-sm lg:text-base"
         variants={navVariants}
         initial="hidden"
         animate="visible"
@@ -151,13 +162,14 @@ export default function Header() {
         })}
       </motion.nav>
 
-      <div className="flex items-center space-x-4 lg:space-x-6 text-amber-900 dark:text-amber-100">
+      <div className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 text-amber-900 dark:text-amber-100">
         <motion.a
           href="/products"
           whileHover={{ scale: 1.15, rotate: 10 }}
           whileTap={{ scale: 0.9 }}
+          aria-label="Search"
         >
-          <Search className="w-6 h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-30" />
+          <Search className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-30" />
         </motion.a>
 
         <motion.a
@@ -167,10 +179,10 @@ export default function Header() {
           whileTap={{ scale: 0.9 }}
           aria-label="Wishlist"
         >
-          <Heart className="w-6 h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-30" />
+          <Heart className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-30" />
           {WishListItems.length > 0 && (
             <motion.span
-              className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-xs font-bold text-white bg-amber-600 dark:bg-amber-500 rounded-full shadow-md"
+              className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[10px] sm:text-xs font-bold text-white bg-amber-600 dark:bg-amber-500 rounded-full shadow-md"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
@@ -187,10 +199,10 @@ export default function Header() {
           whileTap={{ scale: 0.9 }}
           aria-label="Cart"
         >
-          <ShoppingCart className="w-6 h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-300" />
+          <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-amber-800 dark:text-amber-400 group-hover:text-amber-600 transition-all duration-300" />
           {cartItems.length > 0 && (
             <motion.span
-              className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-xs font-bold text-white bg-amber-600 dark:bg-amber-500 rounded-full shadow-md"
+              className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[10px] sm:text-xs font-bold text-white bg-amber-600 dark:bg-amber-500 rounded-full shadow-md"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
@@ -211,11 +223,12 @@ export default function Header() {
         <div className="relative">
           <motion.button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-9 h-9 lg:w-10 lg:h-10 bg-amber-700/70 dark:bg-gray-700/70 text-amber-100 flex items-center justify-center rounded-full shadow-lg hover:bg-amber-800 dark:hover:bg-gray-600 border border-amber-300/30 dark:border-gray-600/30 transition-all duration-300"
+            className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-amber-700/70 dark:bg-gray-700/70 text-amber-100 flex items-center justify-center rounded-full shadow-lg hover:bg-amber-800 dark:hover:bg-gray-600 border border-amber-300/30 dark:border-gray-600/30 transition-all duration-300"
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="User Menu"
           >
-            <User className="w-4 h-4 lg:w-5 lg:h-5" />
+            <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
           </motion.button>
 
           <AnimatePresence>
@@ -225,7 +238,7 @@ export default function Header() {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 shadow-2xl rounded-xl border border-amber-200/50 dark:border-gray-700/50 overflow-hidden z-50"
+                className="absolute right-0 mt-2 w-48 sm:w-56 bg-white dark:bg-gray-800 shadow-2xl rounded-xl border border-amber-200/50 dark:border-gray-700/50 overflow-hidden z-50"
               >
                 {isAuthenticated ? (
                   <>
@@ -244,7 +257,7 @@ export default function Header() {
                     <DropdownLink href="/update-profile" text="Edit Profile" />
                     <motion.button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-amber-600 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-gray-700 border-t border-amber-200/50 dark:border-gray-600/50 transition-all duration-200 font-medium"
+                      className="block w-full text-left px-4 py-2 text-amber-600 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-gray-700 border-t border-amber-200/50 dark:border-gray-600/50 transition-all duration-200 font-medium cursor-pointer"
                       whileHover={{ x: 5 }}
                     >
                       Logout
@@ -262,15 +275,16 @@ export default function Header() {
         </div>
 
         <motion.button
-          className="md:hidden"
+          className="md:hidden p-1"
           onClick={() => setMenuOpen(!menuOpen)}
           whileHover={{ scale: 1.15, rotate: 10 }}
           whileTap={{ scale: 0.9 }}
+          aria-label="Toggle Menu"
         >
           {menuOpen ? (
-            <X className="w-6 h-6 text-amber-800" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6 text-amber-800" />
           ) : (
-            <Menu className="w-6 h-6 text-amber-800" />
+            <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-amber-800" />
           )}
         </motion.button>
       </div>
@@ -278,7 +292,7 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
-            className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-2xl rounded-xl border border-amber-200/50 dark:border-gray-700/50  md:hidden flex flex-col items-center space-y-4 py-6  border-t "
+            className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-2xl rounded-xl border border-amber-200/50 dark:border-gray-700/50 md:hidden flex flex-col items-center space-y-4 py-6 border-t z-50"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -298,10 +312,11 @@ export default function Header() {
                 <motion.a
                   key={index}
                   href={path}
-                  className={`text-base font-sans font-medium dark:text-amber-300  ${
+                  onClick={() => setMenuOpen(false)}
+                  className={`text-base font-sans font-medium dark:text-amber-300 w-11/12 text-center py-2 ${
                     isActiveRoute(path)
-                      ? "bg-amber-700/40 dark:bg-gray-700/50 rounded-full px-4 py-2 shadow-sm"
-                      : "hover:bg-amber-700/20 dark:hover:bg-gray-700/30 rounded-full px-4 py-2"
+                      ? "bg-amber-700/40 dark:bg-gray-700/50 rounded-full shadow-sm"
+                      : "hover:bg-amber-700/20 dark:hover:bg-gray-700/30 rounded-full"
                   }`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.05, y: -2 }}

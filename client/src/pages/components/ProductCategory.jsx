@@ -47,9 +47,10 @@ const ProductCategory = () => {
   }, [categories]);
   const getItemsPerPage = () => {
     if (window.innerWidth >= 1280) return 5;
-    if (window.innerWidth >= 1024) return 5;
-    if (window.innerWidth >= 768) return 6;
-    return 2;
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >= 768) return 3;
+    if (window.innerWidth >= 480) return 2;
+    return 1;
   };
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
   useEffect(() => {
@@ -213,7 +214,7 @@ const ProductCategory = () => {
             <>
               <motion.button
                 onClick={prevSlide}
-                className="absolute z-20 left-6 top-1/2 -translate-y-1/2 bg-amber-600/90 dark:bg-amber-700/90 text-white p-5 rounded-full shadow-[0_10px_30px_rgba(217,119,6,0.3)] backdrop-blur-sm"
+                className="absolute z-20 left-2 sm:left-6 top-1/2 -translate-y-1/2 bg-amber-600/90 dark:bg-amber-700/90 text-white p-3 sm:p-5 rounded-full shadow-[0_10px_30px_rgba(217,119,6,0.3)] backdrop-blur-sm cursor-pointer"
                 variants={buttonVariants}
                 initial="initial"
                 whileHover="hover"
@@ -223,11 +224,11 @@ const ProductCategory = () => {
                   WebkitBackdropFilter: "blur(10px)",
                 }}
               >
-                <FaAngleLeft className="w-6 h-6" />
+                <FaAngleLeft className="w-4 h-4 sm:w-6 sm:h-6" />
               </motion.button>
               <motion.button
                 onClick={nextSlide}
-                className="absolute z-20 right-6 top-1/2 -translate-y-1/2 bg-amber-600/90 dark:bg-amber-700/90 text-white p-5 rounded-full shadow-[0_10px_30px_rgba(217,119,6,0.3)] backdrop-blur-sm"
+                className="absolute z-20 right-2 sm:right-6 top-1/2 -translate-y-1/2 bg-amber-600/90 dark:bg-amber-700/90 text-white p-3 sm:p-5 rounded-full shadow-[0_10px_30px_rgba(217,119,6,0.3)] backdrop-blur-sm cursor-pointer"
                 variants={buttonVariants}
                 initial="initial"
                 whileHover="hover"
@@ -237,7 +238,7 @@ const ProductCategory = () => {
                   WebkitBackdropFilter: "blur(10px)",
                 }}
               >
-                <FaAngleRight className="w-6 h-6" />
+                <FaAngleRight className="w-4 h-4 sm:w-6 sm:h-6" />
               </motion.button>
             </>
           )}
@@ -250,7 +251,7 @@ const ProductCategory = () => {
               exit={{ opacity: 0, x: -100, filter: "blur(10px)" }}
               transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8 p-4 sm:p-10">
                 {getVisibleCategories().map((category, idx) => (
                   <Link
                     key={category._id}

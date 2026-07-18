@@ -1,11 +1,9 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { showJewelryToast } from "../extras/showJewelryToast";
-import Typewriter from "typewriter-effect";
 import MetaData from "../extras/MetaData";
 import { submitContactForm } from "@/store/extra/getintouchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import b2 from "../../assets/slider/2.png"
 import b3 from "../../assets/slider/3.png"
 
 
@@ -76,19 +74,6 @@ const ContactUs = () => {
     },
   };
 
-  const shimmerVariants = {
-    initial: { x: "-100%", opacity: 0.3 },
-    animate: {
-      x: "100%",
-      opacity: 0.7,
-      transition: {
-        repeat: Infinity,
-        duration: 2,
-        ease: "linear",
-      },
-    },
-  };
-
   const buttonVariants = {
     hover: {
       scale: 1.03,
@@ -118,7 +103,7 @@ const ContactUs = () => {
       />
 
      <motion.section
-  className="relative w-full h-[80vh] overflow-hidden"
+  className="relative w-full h-[40vh] sm:h-[60vh] lg:h-[80vh] overflow-hidden"
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   transition={{ duration: 1.5 }}
@@ -145,16 +130,16 @@ const ContactUs = () => {
 </motion.section>
 
       <motion.section
-        className="max-w-5xl mx-auto px-6 py-16 text-center"
+        className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center"
         variants={fadeInVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl md:text-4xl font-serif mb-6 text-amber-800 dark:text-amber-300">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-4 sm:mb-6 text-amber-800 dark:text-amber-300">
           Reach Out to Us
         </h2>
-        <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
+        <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
           At Gitanjali Jewellers, we value every customer and are here to assist
           you with any queries or information you may need. Whether you have
           questions about our collections, need assistance with a purchase, or
@@ -165,7 +150,7 @@ const ContactUs = () => {
       </motion.section>
 
       <motion.section
-        className="max-w-7xl mx-auto px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -173,13 +158,13 @@ const ContactUs = () => {
       >
         <motion.div
           variants={itemVariants}
-          className="lg:col-span-7 bg-white dark:bg-black p-8 md:p-10 rounded-2xl shadow-xl relative overflow-hidden"
+          className="lg:col-span-7 bg-white dark:bg-black p-6 sm:p-8 md:p-10 rounded-2xl shadow-xl relative overflow-hidden"
         >
-          <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-amber-400 dark:border-amber-500 rounded-tl-lg" />
-          <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-amber-400 dark:border-amber-500 rounded-br-lg" />
+          <div className="absolute top-0 left-0 w-12 sm:w-16 h-12 sm:h-16 border-t-2 border-l-2 border-amber-400 dark:border-amber-500 rounded-tl-lg" />
+          <div className="absolute bottom-0 right-0 w-12 sm:w-16 h-12 sm:h-16 border-b-2 border-r-2 border-amber-400 dark:border-amber-500 rounded-br-lg" />
 
           <motion.h2
-            className="text-3xl md:text-4xl font-serif font-medium mb-10 text-amber-800 dark:text-amber-300 relative inline-block"
+            className="text-2xl sm:text-3xl md:text-4xl font-serif font-medium mb-6 sm:mb-10 text-amber-800 dark:text-amber-300 relative inline-block"
             variants={itemVariants}
           >
             Get in Touch
@@ -192,9 +177,9 @@ const ContactUs = () => {
             />
           </motion.h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <motion.div variants={itemVariants} className="relative">
-              <label className="text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
+              <label className="text-xs sm:text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
                 Your Name
               </label>
               <input
@@ -203,12 +188,12 @@ const ContactUs = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300"
+                className="w-full p-3 sm:p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300 text-sm sm:text-base"
               />
             </motion.div>
 
             <motion.div variants={itemVariants} className="relative">
-              <label className="text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
+              <label className="text-xs sm:text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
                 Email Address
               </label>
               <input
@@ -217,12 +202,12 @@ const ContactUs = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email address"
-                className="w-full p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300"
+                className="w-full p-3 sm:p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300 text-sm sm:text-base"
               />
             </motion.div>
 
             <motion.div variants={itemVariants} className="relative">
-              <label className="text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
+              <label className="text-xs sm:text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
                 Phone Number
               </label>
               <input
@@ -231,12 +216,12 @@ const ContactUs = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
-                className="w-full p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300"
+                className="w-full p-3 sm:p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300 text-sm sm:text-base"
               />
             </motion.div>
 
             <motion.div variants={itemVariants} className="relative">
-              <label className="text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
+              <label className="text-xs sm:text-sm text-amber-700 dark:text-amber-300 font-medium mb-1 block">
                 Your Message
               </label>
               <textarea
@@ -245,7 +230,7 @@ const ContactUs = () => {
                 onChange={handleChange}
                 placeholder="Tell us how we can help you..."
                 rows="5"
-                className="w-full p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300"
+                className="w-full p-3 sm:p-4 rounded-lg border-2 border-amber-200 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:text-white placeholder-amber-700/60 dark:placeholder-amber-200/70 transition-all duration-300 text-sm sm:text-base"
               />
             </motion.div>
 
@@ -255,7 +240,7 @@ const ContactUs = () => {
               whileTap="tap"
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-lg font-medium tracking-wide text-white shadow-lg disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-500 relative overflow-hidden"
+              className="w-full py-3 sm:py-4 rounded-lg font-medium tracking-wide text-white shadow-lg disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-500 relative overflow-hidden cursor-pointer"
               style={{
                 backgroundImage: goldGradient,
               }}

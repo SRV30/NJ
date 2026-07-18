@@ -17,47 +17,53 @@ const LuxuryExperience = () => {
         </p>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Feature 1 */}
-          <div className="bg-white dark:bg-slate-900 shadow-lg rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
-            <div className="text-amber-600 dark:text-amber-400 text-5xl mb-4 flex justify-center">
-              <FaGem />
+          <div className="bg-white dark:bg-slate-900 shadow-lg rounded-2xl p-6 hover:scale-105 transition-transform duration-300 flex flex-col justify-between h-full">
+            <div>
+              <div className="text-amber-600 dark:text-amber-400 text-4xl sm:text-5xl mb-4 flex justify-center">
+                <FaGem />
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                Pure & Certified Gems
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+                Every piece is crafted with 100% authentic, certified diamonds and
+                precious stones.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
-              Pure & Certified Gems
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Every piece is crafted with 100% authentic, certified diamonds and
-              precious stones.
-            </p>
           </div>
 
           {/* Feature 2 */}
-          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
-            <div className="text-amber-600 dark:text-amber-400 text-5xl mb-4 flex justify-center">
-              <FaCrown />
+          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-6 hover:scale-105 transition-transform duration-300 flex flex-col justify-between h-full">
+            <div>
+              <div className="text-amber-600 dark:text-amber-400 text-4xl sm:text-5xl mb-4 flex justify-center">
+                <FaCrown />
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                Royal Elegance
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+                Inspired by regal designs, our jewelry reflects timeless luxury
+                and grace.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
-              Royal Elegance
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Inspired by regal designs, our jewelry reflects timeless luxury
-              and grace.
-            </p>
           </div>
 
           {/* Feature 3 */}
-          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
-            <div className="text-amber-600 dark:text-amber-400 text-5xl mb-4 flex justify-center">
-              <FaHandHoldingHeart />
+          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-6 hover:scale-105 transition-transform duration-300 sm:col-span-2 lg:col-span-1 flex flex-col justify-between h-full">
+            <div>
+              <div className="text-amber-600 dark:text-amber-400 text-4xl sm:text-5xl mb-4 flex justify-center">
+                <FaHandHoldingHeart />
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                Handcrafted Perfection
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+                Each jewelry piece is meticulously handcrafted by skilled artisans
+                with passion.
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
-              Handcrafted Perfection
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Each jewelry piece is meticulously handcrafted by skilled artisans
-              with passion.
-            </p>
           </div>
         </div>
       </div>

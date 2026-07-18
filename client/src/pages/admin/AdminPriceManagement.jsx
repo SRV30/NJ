@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addPrice, getPrice, updatePrice, clearError, clearSuccess } from "@/store/product-slice/priceSlice";
 import { motion } from "framer-motion";

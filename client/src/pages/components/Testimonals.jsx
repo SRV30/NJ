@@ -69,17 +69,17 @@ const Testimonials = () => {
   return (
     <section className="py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-16 text-center">
-          <span className="inline-block px-4 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-sm font-medium rounded-full mb-4">
+        <div className="mb-8 sm:mb-16 text-center">
+          <span className="inline-block px-4 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs sm:text-sm font-medium rounded-full mb-4">
             Testimonials
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-amber-50 font-serif leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-amber-50 font-serif leading-tight">
             Voices of{" "}
             <span className="text-amber-600 dark:text-amber-400">
               Satisfaction
             </span>
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Discover what makes our jewelry collection truly special through the
             experiences of our valued customers.
           </p>
@@ -120,7 +120,7 @@ const Testimonials = () => {
               modifier: 2.5,
               slideShadows: false,
             }}
-            spaceBetween={30}
+            spaceBetween={20}
             slidesPerView={1}
             autoplay={{
               delay: 5000,
@@ -131,9 +131,10 @@ const Testimonials = () => {
             modules={[Autoplay, Pagination, EffectCoverflow]}
             className="testimonial-swiper mt-8"
             breakpoints={{
-              640: { slidesPerView: 1.2, centeredSlides: true },
-              768: { slidesPerView: 2, centeredSlides: false },
-              1024: { slidesPerView: 3, centeredSlides: false },
+              480: { slidesPerView: 1.1, centeredSlides: true, spaceBetween: 15 },
+              640: { slidesPerView: 1.3, centeredSlides: true, spaceBetween: 20 },
+              768: { slidesPerView: 2, centeredSlides: false, spaceBetween: 24 },
+              1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 30 },
             }}
           >
             {filteredTestimonials.map((t, i) => (

@@ -29,7 +29,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-amber-900 dark:via-amber-900 dark:to-amber-900 text-amber-100 px-6 py-12 lg:px-12 lg:py-16 absolte overflow-hidden">
+    <footer className="bg-gradient-to-r from-amber-100/90 to-amber-200/90 dark:from-amber-900 dark:via-amber-900 dark:to-amber-900 text-amber-100 px-4 sm:px-6 py-10 sm:py-12 lg:px-12 lg:py-16 relative overflow-hidden">
       <motion.div
         className="absolute inset-0 pointer-events-none"
         animate={{
@@ -48,25 +48,25 @@ const Footer = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 relative z-10"
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-16 relative z-10"
       >
         <motion.div
           variants={itemVariants}
-          className="flex flex-col space-y-5 items-center md:items-start text-center md:text-left"
+          className="flex flex-col space-y-4 items-center md:items-start text-center md:text-left"
         >
           <img
             src={Logo}
             alt="Gitanjali Jewellers Logo"
-            className="h-15 lg:h-18 w-auto"
+            className="h-12 sm:h-15 lg:h-18 w-auto rounded-full"
           />
 
-          <p className="text-amber-800 dark:text-amber-300 text-sm lg:text-base font-sans tracking-wider max-w-sm">
+          <p className="text-amber-800 dark:text-amber-300 text-xs sm:text-sm lg:text-base font-sans tracking-wider max-w-sm">
             Crafting elegance since 2024. Discover the art of luxury with{" "}
             <span className="font-medium">Gitanjali Jewellers</span>.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-8 md:col-span-2 md:grid-cols-4 text-center md:text-left ">
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 md:col-span-2 md:grid-cols-4 text-center md:text-left">
           {[
             {
               title: "Collections",
@@ -122,7 +122,7 @@ const Footer = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-7xl mx-auto mt-10 pt-8 border-t border-amber-400/40 dark:border-gray-600/40 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-sm lg:text-base relative z-10"
+        className="max-w-7xl mx-auto mt-10 pt-8 border-t border-amber-400/40 dark:border-gray-600/40 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-xs sm:text-sm lg:text-base relative z-10 gap-4"
       >
         <motion.p
           variants={itemVariants}
@@ -147,7 +147,7 @@ const Footer = () => {
 
         <motion.div
           variants={itemVariants}
-          className="flex space-x-5 mt-6 md:mt-0   md:mr-30"
+          className="flex space-x-4 sm:space-x-5 mt-4 md:mt-0 md:mr-10 lg:mr-20 xl:mr-30"
         >
           {[
             {

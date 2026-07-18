@@ -49,9 +49,10 @@ const JewelleryType = () => {
 
   const getItemsPerPage = () => {
     if (window.innerWidth >= 1280) return 5;
-    if (window.innerWidth >= 1024) return 5;
-    if (window.innerWidth >= 768) return 6;
-    return 2;
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >= 768) return 3;
+    if (window.innerWidth >= 480) return 2;
+    return 1;
   };
 
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
@@ -230,7 +231,7 @@ const JewelleryType = () => {
         }}
       >
         <motion.div
-          className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-amber-300/20 dark:bg-amber-700/10 blur-3xl"
+          className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-amber-300/20 dark:bg-amber-700/10 blur-3xl pointer-events-none"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -242,7 +243,7 @@ const JewelleryType = () => {
           }}
         />
         <motion.div
-          className="absolute -bottom-32 -left-32 h-64 w-64 rounded-full bg-amber-500/20 dark:bg-amber-500/10 blur-3xl"
+          className="absolute -bottom-32 -left-32 h-64 w-64 rounded-full bg-amber-500/20 dark:bg-amber-500/10 blur-3xl pointer-events-none"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.6, 0.4],
@@ -260,7 +261,7 @@ const JewelleryType = () => {
           <>
             <motion.button
               onClick={handlePrevSlide}
-              className="absolute z-20 left-6 top-1/2 -translate-y-1/2 bg-amber-600/70 dark:bg-amber-700/70 text-white p-4 rounded-full shadow-2xl backdrop-blur-sm"
+              className="absolute z-20 left-2 sm:left-6 top-1/2 -translate-y-1/2 bg-amber-600/70 dark:bg-amber-700/70 text-white p-3 sm:p-4 rounded-full shadow-2xl backdrop-blur-sm cursor-pointer"
               variants={buttonVariants}
               initial="initial"
               whileHover="hover"
@@ -270,7 +271,7 @@ const JewelleryType = () => {
                 WebkitBackdropFilter: "blur(4px)",
               }}
             >
-              <FaAngleLeft className="w-6 h-6" />
+              <FaAngleLeft className="w-4 h-4 sm:w-6 sm:h-6" />
               <motion.span
                 className="absolute inset-0 rounded-full bg-amber-400/30"
                 animate={{
@@ -286,7 +287,7 @@ const JewelleryType = () => {
             </motion.button>
             <motion.button
               onClick={handleNextSlide}
-              className="absolute z-20 right-6 top-1/2 -translate-y-1/2 bg-amber-600/70 dark:bg-amber-700/70 text-white p-4 rounded-full shadow-2xl backdrop-blur-sm"
+              className="absolute z-20 right-2 sm:right-6 top-1/2 -translate-y-1/2 bg-amber-600/70 dark:bg-amber-700/70 text-white p-3 sm:p-4 rounded-full shadow-2xl backdrop-blur-sm cursor-pointer"
               variants={buttonVariants}
               initial="initial"
               whileHover="hover"
@@ -296,7 +297,7 @@ const JewelleryType = () => {
                 WebkitBackdropFilter: "blur(4px)",
               }}
             >
-              <FaAngleRight className="w-6 h-6" />
+              <FaAngleRight className="w-4 h-4 sm:w-6 sm:h-6" />
               <motion.span
                 className="absolute inset-0 rounded-full bg-amber-400/30"
                 animate={{
@@ -323,9 +324,9 @@ const JewelleryType = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            className="w-full py-10"
+            className="w-full py-6 sm:py-10"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8 p-4 sm:p-8">
               {getVisibleCategories().map((category, idx) => (
                 <Link
                   key={category._id}

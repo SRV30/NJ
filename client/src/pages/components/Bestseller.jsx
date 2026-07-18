@@ -58,22 +58,22 @@ const BestSeller = ({ product, index }) => {
     >
       <ShimmerEffect />
       <Link to={`/products/${product._id}`} className="block">
-        <div className="relative h-[420px] overflow-hidden">
+        <div className="relative h-[280px] sm:h-[350px] md:h-[420px] overflow-hidden">
           <img
             src={product?.images?.[0]?.url || "/api/placeholder/400/320"}
             alt={product?.name || "Luxury Jewelry Item"}
-            className="w-full h-full object-fit transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:saturate-125"
+            className="w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:saturate-125"
             style={{ filter: "contrast(1.05) brightness(1.02)" }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-all duration-500 ease-out"></div>
           <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-6 transform group-hover:translate-y-0 text-white transition-all duration-500 ease-out">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 transform group-hover:translate-y-0 text-white transition-all duration-500 ease-out">
           <div className="flex items-center justify-between opacity-90 group-hover:opacity-100 transition-opacity">
-            <h3 className="font-semibold mb-2 text-3xl text-amber-300 group-hover:text-amber-300 transition-colors duration-300 group-hover:-translate-y-1 transform">
+            <h3 className="font-semibold mb-2 text-xl sm:text-2xl md:text-3xl text-amber-300 group-hover:text-amber-300 transition-colors duration-300 group-hover:-translate-y-1 transform">
               {product?.name}
             </h3>
-            <div className="overflow-hidden">
+            <div className="overflow-hidden hidden sm:block">
               <span className="inline-block opacity-0 transform translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-amber-300 text-sm font-medium">
                 View Details
                 <span className="ml-1 inline-block group-hover:translate-x-1 transition-transform duration-300">
@@ -154,12 +154,12 @@ const SectionTitle = ({ subtitle, title }) => {
       initial={{ opacity: 0, y: -30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="text-center mb-16 relative"
+      className="text-center mb-8 sm:mb-16 relative"
     >
-      <h5 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-800 mb-2 uppercase font-[Playfair Display] tracking-wider">
+      <h5 className="text-2xl sm:text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-800 mb-2 uppercase font-[Playfair Display] tracking-wider">
         {subtitle}
       </h5>
-      <h3 className="text-6xl font-bold text-amber-800 dark:text-amber-300  font-mono">
+      <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-amber-800 dark:text-amber-300 font-mono">
         {title}
         <motion.span
           className="absolute -bottom-2 left-1/2 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
@@ -328,7 +328,7 @@ const BestsellerPage = () => {
   return (
     <div className="min-h-screen pb-16 relative overflow-hidden">
       <BackgroundDecoration />
-      <div className="max-w-7xl mx-auto px-6 py-20 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20 relative">
         <SectionTitle
           subtitle="Curated Excellence"
           title="Best Sellers"
@@ -337,7 +337,7 @@ const BestsellerPage = () => {
         {loading ? (
           <LoadingSkeleton />
         ) : bestsellerProducts.length > 0 ? (
-          <div className="relative group">
+          <div className="relative group px-4 sm:px-8">
             <SlideNavButton direction="prev" swiperRef={swiperRef} />
             <Swiper
               onSwiper={(swiper) => {
@@ -359,12 +359,13 @@ const BestsellerPage = () => {
                 slideShadows: false,
               }}
               slidesPerView={1}
-              spaceBetween={40}
+              spaceBetween={20}
               speed={700}
               breakpoints={{
-                640: { slidesPerView: 1.5, centeredSlides: true },
-                768: { slidesPerView: 2, centeredSlides: false },
-                1024: { slidesPerView: 3 },
+                480: { slidesPerView: 1.2, centeredSlides: true, spaceBetween: 24 },
+                640: { slidesPerView: 1.5, centeredSlides: true, spaceBetween: 30 },
+                768: { slidesPerView: 2, centeredSlides: false, spaceBetween: 35 },
+                1024: { slidesPerView: 3, spaceBetween: 40 },
               }}
               loop={true}
               className="pb-16 [--swiper-pagination-bullet-inactive-opacity:0.5] [--swiper-pagination-bullet-size:10px]"

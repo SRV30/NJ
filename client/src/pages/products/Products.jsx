@@ -165,11 +165,11 @@ const ProductsPage = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className={`md:w-1/4 lg:w-1/5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl p-6 md:sticky md:top-8 h-fit overflow-hidden transition-all ${
+          className={`w-full md:w-1/4 lg:w-1/5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl p-6 md:sticky md:top-24 h-fit overflow-hidden transition-all duration-300 ${
             isFilterOpen
-              ? "translate-x-0"
-              : "-translate-x-full md:translate-x-0"
-          } md:translate-x-0 absolute md:relative z-30 md:z-10 inset-0 md:inset-auto`}
+              ? "translate-x-0 opacity-100 block"
+              : "-translate-x-full md:translate-x-0 hidden md:block"
+          } absolute md:relative z-30 md:z-10 top-20 left-0 md:top-auto md:left-auto`}
         >
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-serif text-amber-950 dark:text-amber-200">
@@ -338,7 +338,7 @@ const ProductsPage = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           >
             <AnimatePresence>
               {products?.map((product) => (
@@ -364,7 +364,7 @@ const ProductsPage = () => {
                         <motion.img
                           src={product.images[0]?.url}
                           alt={product.name}
-                          className="w-full h-50 md:h-80"
+                          className="w-full h-50 md:h-80 object-cover"
                           whileHover={{ scale: 1.08 }}
                           transition={{ duration: 0.7 }}
                         />

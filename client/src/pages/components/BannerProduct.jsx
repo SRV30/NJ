@@ -126,9 +126,9 @@ const BannerProduct = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 mt-7">
+    <div className="container mx-auto px-4 mt-4 sm:mt-7">
       <motion.div
-        className="h-[300px] sm:h-[300px] md:h-[400px] lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
+        className="h-[200px] sm:h-[300px] md:h-[400px] lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
         variants={containerVariants}
         whileHover="hover"
         onMouseEnter={() => setIsHovering(true)}
@@ -140,17 +140,17 @@ const BannerProduct = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-[1] pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 z-[1] pointer-events-none"></div>
 
-        <div className="absolute z-10 h-full w-full flex items-center justify-between px-4 lg:px-6">
+        <div className="absolute z-10 h-full w-full flex items-center justify-between px-2 sm:px-4 lg:px-6">
           <motion.button
             onClick={prevImage}
             variants={buttonVariants}
             initial="initial"
             whileHover="hover"
             whileTap="tap"
-            className="bg-amber-600/90 backdrop-blur-md dark:bg-amber-700/90 text-white p-3 lg:p-4 rounded-full shadow-lg hover:bg-amber-700 dark:hover:bg-amber-800 transition-all duration-300 border border-white/10"
+            className="bg-amber-600/90 backdrop-blur-md dark:bg-amber-700/90 text-white p-2 sm:p-3 lg:p-4 rounded-full shadow-lg hover:bg-amber-700 dark:hover:bg-amber-800 transition-all duration-300 border border-white/10 cursor-pointer"
             aria-label="Previous Image"
           >
-            <FaAngleLeft size={20} />
+            <FaAngleLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </motion.button>
           <motion.button
             onClick={nextImage}
@@ -158,10 +158,10 @@ const BannerProduct = () => {
             initial="initial"
             whileHover="hover"
             whileTap="tap"
-            className="bg-amber-600/90 backdrop-blur-md dark:bg-amber-700/90 text-white p-3 lg:p-4 rounded-full shadow-lg hover:bg-amber-700 dark:hover:bg-amber-800 transition-all duration-300 border border-white/10"
+            className="bg-amber-600/90 backdrop-blur-md dark:bg-amber-700/90 text-white p-2 sm:p-3 lg:p-4 rounded-full shadow-lg hover:bg-amber-700 dark:hover:bg-amber-800 transition-all duration-300 border border-white/10 cursor-pointer"
             aria-label="Next Image"
           >
-            <FaAngleRight size={20} />
+            <FaAngleRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </motion.button>
         </div>
 
@@ -179,7 +179,7 @@ const BannerProduct = () => {
             >
               <img
                 src={desktopImages[currentImage]}
-                className="w-full h-full object-fit rounded-xl transform transition-transform duration-1000 hover:scale-105"
+                className="w-full h-full object-cover rounded-xl transform transition-transform duration-1000 hover:scale-105"
                 alt={`Gitanjali Jewellers Banner ${
                   currentImage + 1
                 } - Luxury Jewelry`}
@@ -203,7 +203,7 @@ const BannerProduct = () => {
             >
               <img
                 src={mobileImages[currentImage]}
-                className="w-full h-full object-fit rounded-xl"
+                className="w-full h-full object-cover rounded-xl"
                 alt={`Gitanjali Jewellers Mobile Banner ${
                   currentImage + 1
                 } - Luxury Jewelry`}
@@ -213,7 +213,7 @@ const BannerProduct = () => {
           </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-3 z-10">
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 sm:space-x-3 z-10">
           {desktopImages.map((_, index) => (
             <motion.button
               key={index}
@@ -221,10 +221,10 @@ const BannerProduct = () => {
                 setDirection(index > currentImage ? 1 : -1);
                 setCurrentImage(index);
               }}
-              className="focus:outline-none"
+              className="focus:outline-none cursor-pointer"
             >
               <motion.div
-                className={`w-2.5 h-2.5 rounded-full ${
+                className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full ${
                   currentImage === index
                     ? "bg-amber-300 dark:bg-amber-400"
                     : "bg-gray-900/70 dark:bg-gray-600/70"

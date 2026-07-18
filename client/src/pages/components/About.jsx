@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import Typewriter from "typewriter-effect";
 import MetaData from "../extras/MetaData";
 import { useState, useEffect } from "react";
 import p1 from "../../assets/slider/7.png";
@@ -8,7 +6,6 @@ import p2 from "../../assets/slider/8.png";
 import b6 from "../../assets/slider/6.png";
 
 const About = () => {
-  const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [scrollY, setScrollY] = useState(0);
 
@@ -58,21 +55,6 @@ const About = () => {
     }),
   };
 
-  const shimmerEffect = {
-    hidden: {
-      backgroundPosition: "200% 0%",
-    },
-    visible: {
-      backgroundPosition: "0% 0%",
-      transition: {
-        repeat: Infinity,
-        repeatType: "mirror",
-        duration: 3,
-        ease: "linear",
-      },
-    },
-  };
-
   return (
     <div className="text-gray-800 dark:text-white overflow-hidden mt-7">
       <MetaData
@@ -81,9 +63,9 @@ const About = () => {
         keywords="Gitanjali Jewellers, gold jewelry, diamond rings, silver accessories, handcrafted ornaments, luxury jewelry"
       />
 
-      <div className="relative h-[80vh] overflow-hidden">
+      <div className="relative h-[40vh] sm:h-[60vh] lg:h-[80vh] overflow-hidden">
         <motion.div
-          className="relative w-full h-[80vh] bg-cover bg-center bg-no-repeat"
+          className="relative w-full h-full bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${b6})`,
             backgroundPosition: "center 21%",
@@ -95,7 +77,7 @@ const About = () => {
       </div>
 
       <motion.section
-        className="relative py-20 lg:py-32 overflow-hidden"
+        className="relative py-12 sm:py-20 lg:py-32 overflow-hidden"
         variants={staggerContainerVariants}
         initial="hidden"
         whileInView="visible"
@@ -114,15 +96,15 @@ const About = () => {
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 relative">
-          <motion.div className="flex flex-col lg:flex-row items-center gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+          <motion.div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <motion.div
-              className="lg:w-1/2"
+              className="w-full lg:w-1/2"
               variants={fadeInUpVariants}
               custom={0}
             >
               <motion.span
-                className="block text-amber-700 dark:text-amber-300 text-sm uppercase tracking-widest mb-3 font-medium"
+                className="block text-amber-700 dark:text-amber-300 text-xs sm:text-sm uppercase tracking-widest mb-3 font-medium"
                 initial={{ x: -20, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.6 }}
@@ -131,9 +113,9 @@ const About = () => {
                 Our Legacy
               </motion.span>
 
-              <h2 className="text-4xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6 leading-tight">
                 Best Jewellers in <br />
-                <span className="relative">
+                <span className="relative inline-block mt-2">
                   Bihar
                   <motion.span
                     className="absolute -bottom-3 left-0 h-1 bg-amber-400 dark:bg-amber-300"
@@ -145,7 +127,7 @@ const About = () => {
                 </span>
               </h2>
 
-              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8">
+              <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
                 Gitanjali Jewellers has been a trusted name in the world of fine
                 jewelry, offering an extensive range of high-quality diamond,
                 gold, and silver jewelry. Located in the heart of Bettiah,
@@ -156,7 +138,7 @@ const About = () => {
                 craftsmanship in their jewelry.
               </p>
 
-              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+              <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
                 Over two decades later, we&apos;ve evolved into a distinguished
                 name in fine jewelry, celebrated for our uncompromising quality
                 and distinctive designs. Our pieces don&apos;t simply adorn;
@@ -166,24 +148,24 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              className="lg:w-1/2 relative"
+              className="w-full lg:w-1/2 relative"
               variants={scaleInVariants}
               custom={1}
             >
               <motion.div
-                className="relative z-10 w-full h-[450px] rounded-lg overflow-hidden shadow-2xl"
+                className="relative z-10 w-full h-[280px] sm:h-[380px] md:h-[450px] rounded-lg overflow-hidden shadow-2xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
               >
                 <img
                   src={p1}
                   alt="Gitanjali Jewellers artisans at work"
-                  className="w-full h-full object-fit"
+                  className="w-full h-full object-cover"
                 />
               </motion.div>
 
               <motion.div
-                className="absolute -right-4 -bottom-4 w-full h-full border-2 border-amber-200 dark:border-amber-900 rounded-lg z-0"
+                className="absolute -right-2 sm:-right-4 -bottom-2 sm:-bottom-4 w-full h-full border-2 border-amber-200 dark:border-amber-900 rounded-lg z-0"
                 initial={{ opacity: 0, x: 20, y: 20 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -195,25 +177,25 @@ const About = () => {
       </motion.section>
 
       <motion.section
-        className="py-20 lg:py-32 "
+        className="py-12 sm:py-20 lg:py-32"
         variants={staggerContainerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-10 sm:mb-16"
             variants={fadeInUpVariants}
             custom={0}
           >
-            <span className="block text-amber-700 dark:text-amber-300 text-sm uppercase tracking-widest mb-3 font-medium">
+            <span className="block text-amber-700 dark:text-amber-300 text-xs sm:text-sm uppercase tracking-widest mb-3 font-medium">
               What Defines Us
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-4 sm:mb-6">
               Why Choose Gitanjali Jewellers?
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 text-lg">
+            <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg">
               Our collection includes meticulously crafted pieces such as
               Jhumkas, Tilahari malas, Ms Lari, Nathiyas, bangles, Kanganas,
               Tikas, lockets, chains, and necklace sets. Each item is designed
@@ -221,7 +203,7 @@ const About = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               {
                 title: "Uncompromising Quality",
@@ -277,7 +259,7 @@ const About = () => {
       </motion.section>
 
       <motion.section
-        className="py-20 lg:py-32 relative overflow-hidden"
+        className="py-12 sm:py-20 lg:py-32 relative overflow-hidden"
         variants={staggerContainerVariants}
         initial="hidden"
         whileInView="visible"
@@ -295,23 +277,23 @@ const About = () => {
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
           <motion.div
-            className="flex flex-col lg:flex-row-reverse items-center gap-12"
+            className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12"
             variants={fadeInUpVariants}
           >
             <motion.div
-              className="lg:w-1/2"
+              className="w-full lg:w-1/2"
               variants={fadeInUpVariants}
               custom={0}
             >
-              <span className="block text-amber-700 dark:text-amber-300 text-sm uppercase tracking-widest mb-3 font-medium">
+              <span className="block text-amber-700 dark:text-amber-300 text-xs sm:text-sm uppercase tracking-widest mb-3 font-medium">
                 Our Commitment
               </span>
 
-              <h2 className="text-4xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-medium text-amber-800 dark:text-amber-200 mb-6 leading-tight">
                 Giving Back to <br />
-                <span className="relative">
+                <span className="relative inline-block mt-2">
                   Society & Nature
                   <motion.span
                     className="absolute -bottom-3 left-0 h-1 bg-amber-400 dark:bg-amber-300"
@@ -323,7 +305,7 @@ const About = () => {
                 </span>
               </h2>
 
-              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8">
+              <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
                 At Gitanjali Jewellers, our responsibility extends beyond
                 creating beautiful jewelry. We believe in nurturing the
                 communities and environment that sustain us.
@@ -358,10 +340,10 @@ const About = () => {
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-lg font-medium text-amber-700 dark:text-amber-300 mb-1">
+                      <h4 className="text-base sm:text-lg font-medium text-amber-700 dark:text-amber-300 mb-1">
                         {item.title}
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm md:text-base">
                         {item.desc}
                       </p>
                     </div>
@@ -371,20 +353,20 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              className="lg:w-1/2 relative"
+              className="w-full lg:w-1/2 relative"
               variants={scaleInVariants}
               custom={1}
             >
               <motion.div
-                className="relative z-10 w-full h-[450px] rounded-lg overflow-hidden shadow-2xl"
+                className="relative z-10 w-full h-[280px] sm:h-[380px] md:h-[450px] rounded-lg overflow-hidden shadow-2xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
               >
-                <img src={p2} className="w-full h-full object-fit" />
+                <img src={p2} className="w-full h-full object-cover" />
               </motion.div>
 
               <motion.div
-                className="absolute -left-4 -bottom-4 w-full h-full border-2 border-amber-200 dark:border-amber-900 rounded-lg z-0"
+                className="absolute -left-2 sm:-left-4 -bottom-2 sm:-bottom-4 w-full h-full border-2 border-amber-200 dark:border-amber-900 rounded-lg z-0"
                 initial={{ opacity: 0, x: -20, y: 20 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -396,20 +378,20 @@ const About = () => {
       </motion.section>
 
       <motion.section
-        className="py-20"
+        className="py-12 sm:py-20"
         variants={fadeInUpVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="max-w-5xl mx-auto px-6 text-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <p className="text-2xl md:text-3xl font-serif italic text-amber-800 dark:text-amber-300 my-6 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-amber-800 dark:text-amber-300 my-4 sm:my-6 leading-relaxed">
               Gitanjali Jewellers is owned and operated by Vivek Kumar, whose vision and dedication have played a
               pivotal role in shaping the brand&#39;s reputation for
               trustworthiness and excellence in the jewelry industry. Their
