@@ -8,7 +8,7 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import errorMiddleware from "./middleware/error.js";
 import connectDB from "./config/connectDB.js";
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 
 process.on("uncaughtException", (err) => {
   console.error(`Error: ${err.message}`);
