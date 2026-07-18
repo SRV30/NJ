@@ -160,7 +160,7 @@ const About = () => {
                 <img
                   src={p1}
                   alt="Gitanjali Jewellers artisans at work"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit"
                 />
               </motion.div>
 
@@ -358,11 +358,11 @@ const About = () => {
               custom={1}
             >
               <motion.div
-                className="relative z-10 w-full h-[280px] sm:h-[380px] md:h-[450px] rounded-lg overflow-hidden shadow-2xl"
+                className="relative z-10 w-full h-[500px] sm:h-[600px] md:h-[780px] rounded-lg overflow-hidden shadow-2xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
               >
-                <img src={p2} className="w-full h-full object-cover" />
+                <img src={p2} className="w-full h-full object-fit" />
               </motion.div>
 
               <motion.div

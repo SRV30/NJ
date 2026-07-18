@@ -110,7 +110,7 @@ const ContactUs = () => {
 >
   {/* Background Image */}
 <motion.div
-  className="absolute inset-0 bg-cover bg-no-repeat"
+  className="absolute inset-0 bg-cover bg-no-repeat w-full h-full"
   style={{
     backgroundImage: `url(${b3})`,
     backgroundPosition: "center 21%", // ya "center 10%"
@@ -432,7 +432,7 @@ const ContactUs = () => {
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: "url('/images/mandala-pattern.png')",
-            backgroundSize: "cover",
+            backgroundSize: "fit",
           }}
           animate={{
             rotate: 360,
