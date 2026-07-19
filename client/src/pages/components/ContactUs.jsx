@@ -1,11 +1,10 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { showJewelryToast } from "../extras/showJewelryToast";
 import MetaData from "../extras/MetaData";
 import { submitContactForm } from "@/store/extra/getintouchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import b3 from "../../assets/slider/3.png"
-
+import b3 from "../../assets/slider/3.png";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -102,32 +101,41 @@ const ContactUs = () => {
         keywords="Gitanjali Jewellers, gold jewelry, diamond rings, silver accessories, luxury jewelry, fine craftsmanship, bridal jewelry, handcrafted ornaments"
       />
 
-     <motion.section
-  className="relative w-full h-[40vh] sm:h-[60vh] lg:h-[80vh] overflow-hidden"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 1.5 }}
->
-  {/* Background Image */}
-<motion.div
-  className="absolute inset-0 bg-cover bg-no-repeat w-full h-full"
-  style={{
-    backgroundImage: `url(${b3})`,
-    backgroundPosition: "center 21%", // ya "center 10%"
-  }}
-/>
+      <div className="container mx-auto px-4 mt-4 sm:mt-7">
+        <motion.div
+          className="h-[200px] sm:h-[300px] md:h-[400px] lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
+          whileHover="hover"
+          initial={{
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          {/* Desktop Slider */}
+          <div className="hidden md:flex h-full w-full overflow-hidden perspective-1000">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div key={b3} className="w-full h-full">
+                <img
+                  src={b3}
+                  className="w-full h-full object-fit rounded-xl transform transition-transform duration-1000 hover:scale-105"
+                  loading="lazy"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-  {/* Overlay */}
-  <motion.div
-    className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/25 to-black/35"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 1.8 }}
-  />
-
- 
-  
-</motion.section>
+          {/* Mobile Slider */}
+          <div className="flex md:hidden h-full w-full overflow-hidden perspective-1000">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div key={b3} className="w-full h-full" animate="visible">
+                <img
+                  src={b3}
+                  className="w-full h-full object-fit rounded-xl"
+                  loading="lazy"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
 
       <motion.section
         className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center"
@@ -365,7 +373,7 @@ const ContactUs = () => {
                     Email
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 font-medium">
-                   gitanjalijewellers22k@gmail.com 
+                    gitanjalijewellers22k@gmail.com
                   </p>
                 </div>
               </motion.div>

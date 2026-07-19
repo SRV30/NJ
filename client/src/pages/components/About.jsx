@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import MetaData from "../extras/MetaData";
 import { useState, useEffect } from "react";
 import p1 from "../../assets/slider/7.png";
@@ -63,17 +63,40 @@ const About = () => {
         keywords="Gitanjali Jewellers, gold jewelry, diamond rings, silver accessories, handcrafted ornaments, luxury jewelry"
       />
 
-      <div className="relative h-[40vh] sm:h-[60vh] lg:h-[80vh] overflow-hidden">
+      <div className="container mx-auto px-4 mt-4 sm:mt-7">
         <motion.div
-          className="relative w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${b6})`,
-            backgroundPosition: "center 21%",
+          className="h-[200px] sm:h-[300px] md:h-[400px] lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-amber-200/30 dark:border-gray-700/30 backdrop-blur-sm"
+          whileHover="hover"
+          initial={{
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
           }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1.5 }}
-          transition={{ duration: 1.5 }}
-        />
+        >
+          {/* Desktop Slider */}
+          <div className="hidden md:flex h-full w-full overflow-hidden perspective-1000">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div key={b6} className="w-full h-full">
+                <img
+                  src={b6}
+                  className="w-full h-full object-fit rounded-xl transform transition-transform duration-1000 hover:scale-105"
+                  loading="lazy"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Mobile Slider */}
+          <div className="flex md:hidden h-full w-full overflow-hidden perspective-1000">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div key={b6} className="w-full h-full" animate="visible">
+                <img
+                  src={b6}
+                  className="w-full h-full object-fit rounded-xl"
+                  loading="lazy"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
 
       <motion.section
@@ -392,11 +415,12 @@ const About = () => {
             viewport={{ once: true }}
           >
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-amber-800 dark:text-amber-300 my-4 sm:my-6 leading-relaxed">
-              Gitanjali Jewellers is owned and operated by Vivek Kumar, whose vision and dedication have played a
-              pivotal role in shaping the brand&#39;s reputation for
-              trustworthiness and excellence in the jewelry industry. Their
-              passion for creating stunning jewelry and offering impeccable
-              customer service drives every aspect of the business.
+              Gitanjali Jewellers is owned and operated by Vivek Kumar, whose
+              vision and dedication have played a pivotal role in shaping the
+              brand&#39;s reputation for trustworthiness and excellence in the
+              jewelry industry. Their passion for creating stunning jewelry and
+              offering impeccable customer service drives every aspect of the
+              business.
             </p>
           </motion.div>
         </div>
